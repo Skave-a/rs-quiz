@@ -1,4 +1,7 @@
 import { Container } from '@mui/material';
+import React, { useState } from 'react';
+import './App.css';
+import { booksApi, useGetBooksQuery } from './store';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import { Chat } from './pages/chat/Chat';
 import { Footer } from './pages/footer/Footer';
@@ -7,6 +10,9 @@ import { Main } from './pages/main/Main';
 import { Page404 } from './pages/page404/Page404';
 
 function App() {
+  // для вывода карточек книг
+  const [count, setCount] = useState('');
+  const { data = [], isLoading } = useGetBooksQuery(count);
   return (
     <BrowserRouter>
       <Container sx={{ width: { sm: 2 / 3 } }}>
