@@ -4,4 +4,4 @@ export const API_LINK = 'https://www.googleapis.com/books';
 
 export const TITLES_BOOKS = {
   bestsellers: 'bestsellers',
-}
+};
