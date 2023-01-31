@@ -1,3 +1,6 @@
+import React, { useState } from 'react';
+import './App.css';
+import { booksApi, useGetBooksQuery } from './store';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import { Footer } from './pages/footer/Footer';
 import { Header } from './pages/header/Header';
@@ -6,6 +9,9 @@ import { Main } from './pages/main/Main';
 import { Chat } from './pages/chat/Chat';
 
 function App() {
+  // для вывода карточек книг
+  const [count, setCount] = useState('');
+  const { data = [], isLoading } = useGetBooksQuery(count);
   return (
     <BrowserRouter>
       <Header />
