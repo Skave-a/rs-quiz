@@ -12,4 +12,5 @@ export const SERVICE_MESSAGES = {
   answerContent: 'Answer content',
   addAnswer: 'Add an answer',
   answer: 'Answer',
+  configure: 'Configure results',
 };

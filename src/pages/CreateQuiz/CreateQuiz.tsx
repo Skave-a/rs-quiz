@@ -2,8 +2,10 @@ import { Box, Typography } from '@mui/material';
 import { SERVICE_MESSAGES } from '../../components/utils/constants';
 import { TitleQuiz } from './TitleQuiz';
 import { BlockQuiz } from './BlockQuiz';
+import { useState } from 'react';
 
 export const CreateQuiz = () => {
+  const [state, setState] = useState(['first', 'second']);
   return (
     <Box>
       <Typography

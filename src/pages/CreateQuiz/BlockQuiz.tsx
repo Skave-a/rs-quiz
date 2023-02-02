@@ -9,7 +9,7 @@ interface IBlockQuiz {
 
 export const BlockQuiz = (props: IBlockQuiz) => {
   const { name } = props;
-  function handleClick(e: Event) {
+  function handleClick() {
     console.log('d');
   }
   return (
@@ -20,10 +20,7 @@ export const BlockQuiz = (props: IBlockQuiz) => {
           <ItemBlockQuiz name={name} />
           <ItemBlockQuiz name={name} />
         </Box>
-        <Button
-          sx={{ display: 'flex', alignItems: 'center', gap: '10px' }}
-          onClick={(e) => handleClick(e as unknown as Event)}
-        >
+        <Button sx={{ display: 'flex', alignItems: 'center', gap: '10px' }} onClick={handleClick}>
           <ControlPointIcon sx={{ color: 'rgb(255, 110, 3)' }} />
           <Typography sx={{ textTransform: 'uppercase' }}>{SERVICE_MESSAGES.addAnswer}</Typography>
         </Button>
