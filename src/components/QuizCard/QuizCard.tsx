@@ -6,7 +6,6 @@ import { Box, CardActionArea, CardHeader, IconButton } from '@mui/material';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 import QuizIcon from '@mui/icons-material/Quiz';
 import { SERVICE_MESSAGES } from '../utils/constants';
-import Button from '@mui/material/Button';
 
 export const QuizCard = () => {
   return (
