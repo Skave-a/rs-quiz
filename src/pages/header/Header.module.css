@@ -1,0 +1,33 @@
+.header {box-shadow: none !important; background-color: #ffffff !important; }
+.header:after {
+    background: linear-gradient(90deg,#ffe9d9 10%,#dabdfe 45%,#bdf4fe 90%);
+    border-radius: 1rem;
+    bottom: -5rem;
+    box-shadow: inset 1rem -1rem 3rem 3rem #ffffff;
+    content: "";
+    display: block;
+    height: 9rem;
+    left: -3rem;
+    opacity: 1;
+    pointer-events: none;
+    position: absolute;
+    right: 0;
+    z-index: -1;
+    top: 0;
+}
+.nav__item {
+    color: rgb(16, 15, 15) !important;
+}
+.logo {
+    max-width: 85px;
+    width: 100%;
+}
+.logo__sm {
+    max-width: 65px;
+    width: 100%;
+    margin: 0 auto;
+}
+@media screen and (max-width: 600px) {
+ .logo {display: none;}
+
+}
