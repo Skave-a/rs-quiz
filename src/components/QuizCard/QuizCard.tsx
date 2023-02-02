@@ -5,6 +5,8 @@ import Typography from '@mui/material/Typography';
 import { Box, CardActionArea, CardHeader, IconButton } from '@mui/material';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 import QuizIcon from '@mui/icons-material/Quiz';
+import { SERVICE_MESSAGES } from '../utils/constants';
+import Button from '@mui/material/Button';
 
 export const QuizCard = () => {
   return (
@@ -37,7 +39,8 @@ export const QuizCard = () => {
                 alignItems: 'center',
               }}
             >
-              <QuizIcon /> Quiz
+              <QuizIcon />
+              {SERVICE_MESSAGES.quiz}
             </Typography>
             <Box sx={{ display: 'flex', alignItems: 'center', gap: '3px' }}>
               <Typography
@@ -49,7 +52,7 @@ export const QuizCard = () => {
                   textTransform: 'uppercase',
                 }}
               >
-                published
+                {SERVICE_MESSAGES.published}
               </Typography>
               <Box
                 sx={{
@@ -82,6 +85,48 @@ export const QuizCard = () => {
           >
             2023-02-01 17:37:50
           </Typography>
+          <Box sx={{ display: 'flex', gap: '3px', color: '#5cb85c', alignItems: 'center' }}>
+            <Box
+              sx={{
+                borderRadius: '50%',
+                display: 'inline-block',
+                height: '7px',
+                backgroundColor: '#5cb85c',
+                width: '7px',
+              }}
+            >
+              {' '}
+            </Box>
+            Active
+          </Box>
+          <Box sx={{ display: 'flex', gap: '3px', color: '#05b4f9', alignItems: 'center' }}>
+            <Box
+              sx={{
+                borderRadius: '50%',
+                display: 'inline-block',
+                height: '7px',
+                backgroundColor: '#05b4f9',
+                width: '7px',
+              }}
+            >
+              {' '}
+            </Box>
+            Passed
+          </Box>
+          <Box sx={{ display: 'flex', gap: '3px', color: '#f1003a', alignItems: 'center' }}>
+            <Box
+              sx={{
+                borderRadius: '50%',
+                display: 'inline-block',
+                height: '7px',
+                backgroundColor: '#f1003a',
+                width: '7px',
+              }}
+            >
+              {' '}
+            </Box>
+            Failed
+          </Box>
         </CardContent>
       </CardActionArea>
     </Card>
