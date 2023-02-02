@@ -1,6 +1,7 @@
 import { Box, Button, Typography } from '@mui/material';
-import { QuizCard } from '../../components/QuizCard/QuizCard';
+// import { QuizCard } from '../../components/QuizCard/QuizCard';
 import { SERVICE_MESSAGES } from '../../components/utils/constants';
+import { CreateQuiz } from '../CreateQuiz/CreateQuiz';
 
 export const Main = () => {
   return (
@@ -15,7 +16,8 @@ export const Main = () => {
           {SERVICE_MESSAGES.createNew}
         </Button>
       </Box>
-      <QuizCard />
+      <CreateQuiz />
+      {/* <QuizCard /> */}
     </Box>
   );
 };
