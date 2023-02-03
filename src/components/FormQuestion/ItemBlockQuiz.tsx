@@ -1,4 +1,4 @@
-import { Box, Button, TextField } from '@mui/material';
+import { Box, IconButton, TextField } from '@mui/material';
 import { SERVICE_MESSAGES } from '../utils/constants';
 import { ItemBlockQuizBox } from './styles';
 import BackspaceIcon from '@mui/icons-material/Backspace';
@@ -20,9 +20,9 @@ export const ItemBlockQuiz = (props: IItemBlockQuiz) => {
     <Box sx={ItemBlockQuizBox}>
       <TextField multiline placeholder={SERVICE_MESSAGES.answer} sx={{ width: '100%' }} />
       <input type="radio" name={name} />
-      <Button onClick={remove}>
+      <IconButton color="primary" onClick={remove}>
         <BackspaceIcon />
-      </Button>
+      </IconButton>
     </Box>
   );
 };
