@@ -27,8 +27,8 @@ function App() {
   return (
     <CssVarsProvider theme={theme}>
       <BrowserRouter>
+        <Header />
         <Container sx={{ width: { sm: 2 / 3 } }}>
-          <Header />
           <Routes>
             <Route path="/" element={<Main />} />
             <Route path="/chat" element={<Chat />} />
