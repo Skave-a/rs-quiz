@@ -17,7 +17,7 @@ export const CreateQuizCreate = {
   marginBottom: '2.4rem',
   color: '#424242',
   fontWeight: '700',
-  margin: '72px 0',
+  mb: '72px',
 };
 
 export const CreateQuizBox = {

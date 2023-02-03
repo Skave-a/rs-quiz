@@ -2,7 +2,7 @@ import { Container } from '@mui/material';
 import './App.css';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import { Chat } from './pages/chat/Chat';
-import { Footer } from './pages/Footer/Footer';
+import { Footer } from './pages/footer/Footer';
 import { Header } from './pages/header/Header';
 import { Main } from './pages/main/Main';
 import { Page404 } from './pages/page404/Page404';
