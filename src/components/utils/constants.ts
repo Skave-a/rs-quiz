@@ -14,3 +14,5 @@ export const SERVICE_MESSAGES = {
   answer: 'Answer',
   configure: 'Configure results',
 };
+
+export const LINK_TO_THE_COURSE = 'https://rs.school/js/';
