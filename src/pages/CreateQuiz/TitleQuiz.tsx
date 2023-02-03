@@ -4,9 +4,15 @@ import ImageIcon from '@mui/icons-material/Image';
 import ControlPointIcon from '@mui/icons-material/ControlPoint';
 import { btnImgSX, TitleQuizPaper, TitleQuizPaperBtn } from './styles';
 
-export const TitleQuiz = () => {
+interface ITitleQuiz {
+  block: string[];
+  setBlock: (arg0: string[]) => void;
+}
+
+export const TitleQuiz = (props: ITitleQuiz) => {
+  const { block, setBlock } = props;
   function handleClick() {
-    console.log('da');
+    setBlock([...block, new Date().toString()]);
   }
   return (
     <Box>

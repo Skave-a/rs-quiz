@@ -6,16 +6,16 @@ import { useState } from 'react';
 import { CreateQuizBox, CreateQuizBox2, CreateQuizCreate } from './styles';
 
 export const CreateQuiz = () => {
-  const [state, setState] = useState(['first', 'second']);
+  const [block, setBlock] = useState(['first', 'second']);
+  const blocks = block.map((el, id) => {
+    return <BlockQuiz name={el} key={id} />;
+  });
   return (
     <Box>
       <Typography sx={CreateQuizCreate}>{SERVICE_MESSAGES.create}</Typography>
       <Box sx={CreateQuizBox}>
-        <TitleQuiz />
-        <Box sx={CreateQuizBox2}>
-          <BlockQuiz name="f" />
-          <BlockQuiz name="s" />
-        </Box>
+        <TitleQuiz block={block} setBlock={setBlock} />
+        <Box sx={CreateQuizBox2}>{blocks}</Box>
       </Box>
     </Box>
   );
