@@ -11,7 +11,7 @@
   position: fixed;
   left: 0;
   bottom: 0;
-  height: 80px;
+  /* height: 80px; */
   z-index: 5;
   background: white;
 }

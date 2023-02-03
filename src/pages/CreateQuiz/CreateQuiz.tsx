@@ -11,8 +11,8 @@ import {
 
 export const CreateQuiz = () => {
   const [block, setBlock] = useState(['first', 'second']);
-  const blocks = block.map((el, id) => {
-    return <BlockQuiz name={el} key={id} />;
+  const blocks = block.map((el) => {
+    return <BlockQuiz name={el} key={el} id={el} setBlock={setBlock} block={block} />;
   });
   return (
     <Box sx={{ pb: '150px' }}>
