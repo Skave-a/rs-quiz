@@ -3,6 +3,7 @@ import { SERVICE_MESSAGES } from '../utils/constants';
 import ImageIcon from '@mui/icons-material/Image';
 import ControlPointIcon from '@mui/icons-material/ControlPoint';
 import { btnImgSX, TitleQuizPaper, TitleQuizPaperBtn } from './styles';
+import { ChangeEvent } from 'react';
 
 interface ITitleQuiz {
   block: string[];
@@ -13,6 +14,21 @@ export const TitleQuiz = (props: ITitleQuiz) => {
   const { block, setBlock } = props;
   function handleClick() {
     setBlock([...block, new Date().toString()]);
+  }
+  function handleTitle(e: ChangeEvent<HTMLInputElement>) {
+    dataQuiz.title = e.target.value;
+  }
+  function handleDescription(e: ChangeEvent<HTMLInputElement>) {
+    dataQuiz.description = e.target.value;
+  }
+  const dataQuiz = {
+    img: '',
+    title: '',
+    description: '',
+    questionArr: [],
+  };
+  function handleConfigure() {
+    console.log('handleConfigure', dataQuiz);
   }
   return (
     <Box sx={{ margin: '0 auto' }}>
@@ -28,6 +44,7 @@ export const TitleQuiz = (props: ITitleQuiz) => {
             rows={3}
             placeholder={SERVICE_MESSAGES.writeSmth}
             sx={{ width: '100%' }}
+            onChange={(e: ChangeEvent<HTMLInputElement>) => handleTitle(e)}
           />
         </Box>
         <Box>
@@ -38,6 +55,7 @@ export const TitleQuiz = (props: ITitleQuiz) => {
             rows={2}
             placeholder={SERVICE_MESSAGES.writeSmth}
             sx={{ width: '100%' }}
+            onChange={(e: ChangeEvent<HTMLInputElement>) => handleDescription(e)}
           />
         </Box>
         <Button sx={TitleQuizPaperBtn}>
@@ -46,7 +64,11 @@ export const TitleQuiz = (props: ITitleQuiz) => {
             {SERVICE_MESSAGES.addQBlock}
           </Typography>
         </Button>
-        <Button variant="contained" sx={{ m: '0 auto', color: '#ffffff' }}>
+        <Button
+          variant="contained"
+          sx={{ m: '0 auto', color: '#ffffff' }}
+          onClick={handleConfigure}
+        >
           {SERVICE_MESSAGES.configure}
         </Button>
       </Paper>
