@@ -1,7 +1,7 @@
-import { Box, Button, Typography } from '@mui/material';
-// import { QuizCard } from '../../components/QuizCard/QuizCard';
+import { Box, Button, Link, Typography } from '@mui/material';
+import { QuizCard } from '../../components/QuizCard/QuizCard';
 import { SERVICE_MESSAGES } from '../../components/utils/constants';
-import { CreateQuiz } from '../CreateQuiz/CreateQuiz';
+import { Link as RouterLink } from 'react-router-dom';
 
 export const Main = () => {
   return (
@@ -12,12 +12,13 @@ export const Main = () => {
         <Typography sx={{ fontSize: '1.8rem', lineHeight: '4rem' }}>
           {SERVICE_MESSAGES.myQuizzes}
         </Typography>
-        <Button variant="contained" sx={{ color: '#fff', letterSpacing: '.1em' }}>
-          {SERVICE_MESSAGES.createNew}
-        </Button>
+        <Link component={RouterLink} to="/create-quiz" underline="none">
+          <Button variant="contained" sx={{ color: '#fff', letterSpacing: '.1em' }}>
+            {SERVICE_MESSAGES.createNew}
+          </Button>
+        </Link>
       </Box>
-      <CreateQuiz />
-      {/* <QuizCard /> */}
+      <QuizCard />
     </Box>
   );
 };
