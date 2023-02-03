@@ -1,9 +1,13 @@
 import { Box, Typography } from '@mui/material';
 import { SERVICE_MESSAGES } from '../../components/utils/constants';
-import { TitleQuiz } from './TitleQuiz';
-import { BlockQuiz } from './BlockQuiz';
+import { TitleQuiz } from '../../components/FormQuestion/TitleQuiz';
+import { BlockQuiz } from '../../components/FormQuestion/BlockQuiz';
 import { useState } from 'react';
-import { CreateQuizBox, CreateQuizBox2, CreateQuizCreate } from './styles';
+import {
+  CreateQuizBox,
+  CreateQuizBox2,
+  CreateQuizCreate,
+} from '../../components/FormQuestion/styles';
 
 export const CreateQuiz = () => {
   const [block, setBlock] = useState(['first', 'second']);
@@ -11,7 +15,7 @@ export const CreateQuiz = () => {
     return <BlockQuiz name={el} key={id} />;
   });
   return (
-    <Box>
+    <Box sx={{ pb: '150px' }}>
       <Typography sx={CreateQuizCreate}>{SERVICE_MESSAGES.create}</Typography>
       <Box sx={CreateQuizBox}>
         <TitleQuiz block={block} setBlock={setBlock} />

@@ -17,6 +17,7 @@ export const CreateQuizCreate = {
   marginBottom: '2.4rem',
   color: '#424242',
   fontWeight: '700',
+  margin: '72px 0',
 };
 
 export const CreateQuizBox = {
@@ -24,12 +25,14 @@ export const CreateQuizBox = {
   alignItems: 'flex-start',
   justifyContent: 'space-between',
   flexWrap: 'wrap',
+  gap: '20px',
 };
 
 export const CreateQuizBox2 = {
   display: 'flex',
   flexDirection: 'column',
   gap: '20px',
+  margin: '0 auto',
 };
 
 export const ItemBlockQuizBox = {

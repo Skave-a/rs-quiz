@@ -1,5 +1,5 @@
 import { Box, Button, Paper, TextField, Typography } from '@mui/material';
-import { SERVICE_MESSAGES } from '../../components/utils/constants';
+import { SERVICE_MESSAGES } from '../utils/constants';
 import ImageIcon from '@mui/icons-material/Image';
 import ControlPointIcon from '@mui/icons-material/ControlPoint';
 import { btnImgSX, TitleQuizPaper, TitleQuizPaperBtn } from './styles';
@@ -15,7 +15,7 @@ export const TitleQuiz = (props: ITitleQuiz) => {
     setBlock([...block, new Date().toString()]);
   }
   return (
-    <Box>
+    <Box sx={{ margin: '0 auto' }}>
       <Paper elevation={3} sx={TitleQuizPaper}>
         <Button sx={btnImgSX}>
           <ImageIcon />
@@ -46,7 +46,7 @@ export const TitleQuiz = (props: ITitleQuiz) => {
             {SERVICE_MESSAGES.addQBlock}
           </Typography>
         </Button>
-        <Button variant="contained" sx={{ m: '0 auto' }}>
+        <Button variant="contained" sx={{ m: '0 auto', color: '#ffffff' }}>
           {SERVICE_MESSAGES.configure}
         </Button>
       </Paper>

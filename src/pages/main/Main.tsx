@@ -9,7 +9,7 @@ export const Main = () => {
       <Box
         sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', mb: '20px' }}
       >
-        <Typography sx={{ fontSize: '1.8rem', lineHeight: '4rem' }}>
+        <Typography sx={{ fontSize: '1.8rem', lineHeight: '4rem', margin: '72px 0' }}>
           {SERVICE_MESSAGES.myQuizzes}
         </Typography>
         <Link component={RouterLink} to="/create-quiz" underline="none">
