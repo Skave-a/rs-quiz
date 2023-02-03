@@ -6,15 +6,16 @@ import { Dispatch, SetStateAction } from 'react';
 
 interface IItemBlockQuiz {
   name: string;
-  blockQ: string[];
-  setBlockQ: Dispatch<SetStateAction<string[]>>;
+  blockQ: number[];
+  setBlockQ: Dispatch<SetStateAction<number[]>>;
   id: number;
 }
 
 export const ItemBlockQuiz = (props: IItemBlockQuiz) => {
   const { name, setBlockQ, blockQ, id } = props;
   function remove() {
-    setBlockQ([...blockQ.slice(0, id), ...blockQ.slice(id + 1)]);
+    const indx = blockQ.indexOf(id);
+    setBlockQ([...blockQ.slice(0, indx), ...blockQ.slice(indx + 1)]);
   }
   return (
     <Box sx={ItemBlockQuizBox}>
