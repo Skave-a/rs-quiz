@@ -1,10 +1,12 @@
 import { configureStore, ThunkAction, Action } from '@reduxjs/toolkit';
 import counterReducer from './reducers/counterSlice';
+import cardsReducer from './reducers/cardSlice';
 // import { booksApi } from './booksApi';
 
 export const store = configureStore({
   reducer: {
     counter: counterReducer,
+    cards: cardsReducer,
     // [booksApi.reducerPath]: booksApi.reducer,
   },
   // middleware: (getDefaultMiddlware) => getDefaultMiddlware().concat(booksApi.middleware),

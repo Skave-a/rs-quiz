@@ -1,9 +1,11 @@
+import { useAppSelector } from '../../store/hooks';
 import { Box, Button, Link, Typography } from '@mui/material';
 import { QuizCard } from '../../components/QuizCard/QuizCard';
 import { SERVICE_MESSAGES } from '../../components/utils/constants';
 import { Link as RouterLink } from 'react-router-dom';
 
 export const Main = () => {
+  const allCards = useAppSelector((state) => state.cards.list);
   return (
     <Box>
       <Box
@@ -18,7 +20,19 @@ export const Main = () => {
           </Button>
         </Link>
       </Box>
-      <QuizCard />
+      <Box
+        sx={{
+          display: 'flex',
+          alignItems: 'center',
+          pb: '72px',
+          flexWrap: 'wrap',
+          gap: '20px',
+        }}
+      >
+        {allCards.map((card) => (
+          <QuizCard key={card.id} {...card} />
+        ))}
+      </Box>
     </Box>
   );
 };

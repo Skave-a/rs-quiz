@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { useState } from 'react';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
@@ -12,13 +13,11 @@ import MenuItem from '@mui/material/MenuItem';
 import styles from './Header.module.css';
 import logo from '../../static/images/logoq.png';
 import { Avatar, Tooltip } from '@mui/material';
-
-const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
-const pages = ['Questions list', 'Create new question', 'Some disabled button'];
+import { pages, settings } from '../../components/utils/constants';
 
 export const Header = () => {
-  const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(null);
-  const [anchorElUser, setAnchorElUser] = React.useState<null | HTMLElement>(null);
+  const [anchorElNav, setAnchorElNav] = useState<null | HTMLElement>(null);
+  const [anchorElUser, setAnchorElUser] = useState<null | HTMLElement>(null);
 
   const handleOpenNavMenu = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorElNav(event.currentTarget);
@@ -36,11 +35,14 @@ export const Header = () => {
   };
 
   return (
-    <AppBar position="static" className={styles.header}>
+    <AppBar
+      position="static"
+      sx={{ position: 'relative', boxShadow: 'none', backgroundColor: '#ffffff' }}
+      className={styles.header}
+    >
       <Container maxWidth="xl">
         <Toolbar disableGutters>
-          <img src={logo} alt="logo" className={styles.logo} />
-
+          <Box component="img" src={logo} alt="logo" className={styles.logo} />
           <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
             <IconButton
               size="large"
@@ -76,15 +78,14 @@ export const Header = () => {
                 </MenuItem>
               ))}
             </Menu>
-            <img src={logo} alt="logo" className={styles.logo__sm} />
+            <Box component="img" src={logo} alt="logo" className={styles.logo__sm} />
           </Box>
           <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
             {pages.map((page) => (
               <Button
                 key={page}
-                className={styles.nav__item}
                 onClick={handleCloseNavMenu}
-                sx={{ my: 2, color: 'white', display: 'block' }}
+                sx={{ my: 2, color: '#292626', display: 'block' }}
               >
                 {page}
               </Button>

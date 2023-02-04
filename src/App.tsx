@@ -37,8 +37,8 @@ function App() {
             {/* <Route path="/anyPage" element={< AnyPage/>} /> */}
             <Route path="*" element={<Page404 />} />
           </Routes>
-          <Footer />
         </Container>
+        <Footer />
       </BrowserRouter>
     </CssVarsProvider>
   );
