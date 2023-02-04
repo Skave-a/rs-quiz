@@ -33,9 +33,14 @@ export const TitleQuiz = (props: ITitleQuiz) => {
   return (
     <Box sx={{ margin: '0 auto' }}>
       <Paper elevation={3} sx={TitleQuizPaper}>
-        <Button sx={btnImgSX}>
+        {/* <Button variant="contained" component="label">
+  Upload
+  <input hidden accept="image/*" multiple type="file" />
+</Button> */}
+        <Button sx={btnImgSX} component="label">
           <ImageIcon />
           <Typography>{SERVICE_MESSAGES.addImage}</Typography>
+          <input hidden accept="image/*" multiple type="file" />
         </Button>
         <Box>
           <Typography sx={{ mb: '2px' }}>{SERVICE_MESSAGES.title}</Typography>

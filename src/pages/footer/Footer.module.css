@@ -9,9 +9,10 @@
   border-image-source: linear-gradient(to left, #38495a, #a2abb3, #38495a);
   left: 0;
   bottom: 0;
-  height: 80px;
+  /* height: 80px; */
   z-index: 5;
   background: white;
+  padding: 15px 0;
 }
 
 .dev {
