@@ -1,5 +1,4 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { number, string } from 'yargs';
 
 const questionFormSlice = createSlice({
   name: 'questionForm',

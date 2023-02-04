@@ -7,12 +7,14 @@ export const SERVICE_MESSAGES = {
   addImage: 'Add image',
   title: 'Title',
   writeSmth: 'Write something ...',
+  writeQuest: 'Write a question ...',
   description: 'Description (optional)',
   addQBlock: 'Add a question block',
   answerContent: 'Answer content',
   addAnswer: 'Add an answer',
   answer: 'Answer',
   configure: 'Configure results',
+  addLink: 'Paste image link',
 };
 
 export const LINK_TO_THE_COURSE = 'https://rs.school/js/';
