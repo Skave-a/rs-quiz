@@ -6,10 +6,12 @@ import { Box, CardActionArea, CardHeader, IconButton } from '@mui/material';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 import QuizIcon from '@mui/icons-material/Quiz';
 import { SERVICE_MESSAGES } from '../utils/constants';
+import { CardData } from '../../store/reducers/cardSlice';
+import Link from '@mui/material/Link';
 
-export const QuizCard = () => {
+export const QuizCard: React.FC<CardData> = ({ title, img, date }) => {
   return (
-    <Card sx={{ maxWidth: 345, position: 'relative' }}>
+    <Card sx={{ maxWidth: 345, width: '100%', position: 'relative' }}>
       <CardHeader
         sx={{ position: 'absolute', zIndex: 5, padding: '10px', right: 0 }}
         action={
@@ -19,12 +21,9 @@ export const QuizCard = () => {
         }
       />
       <CardActionArea>
-        <CardMedia
-          component="img"
-          height="140"
-          image="https://cdn.riddle.com/website/riddle/2019/placeholders/placeholder-quiz.png"
-          alt="green iguana"
-        />
+        <Link href="#" underline="none">
+          <CardMedia component="img" height="140" image={img} alt="card" />
+        </Link>
         <CardContent>
           <Box sx={{ display: 'flex', justifyContent: 'space-between', mb: '10px' }}>
             <Typography
@@ -72,7 +71,7 @@ export const QuizCard = () => {
             component="div"
             sx={{ color: '#424242', fontSize: '1.5rem', fontWeight: 700 }}
           >
-            History Quiz
+            {title}
           </Typography>
           <Typography
             sx={{
@@ -82,7 +81,7 @@ export const QuizCard = () => {
               lineHeight: '1.6rem',
             }}
           >
-            2023-02-01 17:37:50
+            {date}
           </Typography>
           <Box sx={{ display: 'flex', gap: '3px', color: '#5cb85c', alignItems: 'center' }}>
             <Box

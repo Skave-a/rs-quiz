@@ -1,6 +1,4 @@
-.header {position: relative !important;
-    box-shadow: none !important;
-    background-color: #ffffff !important;
+.header {
     z-index: 0;}
 .header:after {
     background: linear-gradient(90deg,#ffe9d9 10%,#dabdfe 45%,#bdf4fe 90%);
@@ -16,9 +14,7 @@
     z-index: -1;
     top: 0px;
 }
-.nav__item {
-    color: rgb(16, 15, 15) !important;
-}
+
 .logo {
     max-width: 85px;
     width: 100%;
@@ -28,7 +24,7 @@
     width: 100%;
     margin: 0 auto;
 }
-@media screen and (max-width: 600px) {
+@media screen and (max-width: 899px) {
  .logo {display: none;}
 
 }
