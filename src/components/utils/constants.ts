@@ -15,6 +15,7 @@ export const SERVICE_MESSAGES = {
   answer: 'Answer',
   configure: 'Configure results',
   addLink: 'Paste image link',
+  check: 'Check your answers',
 };
 
 export const LINK_TO_THE_COURSE = 'https://rs.school/js/';

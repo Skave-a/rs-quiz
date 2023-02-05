@@ -11,6 +11,7 @@ import {
   experimental_extendTheme as extendTheme,
 } from '@mui/material/styles';
 import { CreateQuiz } from './pages/CreateQuiz/CreateQuiz';
+import { Test } from './pages/Test/Test';
 
 const theme = extendTheme({
   colorSchemes: {
@@ -34,6 +35,7 @@ function App() {
             <Route path="/" element={<Main />} />
             <Route path="/chat" element={<Chat />} />
             <Route path="/create-quiz" element={<CreateQuiz />} />
+            <Route path={`/:id`} element={<Test />} />
             {/* <Route path="/anyPage" element={< AnyPage/>} /> */}
             <Route path="*" element={<Page404 />} />
           </Routes>
