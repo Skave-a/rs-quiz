@@ -3,11 +3,13 @@ import { Box, Button, Link, Typography } from '@mui/material';
 import { QuizCard } from '../../components/QuizCard/QuizCard';
 import { SERVICE_MESSAGES } from '../../components/utils/constants';
 import { Link as RouterLink } from 'react-router-dom';
+import { Test } from '../Test/Test';
 
 export const Main = () => {
   const allCards = useAppSelector((state) => state.cards.list);
   return (
     <Box>
+      {/* <Test /> */}
       <Box
         sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', mb: '72px' }}
       >
@@ -30,7 +32,9 @@ export const Main = () => {
         }}
       >
         {allCards.map((card) => (
-          <QuizCard key={card.id} {...card} />
+          <RouterLink key={card.id} style={{ textDecoration: 'none' }} to={`/${card.id}`}>
+            <QuizCard key={card.id} {...card} />
+          </RouterLink>
         ))}
       </Box>
     </Box>

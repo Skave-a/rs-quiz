@@ -8,8 +8,9 @@ import QuizIcon from '@mui/icons-material/Quiz';
 import { SERVICE_MESSAGES } from '../utils/constants';
 import { CardData } from '../../store/reducers/cardSlice';
 import Link from '@mui/material/Link';
+import { FC } from 'react';
 
-export const QuizCard: React.FC<CardData> = ({ title, img, date }) => {
+export const QuizCard: FC<CardData> = ({ title, img, date }) => {
   return (
     <Card sx={{ maxWidth: 345, width: '100%', position: 'relative' }}>
       <CardHeader
@@ -21,9 +22,7 @@ export const QuizCard: React.FC<CardData> = ({ title, img, date }) => {
         }
       />
       <CardActionArea>
-        <Link href="#" underline="none">
-          <CardMedia component="img" height="140" image={img} alt="card" />
-        </Link>
+        <CardMedia component="img" height="140" image={img} alt="card" />
         <CardContent>
           <Box sx={{ display: 'flex', justifyContent: 'space-between', mb: '10px' }}>
             <Typography
