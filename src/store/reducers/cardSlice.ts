@@ -1,5 +1,11 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { questionDefaultHistory } from '../../components/utils/constants';
+import {
+  questionDefaultArt,
+  questionDefaultHistory,
+  questionDefaultLit,
+  questionDefaultMus,
+  questionDefaultProg,
+} from '../../components/utils/defaultData';
 import { IQuestion } from '../../components/utils/types';
 
 export type CardData = {
@@ -9,6 +15,8 @@ export type CardData = {
   date: string;
   desription: string;
   questionsArr: IQuestion[];
+  passed: boolean;
+  passedOn: number;
 };
 
 export type CardList = {
@@ -25,6 +33,8 @@ export const initialState: CardList = {
       desription: `Belarus is mostly made up of forests, rivers and lakes and is mostly referred to as the rib of Europe. 
       The country has a very interesting history and people. Take up this quiz to test your knowledge of Belarus and its people.`,
       questionsArr: questionDefaultHistory,
+      passed: false,
+      passedOn: 0,
     },
     {
       title: 'Programming quiz',
@@ -32,7 +42,9 @@ export const initialState: CardList = {
       date: '2022-10-25 13:00',
       id: 2,
       desription: `It's a nice way to see how much you know, or don't know, about JavaScript.`,
-      questionsArr: questionDefaultHistory,
+      questionsArr: questionDefaultProg,
+      passed: false,
+      passedOn: 0,
     },
     {
       title: 'Art quiz',
@@ -40,7 +52,9 @@ export const initialState: CardList = {
       date: '2023-01-06 23:00',
       id: 3,
       desription: `See What you know about art!`,
-      questionsArr: questionDefaultHistory,
+      questionsArr: questionDefaultArt,
+      passed: false,
+      passedOn: 0,
     },
     {
       title: 'Literature quiz',
@@ -48,7 +62,9 @@ export const initialState: CardList = {
       date: '2023-02-01 03:00',
       id: 4,
       desription: `Take this quiz and learn more about Adult Easy - Literature`,
-      questionsArr: questionDefaultHistory,
+      questionsArr: questionDefaultLit,
+      passed: false,
+      passedOn: 0,
     },
     {
       title: 'Musical quiz',
@@ -59,7 +75,9 @@ export const initialState: CardList = {
       Are you a music fanatic? Take this quiz to test your knowledge about the intricacies of music. 
       It takes more than just a pretty voice to make a memorable melody! Prove yourself to be a musical genius by attempting 
       all the questions.`,
-      questionsArr: questionDefaultHistory,
+      questionsArr: questionDefaultMus,
+      passed: false,
+      passedOn: 0,
     },
   ],
 };

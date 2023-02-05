@@ -24,7 +24,13 @@ export const TestItem = (props: ItestItem) => {
     >
       <Typography variant="h4">{question.question}</Typography>
       {question.img.length ? (
-        <CardMedia component="img" image={question.img} alt="card" height={245} />
+        <CardMedia
+          component="img"
+          image={question.img}
+          alt="card"
+          height={245}
+          sx={{ objectFit: 'contain' }}
+        />
       ) : null}
       {questionAnswers.map((answer, id) => (
         <QuestionItem answer={answer} key={id} name={nameRadio} />

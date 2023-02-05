@@ -1,7 +1,8 @@
-import { Box, CardMedia, Typography } from '@mui/material';
+import { Box, Button, CardMedia, Typography } from '@mui/material';
 import Paper from '@mui/material/Paper';
 import { useParams } from 'react-router-dom';
 import { TestItem } from '../../components/TestItem/TestItem';
+import { SERVICE_MESSAGES } from '../../components/utils/constants';
 import { useAppSelector } from '../../store/hooks';
 
 export const Test = () => {
@@ -25,6 +26,9 @@ export const Test = () => {
           <TestItem question={question} id={id} key={id} />
         ))}
       </Box>
+      <Button variant="contained" sx={{ m: '0 auto', color: '#ffffff' }}>
+        {SERVICE_MESSAGES.check}
+      </Button>
     </Box>
   );
 };
