@@ -3,7 +3,7 @@ import { SERVICE_MESSAGES } from '../utils/constants';
 import ImageIcon from '@mui/icons-material/Image';
 import ControlPointIcon from '@mui/icons-material/ControlPoint';
 import { btnImgSX, TitleQuizPaper, TitleQuizPaperBtn } from './styles';
-import { ChangeEvent } from 'react';
+import { ChangeEvent, useState } from 'react';
 
 interface ITitleQuiz {
   block: string[];
@@ -11,15 +11,19 @@ interface ITitleQuiz {
 }
 
 export const TitleQuiz = (props: ITitleQuiz) => {
-  const { block, setBlock } = props;
-  function handleClick() {
-    setBlock([...block, new Date().toString()]);
-  }
+  const [title, setTitle] = useState('');
+  const [description, setDescription] = useState('');
   function handleTitle(e: ChangeEvent<HTMLInputElement>) {
     dataQuiz.title = e.target.value;
+    setTitle(e.target.value);
   }
   function handleDescription(e: ChangeEvent<HTMLInputElement>) {
     dataQuiz.description = e.target.value;
+    setDescription(e.target.value);
+  }
+  const { block, setBlock } = props;
+  function handleClick() {
+    setBlock([...block, new Date().toString()]);
   }
   const dataQuiz = {
     img: '',
@@ -33,10 +37,6 @@ export const TitleQuiz = (props: ITitleQuiz) => {
   return (
     <Box sx={{ margin: '0 auto' }}>
       <Paper elevation={3} sx={TitleQuizPaper}>
-        {/* <Button variant="contained" component="label">
-  Upload
-  <input hidden accept="image/*" multiple type="file" />
-</Button> */}
         <Button sx={btnImgSX} component="label">
           <ImageIcon />
           <Typography>{SERVICE_MESSAGES.addImage}</Typography>

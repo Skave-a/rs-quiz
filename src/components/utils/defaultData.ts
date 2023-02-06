@@ -79,34 +79,44 @@ export const questionDefaultArt: IQuestion[] = [
 
 export const questionDefaultProg: IQuestion[] = [
   {
-    question: `kkk`,
+    question: `What is not a principle of object-oriented programming?`,
     img: '',
-    answers: ['3', '4', '5', '6'],
-    correctAnswer: '5',
+    answers: ['Abstraction', 'Encapsulation', 'Injection', 'Inheritance'],
+    correctAnswer: 'Injection',
   },
   {
-    question: `kkk`,
+    question: `How many data types are there in JavaScript?`,
     img: '',
-    answers: ['3', '4', '5', '6'],
-    correctAnswer: '5',
+    answers: ['3', '8', '5', '6'],
+    correctAnswer: '8',
   },
   {
-    question: `kkk`,
+    question: `Who created the Javascript programming language?`,
     img: '',
-    answers: ['3', '4', '5', '6'],
-    correctAnswer: '5',
+    answers: ['Yukihiro Matsumoto', 'James Gosling', 'Brendan Eich', 'Bjarne Stroustrup'],
+    correctAnswer: 'Brendan Eich',
   },
   {
-    question: `kkk`,
+    question: `What is DOM?`,
     img: '',
-    answers: ['3', '4', '5', '6'],
-    correctAnswer: '5',
+    answers: [
+      'Document Object Model',
+      'Document Object Markup',
+      'Document Operated Model',
+      'Dissociated Object Model',
+    ],
+    correctAnswer: 'Document Object Model',
   },
   {
-    question: `kkk`,
+    question: `What is a Callback Function?`,
     img: '',
-    answers: ['3', '4', '5', '6'],
-    correctAnswer: '5',
+    answers: [
+      'Is a function whose call has been postponed for the future',
+      'Function without <i>return</i>',
+      'Function assigned to a variable',
+      'Is a combination of the function and the lexical environment in which the function has been defined',
+    ],
+    correctAnswer: 'Is a function whose call has been postponed for the future',
   },
 ];
 

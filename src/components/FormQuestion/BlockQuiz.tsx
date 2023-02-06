@@ -24,10 +24,6 @@ export const BlockQuiz = (props: IBlockQuiz) => {
   }
   function remove() {
     const indx = block.indexOf(id);
-    // console.log('block', block);
-    // console.log('indx', indx);
-    // console.log('block.slice(0, indx)', block.slice(0, indx));
-    // console.log('block.slice(indx + 1)', block.slice(indx + 1));
     setBlock([...block.slice(0, indx), ...block.slice(indx + 1)]);
   }
   return (

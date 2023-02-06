@@ -7,7 +7,6 @@ import MoreVertIcon from '@mui/icons-material/MoreVert';
 import QuizIcon from '@mui/icons-material/Quiz';
 import { SERVICE_MESSAGES } from '../utils/constants';
 import { CardData } from '../../store/reducers/cardSlice';
-import Link from '@mui/material/Link';
 import { FC } from 'react';
 
 export const QuizCard: FC<CardData> = ({ title, img, date }) => {
