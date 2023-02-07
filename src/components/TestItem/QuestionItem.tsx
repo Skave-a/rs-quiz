@@ -1,20 +1,29 @@
-import { Box } from '@mui/material';
-import { RNDstring } from '../FormQuestion/RNDstring';
+import { Box, FormControlLabel, Radio } from '@mui/material';
+import { Dispatch, SetStateAction, ChangeEvent } from 'react';
 import style from './QuestionItem.module.css';
 
 interface IQuestionItem {
   answer: string;
-  name: string;
+  score: number;
+  setScore: Dispatch<SetStateAction<number>>;
+  rightAnsw: string;
 }
 export const QuestionItem = (props: IQuestionItem) => {
-  const { answer, name } = props;
-  const idRadio = RNDstring();
+  const { answer, score, setScore, rightAnsw } = props;
+  function handleChecked(e: ChangeEvent<HTMLInputElement>) {
+    const target = e.target as HTMLInputElement;
+    if (target.checked && rightAnsw === target.value) {
+      setScore(score + 1);
+    }
+  }
   return (
     <Box className={style.form_radio}>
-      <input id={idRadio} name={name} type="radio" />
-      <label htmlFor={idRadio} className={style.label__answer}>
-        {answer}
-      </label>
+      <FormControlLabel
+        value={answer}
+        control={<Radio required />}
+        label={answer}
+        onChange={(e) => handleChecked(e as ChangeEvent<HTMLInputElement>)}
+      />
     </Box>
   );
 };
