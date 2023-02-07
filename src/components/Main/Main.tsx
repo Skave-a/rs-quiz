@@ -30,7 +30,7 @@ export const Main = () => {
         }}
       >
         {allCards.map((card) => (
-          <RouterLink key={card.id} style={{ textDecoration: 'none' }} to={`/${card.id}`}>
+          <RouterLink key={card.id} style={{ textDecoration: 'none' }} to={`/test/${card.id}`}>
             <QuizCard key={card.id} {...card} />
           </RouterLink>
         ))}
