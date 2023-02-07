@@ -1,13 +1,9 @@
 import { Box, Typography } from '@mui/material';
-import { SERVICE_MESSAGES } from '../../components/utils/constants';
-import { TitleQuiz } from '../../components/FormQuestion/TitleQuiz';
-import { BlockQuiz } from '../../components/FormQuestion/BlockQuiz';
+import { SERVICE_MESSAGES } from '../utils/constants';
+import { TitleQuiz } from '../FormQuestion/TitleQuiz';
+import { BlockQuiz } from '../FormQuestion/BlockQuiz';
 import { useState } from 'react';
-import {
-  CreateQuizBox,
-  CreateQuizBox2,
-  CreateQuizCreate,
-} from '../../components/FormQuestion/styles';
+import { CreateQuizBox, CreateQuizBox2, CreateQuizCreate } from '../FormQuestion/styles';
 
 export const CreateQuiz = () => {
   const [block, setBlock] = useState(['first', 'second']);

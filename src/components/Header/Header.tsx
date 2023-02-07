@@ -11,9 +11,9 @@ import Container from '@mui/material/Container';
 import Button from '@mui/material/Button';
 import MenuItem from '@mui/material/MenuItem';
 import styles from './Header.module.css';
-import logo from '../../static/images/logoq.png';
+import logo from '../../components/assets/logoq.png';
 import { Avatar, Tooltip } from '@mui/material';
-import { pages, settings } from '../../components/utils/constants';
+import { pages, settings } from '../utils/constants';
 
 export const Header = () => {
   const [anchorElNav, setAnchorElNav] = useState<null | HTMLElement>(null);

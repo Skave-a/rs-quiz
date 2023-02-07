@@ -1,7 +1,7 @@
 import { useAppSelector } from '../../store/hooks';
 import { Box, Button, Link, Typography } from '@mui/material';
-import { QuizCard } from '../../components/QuizCard/QuizCard';
-import { SERVICE_MESSAGES } from '../../components/utils/constants';
+import { QuizCard } from '../QuizCard/QuizCard';
+import { SERVICE_MESSAGES } from '../utils/constants';
 import { Link as RouterLink } from 'react-router-dom';
 
 export const Main = () => {
