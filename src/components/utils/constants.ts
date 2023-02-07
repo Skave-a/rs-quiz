@@ -20,6 +20,7 @@ export const SERVICE_MESSAGES = {
   congratulations: 'Congrats you passed the test on ',
   fail: 'You failed the test. Your result ',
   toMain: 'To main',
+  testDate: 'Test Date',
 };
 
 export const LINK_TO_THE_COURSE = 'https://rs.school/js/';

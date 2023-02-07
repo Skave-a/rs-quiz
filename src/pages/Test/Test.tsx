@@ -1,7 +1,7 @@
 import { Box, Button, CardMedia, FormControl, Typography } from '@mui/material';
 import Paper from '@mui/material/Paper';
 import { FormEvent, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import { BreadcrumbsTest } from '../../components/Breadcrumbs/BreadcrumbsTest';
 import { ModalTestComplete } from '../../components/ModalTestComplete/ModalTestComplete';
@@ -22,7 +22,6 @@ export const Test = () => {
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
 
-  const allTests = useAppSelector((state) => state.tests.list);
   const dispatch = useDispatch();
 
   const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
@@ -36,7 +35,6 @@ export const Test = () => {
       failed: (score * 100) / questions.length > 79 ? true : false,
     };
     dispatch(addTestReduser(result));
-    console.log(allTests);
   };
 
   return (
