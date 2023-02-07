@@ -8,7 +8,6 @@ export const Main = () => {
   const allCards = useAppSelector((state) => state.cards.list);
   return (
     <Box>
-      {/* <Test /> */}
       <Box
         sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', mb: '72px' }}
       >
