@@ -86,8 +86,16 @@ export const cardSlice = createSlice({
   initialState,
   // The `reducers` field lets us define reducers and generate associated actions
   reducers: {
-    addCardReduser: (state, action: PayloadAction<CardData>) => {
-      state.list.push(action.payload);
+    addCard: (state, action: PayloadAction<CardData>) => {
+      state.list.push({
+        date: new Date().toISOString(),
+        title: action.payload.title,
+        img: '',
+        desription: action.payload.desription,
+        questionsArr: [],
+        passed: false,
+        passedOn: 0,
+      });
     },
   },
   // The `extraReducers` field lets the slice handle actions defined elsewhere,
@@ -95,6 +103,6 @@ export const cardSlice = createSlice({
 });
 
 console.log(initialState);
-export const { addCardReduser } = cardSlice.actions;
+export const { addCard } = cardSlice.actions;
 
 export default cardSlice.reducer;
