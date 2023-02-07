@@ -7,10 +7,21 @@ import MoreVertIcon from '@mui/icons-material/MoreVert';
 import QuizIcon from '@mui/icons-material/Quiz';
 import { SERVICE_MESSAGES } from '../utils/constants';
 import { CardData } from '../../store/reducers/cardSlice';
-import Link from '@mui/material/Link';
 import { FC } from 'react';
+import { useAppSelector } from '../../store/hooks';
 
-export const QuizCard: FC<CardData> = ({ title, img, date }) => {
+export const QuizCard: FC<CardData> = ({ title, img, id }) => {
+  const allTests = useAppSelector((state) => state.tests.list);
+  let testPassed;
+  let testFailed;
+  let testDate;
+  allTests.forEach((el) => {
+    if (Number(el.id) === id) {
+      testPassed = el.passed;
+      testFailed = el.failed;
+      testDate = el.date;
+    }
+  });
   return (
     <Card sx={{ maxWidth: 345, width: '100%', position: 'relative' }}>
       <CardHeader
@@ -80,50 +91,54 @@ export const QuizCard: FC<CardData> = ({ title, img, date }) => {
               lineHeight: '1.6rem',
             }}
           >
-            {date}
+            {testDate ? testDate : SERVICE_MESSAGES.testDate}
           </Typography>
-          <Box sx={{ display: 'flex', gap: '3px', color: '#5cb85c', alignItems: 'center' }}>
-            <Box
-              sx={{
-                borderRadius: '50%',
-                display: 'inline-block',
-                height: '7px',
-                backgroundColor: '#5cb85c',
-                width: '7px',
-              }}
-            >
-              {' '}
+          {testPassed && testFailed ? (
+            <Box sx={{ display: 'flex', gap: '3px', color: '#05b4f9', alignItems: 'center' }}>
+              <Box
+                sx={{
+                  borderRadius: '50%',
+                  display: 'inline-block',
+                  height: '7px',
+                  backgroundColor: '#05b4f9',
+                  width: '7px',
+                }}
+              >
+                {' '}
+              </Box>
+              Passed
             </Box>
-            Active
-          </Box>
-          <Box sx={{ display: 'flex', gap: '3px', color: '#05b4f9', alignItems: 'center' }}>
-            <Box
-              sx={{
-                borderRadius: '50%',
-                display: 'inline-block',
-                height: '7px',
-                backgroundColor: '#05b4f9',
-                width: '7px',
-              }}
-            >
-              {' '}
+          ) : testPassed ? (
+            <Box sx={{ display: 'flex', gap: '3px', color: '#f1003a', alignItems: 'center' }}>
+              <Box
+                sx={{
+                  borderRadius: '50%',
+                  display: 'inline-block',
+                  height: '7px',
+                  backgroundColor: '#f1003a',
+                  width: '7px',
+                }}
+              >
+                {' '}
+              </Box>
+              Failed
             </Box>
-            Passed
-          </Box>
-          <Box sx={{ display: 'flex', gap: '3px', color: '#f1003a', alignItems: 'center' }}>
-            <Box
-              sx={{
-                borderRadius: '50%',
-                display: 'inline-block',
-                height: '7px',
-                backgroundColor: '#f1003a',
-                width: '7px',
-              }}
-            >
-              {' '}
+          ) : (
+            <Box sx={{ display: 'flex', gap: '3px', color: '#5cb85c', alignItems: 'center' }}>
+              <Box
+                sx={{
+                  borderRadius: '50%',
+                  display: 'inline-block',
+                  height: '7px',
+                  backgroundColor: '#5cb85c',
+                  width: '7px',
+                }}
+              >
+                {' '}
+              </Box>
+              Active
             </Box>
-            Failed
-          </Box>
+          )}
         </CardContent>
       </CardActionArea>
     </Card>

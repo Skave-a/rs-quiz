@@ -2,12 +2,12 @@
   display: flex;
   overflow: hidden;
 }
-
+/* 
 .form_radio input[type=radio] {
   display: none;
 }
 
-.form_radio label {
+.form_radio .label__answer {
   display: inline-block;
   cursor: pointer;
   padding: 0px 15px;
@@ -26,4 +26,4 @@
   color: #666;
   background: #8a2be21c;
 }
-
+ */
