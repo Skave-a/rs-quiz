@@ -16,6 +16,10 @@ export const SERVICE_MESSAGES = {
   configure: 'Configure results',
   addLink: 'Paste image link',
   check: 'Check your answers',
+  complete: 'You complete the test',
+  congratulations: 'Congrats you passed the test on ',
+  fail: 'You failed the test. Your result ',
+  toMain: 'To main',
 };
 
 export const LINK_TO_THE_COURSE = 'https://rs.school/js/';

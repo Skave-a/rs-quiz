@@ -21,9 +21,8 @@ export const ItemBlockQuiz = (props: IItemBlockQuiz) => {
     setBlockQ([...blockQ.slice(0, indx), ...blockQ.slice(indx + 1)]);
   }
   function inputHandler(e: ChangeEvent<HTMLInputElement>) {
-    console.log('inputHandler', e.target.value);
+    // console.log('inputHandler', e.target.value);
   }
-  console.log(rndStr);
   return (
     <Box sx={ItemBlockQuizBox}>
       <TextField

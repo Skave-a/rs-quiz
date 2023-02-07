@@ -3,7 +3,6 @@ import { Box, Button, Link, Typography } from '@mui/material';
 import { QuizCard } from '../../components/QuizCard/QuizCard';
 import { SERVICE_MESSAGES } from '../../components/utils/constants';
 import { Link as RouterLink } from 'react-router-dom';
-import { Test } from '../Test/Test';
 
 export const Main = () => {
   const allCards = useAppSelector((state) => state.cards.list);
