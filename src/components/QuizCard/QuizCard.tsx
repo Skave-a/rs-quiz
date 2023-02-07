@@ -28,7 +28,7 @@ export const QuizCard: FC<CardData> = ({ title, img, id }) => {
     }
   });
   return (
-    <Card sx={{ maxWidth: 345, width: '100%', position: 'relative' }}>
+    <Card sx={{ maxWidth: 345, width: '100%', position: 'relative', margin: '0 auto' }}>
       <CardHeader
         sx={{ position: 'absolute', zIndex: 5, padding: '10px', right: 0 }}
         action={

@@ -27,7 +27,7 @@ export const Main = () => {
         style={{ marginBottom: '50px' }}
       >
         {allCards.map((card, index) => (
-          <Grid item xs={2} sm={4} md={4} key={index}>
+          <Grid item xs={4} sm={4} md={4} key={index}>
             <RouterLink key={card.id} style={{ textDecoration: 'none' }} to={`/test/${card.id}`}>
               <QuizCard key={card.id} {...card} />
             </RouterLink>

@@ -43,6 +43,8 @@ export const TitleQuiz = (props: ITitleQuiz) => {
         display: 'flex',
         justifyContent: 'space-between',
         alignItems: 'start',
+        flexWrap: 'wrap',
+        gap: '20px',
       }}
     >
       <Paper elevation={3} sx={TitleQuizPaper}>
