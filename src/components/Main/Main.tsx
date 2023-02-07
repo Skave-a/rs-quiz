@@ -1,5 +1,5 @@
 import { useAppSelector } from '../../store/hooks';
-import { Box, Button, Link, Typography } from '@mui/material';
+import { Box, Button, Grid, Link, Typography } from '@mui/material';
 import { QuizCard } from '../QuizCard/QuizCard';
 import { SERVICE_MESSAGES } from '../utils/constants';
 import { Link as RouterLink } from 'react-router-dom';
@@ -20,21 +20,20 @@ export const Main = () => {
           </Button>
         </Link>
       </Box>
-      <Box
-        sx={{
-          display: 'flex',
-          alignItems: 'center',
-          pb: '72px',
-          flexWrap: 'wrap',
-          gap: '20px',
-        }}
+      <Grid
+        container
+        spacing={{ xs: 2, md: 3 }}
+        columns={{ xs: 4, sm: 8, md: 12 }}
+        style={{ marginBottom: '50px' }}
       >
-        {allCards.map((card) => (
-          <RouterLink key={card.id} style={{ textDecoration: 'none' }} to={`/test/${card.id}`}>
-            <QuizCard key={card.id} {...card} />
-          </RouterLink>
+        {allCards.map((card, index) => (
+          <Grid item xs={2} sm={4} md={4} key={index}>
+            <RouterLink key={card.id} style={{ textDecoration: 'none' }} to={`/test/${card.id}`}>
+              <QuizCard key={card.id} {...card} />
+            </RouterLink>
+          </Grid>
         ))}
-      </Box>
+      </Grid>
     </Box>
   );
 };
