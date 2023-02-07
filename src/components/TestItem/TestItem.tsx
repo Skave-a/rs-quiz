@@ -1,19 +1,17 @@
-import { CardMedia, Paper, Typography } from '@mui/material';
+import { CardMedia, Paper, RadioGroup, Typography } from '@mui/material';
 import { Dispatch, SetStateAction } from 'react';
 import { IQuestion } from '../utils/types';
 import { QuestionItem } from './QuestionItem';
 
 interface ItestItem {
   question: IQuestion;
-  id: number;
   score: number;
   setScore: Dispatch<SetStateAction<number>>;
 }
 
 export const TestItem = (props: ItestItem) => {
-  const { question, id, score, setScore } = props;
+  const { question, score, setScore } = props;
   const questionAnswers = question.answers;
-  const nameRadio = `name${id}`;
   return (
     <Paper
       sx={{
@@ -35,16 +33,17 @@ export const TestItem = (props: ItestItem) => {
           sx={{ objectFit: 'contain' }}
         />
       ) : null}
-      {questionAnswers.map((answer, id) => (
-        <QuestionItem
-          answer={answer}
-          key={id}
-          name={nameRadio}
-          score={score}
-          setScore={setScore}
-          rightAnsw={question.correctAnswer}
-        />
-      ))}
+      <RadioGroup>
+        {questionAnswers.map((answer, id) => (
+          <QuestionItem
+            answer={answer}
+            key={id}
+            score={score}
+            setScore={setScore}
+            rightAnsw={question.correctAnswer}
+          />
+        ))}
+      </RadioGroup>
     </Paper>
   );
 };

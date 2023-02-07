@@ -1,0 +1,29 @@
+.test {
+  display: flex;
+  flex-direction: column; 
+  gap: 20px; 
+  margin-bottom: 150px;
+}
+
+.test__title {
+  font-weight: 700; 
+  color: #424242; 
+  text-align: center;
+}
+
+.test__card {
+  max-width: 500px; 
+  margin: 0 auto;
+}
+
+.test__description {
+  padding: 25px; 
+  font-size: 16px; 
+  text-align: justify;
+}
+
+.test__quest {
+  display: flex; 
+  flex-direction: column; 
+  gap: 20px;
+}
