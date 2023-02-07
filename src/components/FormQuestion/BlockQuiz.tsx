@@ -3,24 +3,26 @@ import { SERVICE_MESSAGES } from '../utils/constants';
 import ControlPointIcon from '@mui/icons-material/ControlPoint';
 import { ItemBlockQuiz } from './ItemBlockQuiz';
 import { BlockQuizBtn, BlockQuizPaper } from './styles';
-import { Dispatch, SetStateAction, useState } from 'react';
+import { useState } from 'react';
 import CancelIcon from '@mui/icons-material/Cancel';
-
-interface IBlockQuiz {
-  name: string;
-  id: string;
-  setBlock: Dispatch<SetStateAction<string[]>>;
-  block: string[];
-}
+import { IBlockQuiz } from '../../components/utils/types';
 
 export const BlockQuiz = (props: IBlockQuiz) => {
   const { name, id, setBlock, block } = props;
-  const [blockQ, setBlockQ] = useState([0, 1]);
-  const blocksQ = blockQ.map((el, id) => {
-    return <ItemBlockQuiz name={name} key={el} blockQ={blockQ} setBlockQ={setBlockQ} id={el} />;
+  const [blockQuestion, setBlockQuestion] = useState([0, 1]);
+  const blocksQ = blockQuestion.map((el, id) => {
+    return (
+      <ItemBlockQuiz
+        name={name}
+        key={el}
+        blockQuestion={blockQuestion}
+        setBlockQuestion={setBlockQuestion}
+        id={el}
+      />
+    );
   });
   function handleClick() {
-    setBlockQ([...blockQ, Number(new Date())]);
+    setBlockQuestion([...blockQuestion, Number(new Date())]);
   }
   function remove() {
     const indx = block.indexOf(id);

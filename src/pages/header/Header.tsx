@@ -10,10 +10,11 @@ import MenuIcon from '@mui/icons-material/Menu';
 import Container from '@mui/material/Container';
 import Button from '@mui/material/Button';
 import MenuItem from '@mui/material/MenuItem';
+import { Link as RouterLink } from 'react-router-dom';
 import styles from './Header.module.css';
-import logo from '../../static/images/logoq.png';
+import logo from '../../components/assets/logoq.png';
 import { Avatar, Tooltip } from '@mui/material';
-import { pages, settings } from '../../components/utils/constants';
+import { settings } from '../../components/utils/constants';
 
 export const Header = () => {
   const [anchorElNav, setAnchorElNav] = useState<null | HTMLElement>(null);
@@ -42,7 +43,9 @@ export const Header = () => {
     >
       <Container maxWidth="xl">
         <Toolbar disableGutters>
-          <Box component="img" src={logo} alt="logo" className={styles.logo} />
+          <RouterLink style={{ textDecoration: 'none' }} to="/">
+            <Box component="img" src={logo} alt="logo" className={styles.logo} />
+          </RouterLink>
           <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
             <IconButton
               size="large"
@@ -72,24 +75,48 @@ export const Header = () => {
                 display: { xs: 'block', md: 'none', color: 'black' },
               }}
             >
-              {pages.map((page) => (
-                <MenuItem key={page} onClick={handleCloseNavMenu}>
-                  <Typography textAlign="center">{page}</Typography>
-                </MenuItem>
-              ))}
+              <MenuItem onClick={handleCloseNavMenu}>
+                <Typography
+                  component={RouterLink}
+                  style={{ textDecoration: 'none', color: 'black' }}
+                  to="/"
+                  textAlign="center"
+                >
+                  Questions list
+                </Typography>
+              </MenuItem>
+              <MenuItem onClick={handleCloseNavMenu}>
+                <Typography
+                  style={{ textDecoration: 'none', color: 'black' }}
+                  component={RouterLink}
+                  to="/create-quiz"
+                  textAlign="center"
+                >
+                  Create new quiz
+                </Typography>
+              </MenuItem>
             </Menu>
-            <Box component="img" src={logo} alt="logo" className={styles.logo__sm} />
+            <RouterLink style={{ textDecoration: 'none' }} to="/" className={styles.logo__sm_box}>
+              <Box component="img" src={logo} alt="logo" className={styles.logo__sm} />
+            </RouterLink>
           </Box>
           <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
-            {pages.map((page) => (
-              <Button
-                key={page}
-                onClick={handleCloseNavMenu}
-                sx={{ my: 2, color: '#292626', display: 'block' }}
-              >
-                {page}
-              </Button>
-            ))}
+            <Button
+              component={RouterLink}
+              to="/"
+              onClick={handleCloseNavMenu}
+              sx={{ my: 2, color: '#292626', display: 'block' }}
+            >
+              Questions list
+            </Button>
+            <Button
+              component={RouterLink}
+              to="/create-quiz"
+              onClick={handleCloseNavMenu}
+              sx={{ my: 2, color: '#292626', display: 'block' }}
+            >
+              Create new quiz
+            </Button>
           </Box>
           <Box sx={{ flexGrow: 0 }}>
             <Tooltip title="Open settings">
