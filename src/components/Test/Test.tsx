@@ -14,8 +14,8 @@ import style from './Test.module.css';
 export const Test = () => {
   const { id } = useParams();
   const allCards = useAppSelector((state) => state.cards.list);
-  const card = allCards[Number(id) - 1];
-  const questions = card.questionsArr;
+  const card = allCards[Number(id) - 1] ?? [];
+  const questions = card.questionsArr ?? [];
   const [score, setScore] = useState(0);
 
   const [open, setOpen] = useState(false);

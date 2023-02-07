@@ -1,6 +1,4 @@
-import Typography from '@mui/material/Typography';
-import Breadcrumbs from '@mui/material/Breadcrumbs';
-import Link from '@mui/material/Link';
+import { Link, Breadcrumbs, Typography } from '@mui/material';
 import { Link as RouterLink } from 'react-router-dom';
 
 interface IBreadcrumbsTest {
