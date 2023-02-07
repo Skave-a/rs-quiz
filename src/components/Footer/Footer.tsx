@@ -1,4 +1,4 @@
-import { LINK_TO_THE_COURSE } from '../../components/utils/constants';
+import { LINK_TO_THE_COURSE } from '../utils/constants';
 import style from './Footer.module.css';
 
 export const develops = [

@@ -1,8 +1,13 @@
-import Card from '@mui/material/Card';
-import CardContent from '@mui/material/CardContent';
-import CardMedia from '@mui/material/CardMedia';
-import Typography from '@mui/material/Typography';
-import { Box, CardActionArea, CardHeader, IconButton } from '@mui/material';
+import {
+  Box,
+  CardActionArea,
+  CardHeader,
+  IconButton,
+  Card,
+  CardContent,
+  CardMedia,
+  Typography,
+} from '@mui/material';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 import QuizIcon from '@mui/icons-material/Quiz';
 import { SERVICE_MESSAGES } from '../utils/constants';

@@ -3,10 +3,10 @@ import Paper from '@mui/material/Paper';
 import { FormEvent, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { useParams } from 'react-router-dom';
-import { BreadcrumbsTest } from '../../components/Breadcrumbs/BreadcrumbsTest';
-import { ModalTestComplete } from '../../components/ModalTestComplete/ModalTestComplete';
-import { TestItem } from '../../components/TestItem/TestItem';
-import { SERVICE_MESSAGES } from '../../components/utils/constants';
+import { BreadcrumbsTest } from '../Breadcrumbs/BreadcrumbsTest';
+import { ModalTestComplete } from '../ModalTestComplete/ModalTestComplete';
+import { TestItem } from '../TestItem/TestItem';
+import { SERVICE_MESSAGES } from '../utils/constants';
 import { useAppSelector } from '../../store/hooks';
 import { addTestReduser } from '../../store/reducers/testsSlice';
 import style from './Test.module.css';
@@ -14,8 +14,8 @@ import style from './Test.module.css';
 export const Test = () => {
   const { id } = useParams();
   const allCards = useAppSelector((state) => state.cards.list);
-  const card = allCards[Number(id) - 1];
-  const questions = card.questionsArr;
+  const card = allCards[Number(id) - 1] ?? [];
+  const questions = card.questionsArr ?? [];
   const [score, setScore] = useState(0);
 
   const [open, setOpen] = useState(false);
