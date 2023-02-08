@@ -1,47 +1,63 @@
-import { Box, Button, Paper, TextField, Typography } from '@mui/material';
+import { Box, Button, Container, Paper, TextField, Typography } from '@mui/material';
 import { SERVICE_MESSAGES } from '../utils/constants';
-import ImageIcon from '@mui/icons-material/Image';
 import ControlPointIcon from '@mui/icons-material/ControlPoint';
-import { btnImgSX, TitleQuizPaper, TitleQuizPaperBtn } from './styles';
-import { ChangeEvent } from 'react';
-
-interface ITitleQuiz {
-  block: string[];
-  setBlock: (arg0: string[]) => void;
-}
+import { CreateQuizBox2, TitleQuizPaper, TitleQuizPaperBtn } from './styles';
+import { ChangeEvent, useState } from 'react';
+import { useAppDispatch } from '../../store/hooks';
+import { addCard } from '../../store/reducers/cardSlice';
+import { BlockQuiz } from '../../components/FormQuestion/BlockQuiz';
+import { ITitleQuiz } from '../../components/utils/types';
 
 export const TitleQuiz = (props: ITitleQuiz) => {
+  const dispatch = useAppDispatch();
+  const [title, setTitle] = useState('');
+  const [desription, setDescription] = useState('');
+  const [img, setImg] = useState('');
+  const [blockQuestion, setBlockQuestion] = useState(['first']);
   const { block, setBlock } = props;
+
+  const addNewCard = () =>
+    dispatch(
+      addCard({
+        title,
+        img,
+        date: new Date().toISOString(),
+        desription,
+        questionsArr: [],
+        passed: false,
+        passedOn: 0,
+      })
+    );
+
   function handleClick() {
     setBlock([...block, new Date().toString()]);
   }
-  function handleTitle(e: ChangeEvent<HTMLInputElement>) {
-    dataQuiz.title = e.target.value;
-  }
-  function handleDescription(e: ChangeEvent<HTMLInputElement>) {
-    dataQuiz.description = e.target.value;
-  }
-  const dataQuiz = {
-    img: '',
-    title: '',
-    description: '',
-    questionArr: [],
-  };
-  function handleConfigure() {
-    console.log('handleConfigure', dataQuiz);
-  }
+
+  const blocksQuestion = block.map((el) => {
+    return (
+      <BlockQuiz name={el} key={el} id={el} setBlock={setBlockQuestion} block={blockQuestion} />
+    );
+  });
   return (
-    <Box sx={{ margin: '0 auto' }}>
+    <Container
+      sx={{
+        margin: '0 auto',
+        display: 'flex',
+        justifyContent: 'space-between',
+        alignItems: 'start',
+        flexWrap: 'wrap',
+        gap: '20px',
+      }}
+    >
       <Paper elevation={3} sx={TitleQuizPaper}>
-        {/* <Button variant="contained" component="label">
-  Upload
-  <input hidden accept="image/*" multiple type="file" />
-</Button> */}
-        <Button sx={btnImgSX} component="label">
-          <ImageIcon />
-          <Typography>{SERVICE_MESSAGES.addImage}</Typography>
-          <input hidden accept="image/*" multiple type="file" />
-        </Button>
+        <Typography>{SERVICE_MESSAGES.addImage}</Typography>
+        <TextField
+          multiline
+          rows={1}
+          placeholder={SERVICE_MESSAGES.addLink}
+          sx={{ width: '100%', mb: '15px' }}
+          onChange={(e: ChangeEvent<HTMLInputElement>) => setImg(e.target.value)}
+        />
         <Box>
           <Typography sx={{ mb: '2px' }}>{SERVICE_MESSAGES.title}</Typography>
           <TextField
@@ -49,7 +65,7 @@ export const TitleQuiz = (props: ITitleQuiz) => {
             rows={3}
             placeholder={SERVICE_MESSAGES.writeSmth}
             sx={{ width: '100%' }}
-            onChange={(e: ChangeEvent<HTMLInputElement>) => handleTitle(e)}
+            onChange={(e: ChangeEvent<HTMLInputElement>) => setTitle(e.target.value)}
           />
         </Box>
         <Box>
@@ -60,7 +76,7 @@ export const TitleQuiz = (props: ITitleQuiz) => {
             rows={2}
             placeholder={SERVICE_MESSAGES.writeSmth}
             sx={{ width: '100%' }}
-            onChange={(e: ChangeEvent<HTMLInputElement>) => handleDescription(e)}
+            onChange={(e: ChangeEvent<HTMLInputElement>) => setDescription(e.target.value)}
           />
         </Box>
         <Button sx={TitleQuizPaperBtn}>
@@ -69,14 +85,13 @@ export const TitleQuiz = (props: ITitleQuiz) => {
             {SERVICE_MESSAGES.addQBlock}
           </Typography>
         </Button>
-        <Button
-          variant="contained"
-          sx={{ m: '0 auto', color: '#ffffff' }}
-          onClick={handleConfigure}
-        >
+      </Paper>
+      <Box sx={CreateQuizBox2}>
+        {blocksQuestion}
+        <Button variant="contained" sx={{ m: '0 auto', color: '#ffffff' }} onClick={addNewCard}>
           {SERVICE_MESSAGES.configure}
         </Button>
-      </Paper>
-    </Box>
+      </Box>
+    </Container>
   );
 };

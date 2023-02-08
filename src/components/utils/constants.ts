@@ -25,6 +25,7 @@ export const SERVICE_MESSAGES = {
 
 export const LINK_TO_THE_COURSE = 'https://rs.school/js/';
 export const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
+// export const pages = ['Questions list', 'Create new question', 'Some disabled button'];
 export const pages = ['Questions list', 'Create new question', 'Some disabled button'];
 
 export const PAGE_NOT_FOUND = {
