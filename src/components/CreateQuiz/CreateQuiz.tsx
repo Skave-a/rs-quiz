@@ -6,6 +6,7 @@ import { CreateQuizBox, CreateQuizCreate } from '../FormQuestion/styles';
 
 export const CreateQuiz = () => {
   const [block, setBlock] = useState(['first']);
+
   return (
     <Box sx={{ pb: '150px' }}>
       <Typography sx={CreateQuizCreate}>{SERVICE_MESSAGES.create}</Typography>

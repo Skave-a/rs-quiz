@@ -1,8 +1,7 @@
 import { Box, Button, Container, Paper, TextField, Typography } from '@mui/material';
 import { SERVICE_MESSAGES } from '../utils/constants';
-import ImageIcon from '@mui/icons-material/Image';
 import ControlPointIcon from '@mui/icons-material/ControlPoint';
-import { btnImgSX, CreateQuizBox2, TitleQuizPaper, TitleQuizPaperBtn } from './styles';
+import { CreateQuizBox2, TitleQuizPaper, TitleQuizPaperBtn } from './styles';
 import { ChangeEvent, useState } from 'react';
 import { useAppDispatch } from '../../store/hooks';
 import { addCard } from '../../store/reducers/cardSlice';
@@ -13,12 +12,15 @@ export const TitleQuiz = (props: ITitleQuiz) => {
   const dispatch = useAppDispatch();
   const [title, setTitle] = useState('');
   const [desription, setDescription] = useState('');
+  const [img, setImg] = useState('');
+  const [blockQuestion, setBlockQuestion] = useState(['first']);
+  const { block, setBlock } = props;
 
   const addNewCard = () =>
     dispatch(
       addCard({
         title,
-        img: '',
+        img,
         date: new Date().toISOString(),
         desription,
         questionsArr: [],
@@ -26,14 +28,14 @@ export const TitleQuiz = (props: ITitleQuiz) => {
         passedOn: 0,
       })
     );
-  const { block, setBlock } = props;
+
   function handleClick() {
     setBlock([...block, new Date().toString()]);
   }
-  const [blockQuestion, setblockQuestion] = useState(['first']);
+
   const blocksQuestion = block.map((el) => {
     return (
-      <BlockQuiz name={el} key={el} id={el} setBlock={setblockQuestion} block={blockQuestion} />
+      <BlockQuiz name={el} key={el} id={el} setBlock={setBlockQuestion} block={blockQuestion} />
     );
   });
   return (
@@ -48,11 +50,14 @@ export const TitleQuiz = (props: ITitleQuiz) => {
       }}
     >
       <Paper elevation={3} sx={TitleQuizPaper}>
-        <Button sx={btnImgSX} component="label">
-          <ImageIcon />
-          <Typography>{SERVICE_MESSAGES.addImage}</Typography>
-          <input hidden accept="image/*" multiple type="file" />
-        </Button>
+        <Typography>{SERVICE_MESSAGES.addImage}</Typography>
+        <TextField
+          multiline
+          rows={1}
+          placeholder={SERVICE_MESSAGES.addLink}
+          sx={{ width: '100%', mb: '15px' }}
+          onChange={(e: ChangeEvent<HTMLInputElement>) => setImg(e.target.value)}
+        />
         <Box>
           <Typography sx={{ mb: '2px' }}>{SERVICE_MESSAGES.title}</Typography>
           <TextField

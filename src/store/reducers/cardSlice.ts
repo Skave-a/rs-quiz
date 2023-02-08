@@ -87,10 +87,14 @@ export const cardSlice = createSlice({
   // The `reducers` field lets us define reducers and generate associated actions
   reducers: {
     addCard: (state, action: PayloadAction<CardData>) => {
+      if (action.payload.img === '') {
+        action.payload.img =
+          'https://cdn.riddle.com/website/riddle/2019/placeholders/placeholder-quiz.png';
+      }
       state.list.push({
         date: new Date().toISOString(),
         title: action.payload.title,
-        img: '',
+        img: action.payload.img,
         desription: action.payload.desription,
         questionsArr: [],
         passed: false,

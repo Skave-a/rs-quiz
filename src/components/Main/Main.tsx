@@ -25,11 +25,22 @@ export const Main = () => {
         spacing={{ xs: 2, md: 3 }}
         columns={{ xs: 4, sm: 8, md: 12 }}
         style={{ marginBottom: '50px' }}
+        alignItems="stretch"
       >
         {allCards.map((card, index) => (
-          <Grid item xs={4} sm={4} md={4} key={index}>
+          <Grid item xs={4} sm={4} md={4} key={index} alignItems="stretch">
             <RouterLink key={card.id} style={{ textDecoration: 'none' }} to={`/test/${card.id}`}>
-              <QuizCard key={card.id} {...card} />
+              <QuizCard
+                key={card.id}
+                title={card.title}
+                img={card.img}
+                id={card.id}
+                date={''}
+                desription={''}
+                questionsArr={[]}
+                passed={false}
+                passedOn={0}
+              />
             </RouterLink>
           </Grid>
         ))}

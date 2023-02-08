@@ -9,7 +9,9 @@ import { IBlockQuiz } from '../../components/utils/types';
 
 export const BlockQuiz = (props: IBlockQuiz) => {
   const { name, id, setBlock, block } = props;
+
   const [blockQuestion, setBlockQuestion] = useState([0, 1]);
+
   const blocksQ = blockQuestion.map((el, id) => {
     return (
       <ItemBlockQuiz
@@ -21,13 +23,16 @@ export const BlockQuiz = (props: IBlockQuiz) => {
       />
     );
   });
+
   function handleClick() {
     setBlockQuestion([...blockQuestion, Number(new Date())]);
   }
+
   function remove() {
     const indx = block.indexOf(id);
     setBlock([...block.slice(0, indx), ...block.slice(indx + 1)]);
   }
+
   return (
     <Box>
       <Paper elevation={3} sx={BlockQuizPaper}>

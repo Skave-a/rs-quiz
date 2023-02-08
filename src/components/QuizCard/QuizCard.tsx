@@ -14,6 +14,7 @@ import { SERVICE_MESSAGES } from '../utils/constants';
 import { CardData } from '../../store/reducers/cardSlice';
 import { FC } from 'react';
 import { useAppSelector } from '../../store/hooks';
+import styles from './QuizCard.module.css';
 
 export const QuizCard: FC<CardData> = ({ title, img, id }) => {
   const allTests = useAppSelector((state) => state.tests.list);
@@ -28,9 +29,9 @@ export const QuizCard: FC<CardData> = ({ title, img, id }) => {
     }
   });
   return (
-    <Card sx={{ maxWidth: 345, width: '100%', position: 'relative', margin: '0 auto' }}>
+    <Card className={styles.card}>
       <CardHeader
-        sx={{ position: 'absolute', zIndex: 5, padding: '10px', right: 0 }}
+        className={styles.card__header}
         action={
           <IconButton aria-label="settings">
             <MoreVertIcon />
@@ -99,46 +100,22 @@ export const QuizCard: FC<CardData> = ({ title, img, id }) => {
             {testDate ? testDate : SERVICE_MESSAGES.testDate}
           </Typography>
           {testPassed && testFailed ? (
-            <Box sx={{ display: 'flex', gap: '3px', color: '#05b4f9', alignItems: 'center' }}>
-              <Box
-                sx={{
-                  borderRadius: '50%',
-                  display: 'inline-block',
-                  height: '7px',
-                  backgroundColor: '#05b4f9',
-                  width: '7px',
-                }}
-              >
+            <Box className={styles.card__passed} sx={{ color: '#05b4f9' }}>
+              <Box className={styles.card__passed_dot} sx={{ backgroundColor: '#05b4f9' }}>
                 {' '}
               </Box>
               Passed
             </Box>
           ) : testPassed ? (
-            <Box sx={{ display: 'flex', gap: '3px', color: '#f1003a', alignItems: 'center' }}>
-              <Box
-                sx={{
-                  borderRadius: '50%',
-                  display: 'inline-block',
-                  height: '7px',
-                  backgroundColor: '#f1003a',
-                  width: '7px',
-                }}
-              >
+            <Box className={styles.card__passed} sx={{ color: '#f1003a' }}>
+              <Box className={styles.card__passed_dot} sx={{ backgroundColor: '#f1003a' }}>
                 {' '}
               </Box>
               Failed
             </Box>
           ) : (
-            <Box sx={{ display: 'flex', gap: '3px', color: '#5cb85c', alignItems: 'center' }}>
-              <Box
-                sx={{
-                  borderRadius: '50%',
-                  display: 'inline-block',
-                  height: '7px',
-                  backgroundColor: '#5cb85c',
-                  width: '7px',
-                }}
-              >
+            <Box className={styles.card__passed} sx={{ color: '#5cb85c' }}>
+              <Box className={styles.card__passed_dot} sx={{ backgroundColor: '#5cb85c' }}>
                 {' '}
               </Box>
               Active
