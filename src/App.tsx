@@ -13,6 +13,8 @@ import {
 import { CreateQuiz } from './components/CreateQuiz/CreateQuiz';
 import { Test } from './components/Test/Test';
 import Page404 from './components/Page404/Page404';
+import Authorization from './components/Authorization/Authorization';
+import Registration from './components/Registratiion/Registartion';
 
 const theme = extendTheme({
   colorSchemes: {
@@ -31,8 +33,10 @@ function App() {
     <CssVarsProvider theme={theme}>
       <BrowserRouter>
         <Header />
-        <Container sx={{ width: { sm: 2 / 3 } }}>
+        <Container sx={{ width: { sm: 2 / 2 } }}>
           <Routes>
+            <Route path="/authorization" element={<Authorization />} />
+            <Route path="/registration" element={<Registration />} />
             <Route path="/" element={<Main />} />
             <Route path="/chat" element={<Chat />} />
             <Route path="/create-quiz" element={<CreateQuiz />} />
