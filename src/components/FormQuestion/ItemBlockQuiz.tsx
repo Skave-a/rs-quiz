@@ -1,4 +1,4 @@
-import { Box, IconButton, TextField } from '@mui/material';
+import { Box, Button, IconButton, TextField } from '@mui/material';
 import { SERVICE_MESSAGES } from '../utils/constants';
 import { ItemBlockQuizBox } from './styles';
 import BackspaceIcon from '@mui/icons-material/Backspace';
@@ -6,6 +6,7 @@ import { ChangeEvent, useState } from 'react';
 import style from './FormQuestion.module.css';
 import { RNDstring } from './RNDstring';
 import { IItemBlockQuiz } from '../../components/utils/types';
+import CloseIcon from '@mui/icons-material/Close';
 
 export const ItemBlockQuiz = (props: IItemBlockQuiz) => {
   const { name, setBlockQuestion, blockQuestion, id } = props;
@@ -28,9 +29,18 @@ export const ItemBlockQuiz = (props: IItemBlockQuiz) => {
       />
       <input type="radio" name={name} id={rndStr} className={style.inputQuestion} />
       <label htmlFor={rndStr}></label>
-      <IconButton color="primary" onClick={remove}>
+      {/* <IconButton color="warning" onClick={remove}>
         <BackspaceIcon />
-      </IconButton>
+      </IconButton> */}
+      <Button
+        onClick={remove}
+        variant="contained"
+        color="error"
+        sx={{ fontSize: '12px', textTransform: 'capitalize' }}
+      >
+        <CloseIcon fontSize="small" />
+        Remove
+      </Button>
     </Box>
   );
 };

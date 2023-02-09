@@ -14,6 +14,7 @@ import {
   Paper,
   Typography,
 } from '@mui/material';
+import { FormEvent } from 'react';
 
 import { Link as RouterLink } from 'react-router-dom';
 
@@ -33,7 +34,7 @@ function Copyright(props: any) {
 const theme = createTheme();
 
 export default function Authorization() {
-  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
     console.log({

@@ -40,11 +40,10 @@ export const Test = () => {
   return (
     <Box className={style.test}>
       <BreadcrumbsTest title={card.title} />
-      <Typography variant="h4" className={style.test__title}>
-        {card.title}
-      </Typography>
       <Paper className={style.test__card}>
-        <CardMedia component="img" image={card.img} alt="card" height={245} />
+        {/* <CardMedia component="img" image={card.img} alt="card" height={245} /> */}
+        {/* <Typography variant="h4" className={style.test__title}>{card.title} -
+        </Typography> */}
         <Typography className={style.test__description}>{card.desription}</Typography>
       </Paper>
       <form onSubmit={handleSubmit} style={{ margin: '0 auto' }}>

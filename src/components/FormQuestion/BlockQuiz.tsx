@@ -8,11 +8,11 @@ import CancelIcon from '@mui/icons-material/Cancel';
 import { IBlockQuiz } from '../../components/utils/types';
 
 export const BlockQuiz = (props: IBlockQuiz) => {
-  const { name, id, setBlock, block } = props;
+  const { name, id, setBlock, block, num } = props;
 
   const [blockQuestion, setBlockQuestion] = useState([0, 1]);
 
-  const blocksQ = blockQuestion.map((el, id) => {
+  const blocksQ = blockQuestion.map((el) => {
     return (
       <ItemBlockQuiz
         name={name}
@@ -44,7 +44,10 @@ export const BlockQuiz = (props: IBlockQuiz) => {
             alignItems: 'flex-end',
           }}
         >
-          <Typography>{SERVICE_MESSAGES.answerContent}</Typography>
+          <Typography fontSize={'30px'}>
+            {SERVICE_MESSAGES.questionNum}
+            {num}
+          </Typography>
           <IconButton color="warning" onClick={remove}>
             <CancelIcon />
           </IconButton>

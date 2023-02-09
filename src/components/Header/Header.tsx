@@ -10,7 +10,7 @@ import {
   Toolbar,
   Typography,
 } from '@mui/material';
-import { useState } from 'react';
+import { useState, MouseEvent } from 'react';
 import { Link as RouterLink } from 'react-router-dom';
 import logo from '../../components/assets/logoq.png';
 import styles from './Header.module.css';
@@ -18,7 +18,7 @@ import styles from './Header.module.css';
 export const Header = () => {
   const [anchorElNav, setAnchorElNav] = useState<null | HTMLElement>(null);
 
-  const handleOpenNavMenu = (event: React.MouseEvent<HTMLElement>) => {
+  const handleOpenNavMenu = (event: MouseEvent<HTMLElement>) => {
     setAnchorElNav(event.currentTarget);
   };
 

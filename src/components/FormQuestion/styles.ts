@@ -11,13 +11,12 @@ export const BlockQuizBtn = {
 };
 
 export const CreateQuizCreate = {
-  fontSize: '3rem',
+  fontSize: '30px',
   letterSpacing: '-0.05em',
   lineHeight: '1em',
-  marginBottom: '2.4rem',
   color: '#424242',
+  fontFamily: `'Poppins',sans-serif`,
   fontWeight: '700',
-  mb: '72px',
 };
 
 export const CreateQuizBox = {

@@ -12,6 +12,7 @@ export interface IBlockQuiz {
   id: string;
   setBlock: Dispatch<SetStateAction<string[]>>;
   block: string[];
+  num: number;
 }
 
 export interface ITitleQuiz {
@@ -24,4 +25,8 @@ export interface IItemBlockQuiz {
   blockQuestion: number[];
   setBlockQuestion: Dispatch<SetStateAction<number[]>>;
   id: number;
+}
+
+export interface IBtnAddBlock {
+  handleClick: () => void;
 }

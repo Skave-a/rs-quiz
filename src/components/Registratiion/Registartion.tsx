@@ -15,6 +15,7 @@ import {
 } from '@mui/material';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import { Link as RouterLink } from 'react-router-dom';
+import { FormEvent } from 'react';
 
 function Copyright(props: any) {
   return (
@@ -32,7 +33,7 @@ function Copyright(props: any) {
 const theme = createTheme();
 
 export default function Registration() {
-  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
     console.log({

@@ -12,7 +12,7 @@ import MoreVertIcon from '@mui/icons-material/MoreVert';
 import QuizIcon from '@mui/icons-material/Quiz';
 import { SERVICE_MESSAGES } from '../utils/constants';
 import { CardData } from '../../store/reducers/cardSlice';
-import { FC } from 'react';
+import { FC, MouseEvent } from 'react';
 import { useAppSelector } from '../../store/hooks';
 import styles from './QuizCard.module.css';
 
@@ -28,12 +28,15 @@ export const QuizCard: FC<CardData> = ({ title, img, id }) => {
       testDate = el.date;
     }
   });
+  function handleSetting(event: MouseEvent<HTMLElement>) {
+    event.preventDefault();
+  }
   return (
     <Card className={styles.card}>
       <CardHeader
         className={styles.card__header}
         action={
-          <IconButton aria-label="settings">
+          <IconButton aria-label="settings" onClick={(e) => handleSetting(e)}>
             <MoreVertIcon />
           </IconButton>
         }
