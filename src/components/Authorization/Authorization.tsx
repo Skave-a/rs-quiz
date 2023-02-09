@@ -102,7 +102,12 @@ export default function Authorization() {
                 control={<Checkbox value="remember" color="primary" />}
                 label="Remember me"
               />
-              <Button type="submit" fullWidth variant="contained" sx={{ mt: 3, mb: 2 }}>
+              <Button
+                type="submit"
+                fullWidth
+                variant="contained"
+                sx={{ mt: 3, mb: 2, color: '#fff' }}
+              >
                 Sign In
               </Button>
               <Grid container>

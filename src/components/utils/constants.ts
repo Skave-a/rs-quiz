@@ -1,7 +1,7 @@
 export const SERVICE_MESSAGES = {
   quiz: 'Quiz',
   published: 'published',
-  createNew: 'CREATE NEW QUIZ',
+  createNew: 'CREATE A NEW QUIZ',
   myQuizzes: 'My quizzes',
   create: 'Create',
   addImage: 'Add image',
@@ -21,6 +21,7 @@ export const SERVICE_MESSAGES = {
   fail: 'You failed the test. Your result ',
   toMain: 'To main',
   testDate: 'Test Date',
+  main: 'Main',
 };
 
 export const LINK_TO_THE_COURSE = 'https://rs.school/js/';

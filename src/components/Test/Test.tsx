@@ -1,4 +1,4 @@
-import { Box, Button, CardMedia, FormControl, Typography } from '@mui/material';
+import { Box, Button, FormControl, Grid, Typography } from '@mui/material';
 import Paper from '@mui/material/Paper';
 import { FormEvent, useState } from 'react';
 import { useDispatch } from 'react-redux';
@@ -36,7 +36,6 @@ export const Test = () => {
     };
     dispatch(addTestReduser(result));
   };
-
   return (
     <Box className={style.test}>
       <BreadcrumbsTest title={card.title} />
@@ -44,15 +43,24 @@ export const Test = () => {
         {/* <CardMedia component="img" image={card.img} alt="card" height={245} /> */}
         {/* <Typography variant="h4" className={style.test__title}>{card.title} -
         </Typography> */}
-        <Typography className={style.test__description}>{card.desription}</Typography>
+        <Typography className={style.test__description} sx={{ m: 0 }}>
+          {card.desription}
+        </Typography>
       </Paper>
       <form onSubmit={handleSubmit} style={{ margin: '0 auto' }}>
         <FormControl>
-          <Box className={style.test__quest}>
+          <Grid
+            container
+            spacing={2}
+            sx={{ maxWidth: '1000px', mb: 15 }}
+            className={style.test__quest}
+          >
             {questions.map((question, id) => (
-              <TestItem question={question} key={id} score={score} setScore={setScore} />
+              <Grid item xs={12} md={12} sm={12} key={id}>
+                <TestItem question={question} key={id} score={score} setScore={setScore} />
+              </Grid>
             ))}
-          </Box>
+          </Grid>
           <Button
             variant="contained"
             sx={{ m: '0 auto', color: '#ffffff', mt: '20px' }}
