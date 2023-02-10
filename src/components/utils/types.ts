@@ -28,6 +28,10 @@ export interface IItemBlockQuiz {
   id: number;
 }
 
+export type LoginInput = {
+  email: string;
+  password: string;
+};
 export interface IBtnAddBlock {
   handleClick: () => void;
 }

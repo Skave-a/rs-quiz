@@ -3,6 +3,9 @@ import counterReducer from './reducers/counterSlice';
 import cardsReducer from './reducers/cardSlice';
 import testsReducer from './reducers/testsSlice';
 import switchMode from './reducers/darkSlice';
+import usersReducer from './reducers/userSlice';
+import { registrationApi } from './api/RegistrationApi';
+import { authApi } from './api/AuthApi';
 
 // import { booksApi } from './booksApi';
 
@@ -12,9 +15,13 @@ export const store = configureStore({
     cards: cardsReducer,
     tests: testsReducer,
     darkMode: switchMode,
+    users: usersReducer,
     // [booksApi.reducerPath]: booksApi.reducer,
+    [registrationApi.reducerPath]: registrationApi.reducer,
+    [authApi.reducerPath]: authApi.reducer,
   },
-  // middleware: (getDefaultMiddlware) => getDefaultMiddlware().concat(booksApi.middleware),
+  middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware().concat([registrationApi.middleware, authApi.middleware]),
 });
 
 export type AppDispatch = typeof store.dispatch;

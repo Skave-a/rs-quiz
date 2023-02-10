@@ -15,7 +15,7 @@ import {
 } from '@mui/material';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import { Link as RouterLink } from 'react-router-dom';
-import { FormEvent } from 'react';
+import { useRegistrationUserMutation } from '../../store/api/RegistrationApi';
 
 function Copyright(props: any) {
   return (
@@ -33,13 +33,17 @@ function Copyright(props: any) {
 const theme = createTheme();
 
 export default function Registration() {
-  const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
+  const [registrationUser, { isLoading, isError, error, isSuccess }] =
+    useRegistrationUserMutation();
+
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
-    console.log({
-      email: data.get('email'),
-      password: data.get('password'),
-    });
+    const email = data.get('email') as string;
+    const password = data.get('password') as string;
+    //const firstName = data.get('firstName') as string;
+    //const lastName = data.get('lastName');
+    await registrationUser({ email, password });
   };
 
   return (
