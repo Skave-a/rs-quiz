@@ -34,34 +34,32 @@ function App() {
   const token = useAppSelector((state) => state.users.token);
   console.log(`token, isAuth =>>>>>`, token, isAuth);
 
-  /* function RequireAuth({ redirectTo }: { redirectTo: string }) {
-    return isAuth ? <Outlet /> : <Navigate to={redirectTo} />;
-  } */
+  const PrivateRoute = () => {
+    return isAuth ? <Outlet /> : <Authorization />;
+  };
 
   return (
     <CssVarsProvider theme={theme}>
       <BrowserRouter>
         <Header />
         <Container sx={{ width: { sm: 2 / 2 } }}>
-          {isAuth ? (
-            <Routes>
-              <Route path="/" element={<Main />} />
-              <Route path="/authorization" element={<Authorization />} />
-              <Route path="/registration" element={<Registration />} />
+          <Routes>
+            <Route path="/" element={<Main />} />
+            <Route element={<PrivateRoute />}>
+              <Route
+                path="/authorization"
+                element={isAuth ? <Navigate to="/" replace /> : <Authorization />}
+              />
+              <Route
+                path="/registration"
+                element={isAuth ? <Navigate to="/" replace /> : <Registration />}
+              />
               <Route path="/chat" element={<Chat />} />
               <Route path="/create-quiz" element={<CreateQuiz />} />
               <Route path="/test/:id" element={<Test />} />
               <Route path="*" element={<Page404 />} />
-            </Routes>
-          ) : (
-            <Routes>
-              <Route path="/" element={<Main />} />
-              <Route path="/authorization" element={<Authorization />} />
-              <Route path="/registration" element={<Registration />} />
-              <Route path="*" element={<Authorization />} />
-              {isAuth && <Navigate to="/" replace />}
-            </Routes>
-          )}
+            </Route>
+          </Routes>
         </Container>
         <Footer />
       </BrowserRouter>
