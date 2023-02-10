@@ -37,14 +37,12 @@ export const Main = () => {
             <RouterLink key={card.id} style={{ textDecoration: 'none' }} to={`/test/${card.id}`}>
               <QuizCard
                 key={card.id}
-                title={card.title}
-                img={card.img}
-                id={card.id}
                 date={''}
                 desription={''}
                 questionsArr={[]}
                 passed={false}
                 passedOn={0}
+                card={card}
               />
             </RouterLink>
           </Grid>

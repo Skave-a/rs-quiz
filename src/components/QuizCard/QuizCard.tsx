@@ -2,26 +2,24 @@ import {
   Box,
   CardActionArea,
   CardHeader,
-  IconButton,
   Card,
   CardContent,
   CardMedia,
   Typography,
 } from '@mui/material';
-import MoreVertIcon from '@mui/icons-material/MoreVert';
 import QuizIcon from '@mui/icons-material/Quiz';
 import { SERVICE_MESSAGES } from '../utils/constants';
-import { CardData } from '../../store/reducers/cardSlice';
-import { FC, MouseEvent } from 'react';
 import { useAppSelector } from '../../store/hooks';
 import styles from './QuizCard.module.css';
+import { CardMenu } from '../CardMenu/CardMenu';
+import { IQuizCard } from '../utils/types';
 
-export const QuizCard: FC<CardData> = ({ title, img, id }) => {
+export const QuizCard = (props: IQuizCard) => {
+  const { card } = props;
+  const { title, img, id } = card;
   const allTests = useAppSelector((state) => state.tests.list);
   const darkMode = useAppSelector((state) => state.darkMode.darkMode);
-  let testPassed;
-  let testFailed;
-  let testDate;
+  let testPassed, testFailed, testDate;
   allTests.forEach((el) => {
     if (Number(el.id) === id) {
       testPassed = el.passed;
@@ -29,19 +27,9 @@ export const QuizCard: FC<CardData> = ({ title, img, id }) => {
       testDate = el.date;
     }
   });
-  function handleSetting(event: MouseEvent<HTMLElement>) {
-    event.preventDefault();
-  }
   return (
     <Card className={styles.card} sx={{ background: darkMode ? '#323a4b' : '#ffffff' }}>
-      <CardHeader
-        className={styles.card__header}
-        action={
-          <IconButton aria-label="settings" onClick={(e) => handleSetting(e)}>
-            <MoreVertIcon />
-          </IconButton>
-        }
-      />
+      <CardHeader className={styles.card__header} action={<CardMenu card={card} />} />
       <CardActionArea>
         <CardMedia component="img" height="140" image={img} alt="card" />
         <CardContent>
