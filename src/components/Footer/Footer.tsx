@@ -1,3 +1,4 @@
+import { useAppSelector } from '../../store/hooks';
 import { LINK_TO_THE_COURSE } from '../utils/constants';
 import style from './Footer.module.css';
 
@@ -20,8 +21,9 @@ export const develops = [
 ];
 
 export const Footer = () => {
+  const darkMode = useAppSelector((state) => state.darkMode.darkMode);
   return (
-    <div className={style.footer}>
+    <div className={darkMode ? style.footerDark : style.footer}>
       <div className={style.dev}>
         {develops.map((develop) => (
           <div key={develop.id}>

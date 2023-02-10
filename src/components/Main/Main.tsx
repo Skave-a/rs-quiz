@@ -6,13 +6,14 @@ import { Link as RouterLink } from 'react-router-dom';
 
 export const Main = () => {
   const allCards = useAppSelector((state) => state.cards.list);
+  const darkMode = useAppSelector((state) => state.darkMode.darkMode);
   return (
     <Box>
       <Box
         sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', mb: '72px' }}
       >
         <Typography
-          sx={{ fontSize: '1.8rem', lineHeight: '4rem' }}
+          sx={{ fontSize: '1.8rem', lineHeight: '4rem', color: darkMode ? '#ffffff' : '' }}
           fontFamily={`'Poppins', sans-serif`}
           fontWeight={700}
         >

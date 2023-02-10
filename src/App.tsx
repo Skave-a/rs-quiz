@@ -15,20 +15,23 @@ import { Test } from './components/Test/Test';
 import Page404 from './components/Page404/Page404';
 import Authorization from './components/Authorization/Authorization';
 import Registration from './components/Registratiion/Registartion';
+import { useAppSelector } from './store/hooks';
 
-const theme = extendTheme({
-  colorSchemes: {
-    light: {
-      palette: {
-        primary: {
-          main: '#19d2f1',
+function App() {
+  const darkMode = useAppSelector((state) => state.darkMode.darkMode);
+  const theme = extendTheme({
+    colorSchemes: {
+      light: {
+        palette: {
+          primary: {
+            main: '#19d2f1',
+          },
+          mode: darkMode ? 'dark' : 'light',
         },
       },
     },
-  },
-});
-
-function App() {
+  });
+  document.body.style.background = darkMode ? '#1e222b' : '#eff4fc';
   return (
     <CssVarsProvider theme={theme}>
       <BrowserRouter>

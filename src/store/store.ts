@@ -2,6 +2,7 @@ import { configureStore, ThunkAction, Action } from '@reduxjs/toolkit';
 import counterReducer from './reducers/counterSlice';
 import cardsReducer from './reducers/cardSlice';
 import testsReducer from './reducers/testsSlice';
+import switchMode from './reducers/darkSlice';
 
 // import { booksApi } from './booksApi';
 
@@ -10,6 +11,7 @@ export const store = configureStore({
     counter: counterReducer,
     cards: cardsReducer,
     tests: testsReducer,
+    darkMode: switchMode,
     // [booksApi.reducerPath]: booksApi.reducer,
   },
   // middleware: (getDefaultMiddlware) => getDefaultMiddlware().concat(booksApi.middleware),

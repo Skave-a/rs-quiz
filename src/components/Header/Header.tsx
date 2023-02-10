@@ -7,16 +7,22 @@ import {
   IconButton,
   Menu,
   MenuItem,
+  Switch,
   Toolbar,
   Typography,
 } from '@mui/material';
 import { useState, MouseEvent } from 'react';
+import { useDispatch } from 'react-redux/es/exports';
 import { Link as RouterLink } from 'react-router-dom';
 import logo from '../../components/assets/logoq.png';
+import { useAppSelector } from '../../store/hooks';
+import { switchMode } from '../../store/reducers/darkSlice';
 import styles from './Header.module.css';
 
 export const Header = () => {
   const [anchorElNav, setAnchorElNav] = useState<null | HTMLElement>(null);
+  const darkMode = useAppSelector((state) => state.darkMode.darkMode);
+  const dispatch = useDispatch();
 
   const handleOpenNavMenu = (event: MouseEvent<HTMLElement>) => {
     setAnchorElNav(event.currentTarget);
@@ -26,11 +32,19 @@ export const Header = () => {
     setAnchorElNav(null);
   };
 
+  const handleModeChange = () => {
+    dispatch(switchMode());
+  };
+
   return (
     <AppBar
       position="static"
-      sx={{ position: 'relative', boxShadow: 'none', backgroundColor: '#ffffff' }}
-      className={styles.header}
+      sx={{
+        position: 'relative',
+        boxShadow: 'none',
+        backgroundColor: darkMode ? '#323a4b' : '#ffffff',
+      }}
+      className={darkMode ? styles.headerDark : styles.header}
     >
       <Container maxWidth="xl">
         <Toolbar disableGutters>
@@ -96,7 +110,7 @@ export const Header = () => {
               component={RouterLink}
               to="/"
               onClick={handleCloseNavMenu}
-              sx={{ my: 2, color: '#292626', display: 'block' }}
+              sx={{ my: 2, color: darkMode ? '' : '#292626', display: 'block' }}
             >
               Questions list
             </Button>
@@ -104,14 +118,20 @@ export const Header = () => {
               component={RouterLink}
               to="/create-quiz"
               onClick={handleCloseNavMenu}
-              sx={{ my: 2, color: '#292626', display: 'block' }}
+              sx={{ my: 2, color: darkMode ? '' : '#292626', display: 'block' }}
             >
               Create new quiz
             </Button>
           </Box>
+          <Switch
+            // checked={toggleDark}
+            onChange={handleModeChange}
+            // name="toggleDark"
+            color="default"
+          />
           <Box sx={{ flexGrow: 0 }}>
             <Typography
-              style={{ textDecoration: 'none', color: 'black' }}
+              style={{ textDecoration: 'none', color: darkMode ? '#19d2f1' : 'black' }}
               component={RouterLink}
               to="/authorization"
               textAlign="center"
