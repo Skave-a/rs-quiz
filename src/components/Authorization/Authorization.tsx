@@ -14,9 +14,9 @@ import {
   Paper,
   Typography,
 } from '@mui/material';
-import { FormEvent } from 'react';
 
 import { Link as RouterLink } from 'react-router-dom';
+import { useLoginUserMutation } from '../../store/api/AuthApi';
 
 function Copyright(props: any) {
   return (
@@ -34,13 +34,17 @@ function Copyright(props: any) {
 const theme = createTheme();
 
 export default function Authorization() {
-  const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
+  const [loginUser, { isLoading, isError, error, isSuccess }] = useLoginUserMutation();
+
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
+
     const data = new FormData(event.currentTarget);
-    console.log({
-      email: data.get('email'),
-      password: data.get('password'),
-    });
+    const email = data.get('email') as string;
+    const password = data.get('password') as string;
+    //const firstName = data.get('firstName') as string;
+    //const lastName = data.get('lastName');
+    await loginUser({ email, password });
   };
 
   return (

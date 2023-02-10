@@ -13,10 +13,14 @@ import {
 import { useState, MouseEvent } from 'react';
 import { Link as RouterLink } from 'react-router-dom';
 import logo from '../../components/assets/logoq.png';
+import { useAppDispatch, useAppSelector } from '../../store/hooks';
+import { logout } from '../../store/reducers/userSlice';
 import styles from './Header.module.css';
 
 export const Header = () => {
   const [anchorElNav, setAnchorElNav] = useState<null | HTMLElement>(null);
+  const isAuth = useAppSelector((state) => state.users.isAuth);
+  const dispatch = useAppDispatch();
 
   const handleOpenNavMenu = (event: MouseEvent<HTMLElement>) => {
     setAnchorElNav(event.currentTarget);
@@ -24,6 +28,10 @@ export const Header = () => {
 
   const handleCloseNavMenu = () => {
     setAnchorElNav(null);
+  };
+
+  const handleLogOut = () => {
+    dispatch(logout());
   };
 
   return (
@@ -110,14 +118,25 @@ export const Header = () => {
             </Button>
           </Box>
           <Box sx={{ flexGrow: 0 }}>
-            <Typography
-              style={{ textDecoration: 'none', color: 'black' }}
-              component={RouterLink}
-              to="/authorization"
-              textAlign="center"
-            >
-              LOG IN
-            </Typography>
+            {isAuth ? (
+              <Button
+                component={RouterLink}
+                to="/"
+                onClick={handleLogOut}
+                sx={{ my: 2, color: '#292626', display: 'block' }}
+              >
+                LOG OUT
+              </Button>
+            ) : (
+              <Button
+                component={RouterLink}
+                to="/authorization"
+                //onClick={handleCloseNavMenu}
+                sx={{ my: 2, color: '#292626', display: 'block' }}
+              >
+                LOG IN
+              </Button>
+            )}
           </Box>
         </Toolbar>
       </Container>
