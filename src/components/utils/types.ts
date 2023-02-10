@@ -25,3 +25,8 @@ export interface IItemBlockQuiz {
   setBlockQuestion: Dispatch<SetStateAction<number[]>>;
   id: number;
 }
+
+export type LoginInput = {
+  email: string;
+  password: string;
+};
