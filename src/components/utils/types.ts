@@ -1,4 +1,5 @@
 import { Dispatch, SetStateAction } from 'react';
+import { CardData } from '../../store/reducers/cardSlice';
 
 export interface IQuestion {
   question: string;
@@ -29,4 +30,17 @@ export interface IItemBlockQuiz {
 
 export interface IBtnAddBlock {
   handleClick: () => void;
+}
+
+export interface ICardMenu {
+  card: CardData;
+}
+
+export interface IQuizCard {
+  date: string;
+  desription: string;
+  questionsArr: never[];
+  passed: boolean;
+  passedOn: number;
+  card: CardData;
 }

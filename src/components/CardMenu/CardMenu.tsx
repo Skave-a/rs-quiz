@@ -4,10 +4,15 @@ import EditIcon from '@mui/icons-material/Edit';
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 import { cardMenuText } from '../utils/constants';
+import { useDispatch } from 'react-redux';
+import { ICardMenu } from '../utils/types';
+import { removeCard } from '../../store/reducers/cardSlice';
 
-export const CardMenu = () => {
+export const CardMenu = (props: ICardMenu) => {
+  const { card } = props;
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const open = Boolean(anchorEl);
+  const dispatch = useDispatch();
   const handleClick = (event: MouseEvent<HTMLElement>) => {
     event.preventDefault();
     setAnchorEl(event.currentTarget);
@@ -16,6 +21,10 @@ export const CardMenu = () => {
     event.preventDefault();
     setAnchorEl(null);
   };
+  function handleRemove(event: MouseEvent<HTMLElement>) {
+    handleClose(event);
+    dispatch(removeCard(card));
+  }
   return (
     <Box>
       <Box>
@@ -73,7 +82,7 @@ export const CardMenu = () => {
           </ListItemIcon>
           {cardMenuText.edit}
         </MenuItem>
-        <MenuItem onClick={handleClose}>
+        <MenuItem onClick={handleRemove}>
           <ListItemIcon>
             <DeleteForeverIcon fontSize="small" />
           </ListItemIcon>
