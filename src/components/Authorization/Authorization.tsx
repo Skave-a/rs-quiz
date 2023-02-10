@@ -17,6 +17,7 @@ import {
 import { FormEvent } from 'react';
 
 import { Link as RouterLink } from 'react-router-dom';
+import { useAppSelector } from '../../store/hooks';
 
 function Copyright(props: any) {
   return (
@@ -34,6 +35,7 @@ function Copyright(props: any) {
 const theme = createTheme();
 
 export default function Authorization() {
+  const darkMode = useAppSelector((state) => state.darkMode.darkMode);
   const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
@@ -61,7 +63,16 @@ export default function Authorization() {
             backgroundPosition: 'center',
           }}
         />
-        <Grid item xs={12} sm={8} md={5} component={Paper} elevation={6} square>
+        <Grid
+          item
+          xs={12}
+          sm={8}
+          md={5}
+          component={Paper}
+          elevation={6}
+          square
+          sx={{ backgroundColor: darkMode ? '#323a4b' : '' }}
+        >
           <Box
             sx={{
               my: 8,

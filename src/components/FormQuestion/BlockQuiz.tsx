@@ -2,15 +2,16 @@ import { Box, Button, IconButton, Paper, TextField, Typography } from '@mui/mate
 import { SERVICE_MESSAGES } from '../utils/constants';
 import ControlPointIcon from '@mui/icons-material/ControlPoint';
 import { ItemBlockQuiz } from './ItemBlockQuiz';
-import { BlockQuizBtn, BlockQuizPaper } from './styles';
+import { BlockQuizBtn, BlockQuizPaper, BlockQuizPaperDark } from './styles';
 import { useState } from 'react';
 import CancelIcon from '@mui/icons-material/Cancel';
 import { IBlockQuiz } from '../../components/utils/types';
+import { useAppSelector } from '../../store/hooks';
 
 export const BlockQuiz = (props: IBlockQuiz) => {
   const { name, id, setBlock, block, num } = props;
-
   const [blockQuestion, setBlockQuestion] = useState([0, 1]);
+  const darkMode = useAppSelector((state) => state.darkMode.darkMode);
 
   const blocksQ = blockQuestion.map((el) => {
     return (
@@ -35,7 +36,7 @@ export const BlockQuiz = (props: IBlockQuiz) => {
 
   return (
     <Box>
-      <Paper elevation={3} sx={BlockQuizPaper}>
+      <Paper elevation={3} sx={darkMode ? BlockQuizPaperDark : BlockQuizPaper}>
         <Box
           sx={{
             display: 'flex',

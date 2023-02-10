@@ -1,5 +1,6 @@
 import { Box, CardMedia, Paper, RadioGroup, Typography } from '@mui/material';
 import { Dispatch, SetStateAction } from 'react';
+import { useAppSelector } from '../../store/hooks';
 import { IQuestion } from '../utils/types';
 import { QuestionItem } from './QuestionItem';
 
@@ -12,6 +13,7 @@ interface ItestItem {
 export const TestItem = (props: ItestItem) => {
   const { question, score, setScore } = props;
   const questionAnswers = question.answers;
+  const darkMode = useAppSelector((state) => state.darkMode.darkMode);
   return (
     <Paper
       sx={{
@@ -21,6 +23,7 @@ export const TestItem = (props: ItestItem) => {
         alignItems: 'center',
         padding: '15px',
         flexWrap: 'wrap',
+        background: darkMode ? '#323a4b' : '',
       }}
     >
       <Box

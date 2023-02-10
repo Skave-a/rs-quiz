@@ -17,6 +17,7 @@ import { Link as RouterLink } from 'react-router-dom';
 import logo from '../../components/assets/logoq.png';
 import { useAppSelector } from '../../store/hooks';
 import { switchMode } from '../../store/reducers/darkSlice';
+import SwitchMode from '../SwitchMode/SwitchMode';
 import styles from './Header.module.css';
 
 export const Header = () => {
@@ -123,12 +124,13 @@ export const Header = () => {
               Create new quiz
             </Button>
           </Box>
-          <Switch
+          {/* <Switch
             // checked={toggleDark}
             onChange={handleModeChange}
             // name="toggleDark"
             color="default"
-          />
+          /> */}
+          <SwitchMode handleModeChange={handleModeChange} />
           <Box sx={{ flexGrow: 0 }}>
             <Typography
               style={{ textDecoration: 'none', color: darkMode ? '#19d2f1' : 'black' }}

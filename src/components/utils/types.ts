@@ -44,3 +44,7 @@ export interface IQuizCard {
   passedOn: number;
   card: CardData;
 }
+
+export interface ISwitchMode {
+  handleModeChange: () => void;
+}

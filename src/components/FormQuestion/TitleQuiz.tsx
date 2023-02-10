@@ -1,9 +1,9 @@
 import { Box, Button, Container, Paper, TextField, Typography } from '@mui/material';
 import { SERVICE_MESSAGES } from '../utils/constants';
 import ControlPointIcon from '@mui/icons-material/ControlPoint';
-import { CreateQuizBox2, TitleQuizPaper, TitleQuizPaperBtn } from './styles';
+import { CreateQuizBox2, TitleQuizPaper, TitleQuizPaperBtn, TitleQuizPaperDark } from './styles';
 import { ChangeEvent, useState } from 'react';
-import { useAppDispatch } from '../../store/hooks';
+import { useAppDispatch, useAppSelector } from '../../store/hooks';
 import { addCard } from '../../store/reducers/cardSlice';
 import { BlockQuiz } from '../../components/FormQuestion/BlockQuiz';
 import { ITitleQuiz } from '../../components/utils/types';
@@ -16,6 +16,7 @@ export const TitleQuiz = (props: ITitleQuiz) => {
   const [img, setImg] = useState('');
   const [blockQuestion, setBlockQuestion] = useState(['first']);
   const { block, setBlock } = props;
+  const darkMode = useAppSelector((state) => state.darkMode.darkMode);
 
   const addNewCard = () =>
     dispatch(
@@ -57,7 +58,7 @@ export const TitleQuiz = (props: ITitleQuiz) => {
         gap: '20px',
       }}
     >
-      <Paper elevation={3} sx={TitleQuizPaper}>
+      <Paper elevation={3} sx={darkMode ? TitleQuizPaperDark : TitleQuizPaper}>
         <Box>
           <Typography sx={{ mb: '2px' }}>{SERVICE_MESSAGES.title}</Typography>
           <TextField

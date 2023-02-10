@@ -4,6 +4,7 @@ import Modal from '@mui/material/Modal';
 import { SERVICE_MESSAGES } from '../utils/constants';
 import { Link as RouterLink } from 'react-router-dom';
 import { Button, Link } from '@mui/material';
+import { useAppSelector } from '../../store/hooks';
 
 interface IModalTestComplete {
   open: boolean;
@@ -28,6 +29,7 @@ const style = {
 export const ModalTestComplete = (props: IModalTestComplete) => {
   const { open, handleClose, score, countOfquestions } = props;
   const percent = (score * 100) / countOfquestions;
+  const darkMode = useAppSelector((state) => state.darkMode.darkMode);
   return (
     <div>
       <Modal
@@ -37,10 +39,15 @@ export const ModalTestComplete = (props: IModalTestComplete) => {
         aria-describedby="modal-modal-description"
       >
         <Box sx={style}>
-          <Typography id="modal-modal-title" variant="h6" component="h2">
+          <Typography
+            id="modal-modal-title"
+            variant="h6"
+            component="h2"
+            sx={{ color: darkMode ? '#ffffff' : '' }}
+          >
             {SERVICE_MESSAGES.complete}
           </Typography>
-          <Typography id="modal-modal-description" sx={{ mt: 2 }}>
+          <Typography id="modal-modal-description" sx={{ mt: 2, color: darkMode ? '#ffffff' : '' }}>
             {percent > 79
               ? `${SERVICE_MESSAGES.congratulations}${percent}%`
               : `${SERVICE_MESSAGES.fail}${percent}%`}
