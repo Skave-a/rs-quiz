@@ -3,19 +3,19 @@ import { IQuestion } from './types';
 export const questionDefaultHistory: IQuestion[] = [
   {
     question: `How many countries border Belarus?`,
-    img: '',
+    img: 'https://images.unsplash.com/photo-1600633349333-eebb43d01e23?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80',
     answers: ['3', '4', '5', '6'],
     correctAnswer: '5',
   },
   {
     question: `What is the approximate population of Belarus?`,
-    img: '',
+    img: 'https://images.unsplash.com/photo-1517732306149-e8f829eb588a?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1172&q=80',
     answers: ['10 million', '15 million', '20 million', '25 million'],
     correctAnswer: '10 million',
   },
   {
     question: `Belarus was sometimes called by which of these names?`,
-    img: '',
+    img: 'https://images.unsplash.com/photo-1559387188-d5cebb21de5e?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1074&q=80',
     answers: ['Livonia', 'Thuringia', 'Tasmania', 'Ruthenia'],
     correctAnswer: 'Ruthenia',
   },
@@ -86,13 +86,13 @@ export const questionDefaultProg: IQuestion[] = [
   },
   {
     question: `How many data types are there in JavaScript?`,
-    img: '',
+    img: 'https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1172&q=80',
     answers: ['3', '8', '5', '6'],
     correctAnswer: '8',
   },
   {
     question: `Who created the Javascript programming language?`,
-    img: '',
+    img: 'https://cdn.facesofopensource.com/wp-content/uploads/2017/07/23193713/brendaneich25607.web_.jpg',
     answers: ['Yukihiro Matsumoto', 'James Gosling', 'Brendan Eich', 'Bjarne Stroustrup'],
     correctAnswer: 'Brendan Eich',
   },
@@ -123,13 +123,13 @@ export const questionDefaultProg: IQuestion[] = [
 export const questionDefaultLit: IQuestion[] = [
   {
     question: `What is the name of the heroine in Jane Austen's popular novel "Pride and Prejudice"?`,
-    img: '',
+    img: 'https://images.unsplash.com/photo-1544716278-e513176f20b5?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1074&q=80',
     answers: ['Caroline Bingley', 'Elizabeth Bennet', 'Mrs. Bennet', 'Lady Catherine'],
     correctAnswer: 'Elizabeth Bennet',
   },
   {
     question: `Who wrote the best-selling "Vampire Chronicles"?`,
-    img: '',
+    img: 'https://images.unsplash.com/photo-1505629557752-b84ec6489bef?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80',
     answers: ['Mercedes Lackey', 'Anne McAffery', 'Anne Rice', 'Emily Bronte'],
     correctAnswer: 'Anne Rice',
   },
@@ -141,7 +141,7 @@ export const questionDefaultLit: IQuestion[] = [
   },
   {
     question: `In which place in England did Jane Austen die?`,
-    img: '',
+    img: 'https://images.unsplash.com/photo-1587978191773-ae3cd9e26501?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=764&q=80',
     answers: ['Portsmouth', 'Winchester', 'Southampton', 'Chawton'],
     correctAnswer: 'Winchester',
   },
@@ -156,7 +156,7 @@ export const questionDefaultLit: IQuestion[] = [
 export const questionDefaultMus: IQuestion[] = [
   {
     question: `How loud or soft the sound is, is determined by the ...`,
-    img: '',
+    img: 'https://images.unsplash.com/photo-1617994452722-4145e196248b?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80',
     answers: ['Rythm', 'Tempo', 'Beat', 'Dynamics'],
     correctAnswer: 'Dynamics',
   },
@@ -168,7 +168,7 @@ export const questionDefaultMus: IQuestion[] = [
   },
   {
     question: `The speed of a beat is called the...`,
-    img: '',
+    img: 'https://images.unsplash.com/photo-1470225620780-dba8ba36b745?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80',
     answers: ['Music', 'Instrumentation', 'Tempo', 'Form'],
     correctAnswer: 'Tempo',
   },

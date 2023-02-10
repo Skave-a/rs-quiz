@@ -1,17 +1,17 @@
 export const SERVICE_MESSAGES = {
   quiz: 'Quiz',
   published: 'published',
-  createNew: 'CREATE NEW',
+  createNew: 'CREATE A NEW QUIZ',
   myQuizzes: 'My quizzes',
   create: 'Create',
   addImage: 'Add image',
-  title: 'Title',
+  title: 'Theme',
   writeSmth: 'Write something ...',
   writeQuest: 'Write a question ...',
   description: 'Description (optional)',
-  addQBlock: 'Add a question block',
-  answerContent: 'Answer content',
-  addAnswer: 'Add an answer',
+  addQBlock: 'Add a new question block',
+  questionNum: 'Question #',
+  addAnswer: 'Add a new answer',
   answer: 'Answer',
   configure: 'Configure results',
   addLink: 'Paste image link',
@@ -21,15 +21,21 @@ export const SERVICE_MESSAGES = {
   fail: 'You failed the test. Your result ',
   toMain: 'To main',
   testDate: 'Test Date',
+  main: 'Main',
 };
 
 export const LINK_TO_THE_COURSE = 'https://rs.school/js/';
 export const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
-// export const pages = ['Questions list', 'Create new question', 'Some disabled button'];
 export const pages = ['Questions list', 'Create new question', 'Some disabled button'];
 
 export const PAGE_NOT_FOUND = {
   title: 'Oops!',
   subTitle: '404 - The Page can not be found',
   linkTitle: 'Go to homepage',
+};
+
+export const cardMenuText = {
+  delete: 'Delete',
+  edit: 'Edit',
+  testSet: 'Test settings',
 };

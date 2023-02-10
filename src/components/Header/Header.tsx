@@ -10,7 +10,7 @@ import {
   Toolbar,
   Typography,
 } from '@mui/material';
-import { useState } from 'react';
+import { useState, MouseEvent } from 'react';
 import { Link as RouterLink } from 'react-router-dom';
 import logo from '../../components/assets/logoq.png';
 import { useAppDispatch, useAppSelector } from '../../store/hooks';
@@ -22,7 +22,7 @@ export const Header = () => {
   const isAuth = useAppSelector((state) => state.users.isAuth);
   const dispatch = useAppDispatch();
 
-  const handleOpenNavMenu = (event: React.MouseEvent<HTMLElement>) => {
+  const handleOpenNavMenu = (event: MouseEvent<HTMLElement>) => {
     setAnchorElNav(event.currentTarget);
   };
 

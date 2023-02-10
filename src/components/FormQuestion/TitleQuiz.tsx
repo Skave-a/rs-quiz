@@ -7,6 +7,7 @@ import { useAppDispatch } from '../../store/hooks';
 import { addCard } from '../../store/reducers/cardSlice';
 import { BlockQuiz } from '../../components/FormQuestion/BlockQuiz';
 import { ITitleQuiz } from '../../components/utils/types';
+import { BtnAddBlock } from '../BtnAddBlock/BtnAddBlock';
 
 export const TitleQuiz = (props: ITitleQuiz) => {
   const dispatch = useAppDispatch();
@@ -33,9 +34,16 @@ export const TitleQuiz = (props: ITitleQuiz) => {
     setBlock([...block, new Date().toString()]);
   }
 
-  const blocksQuestion = block.map((el) => {
+  const blocksQuestion = block.map((el, id) => {
     return (
-      <BlockQuiz name={el} key={el} id={el} setBlock={setBlockQuestion} block={blockQuestion} />
+      <BlockQuiz
+        name={el}
+        key={el}
+        id={el}
+        setBlock={setBlockQuestion}
+        block={blockQuestion}
+        num={id + 1}
+      />
     );
   });
   return (
@@ -50,19 +58,11 @@ export const TitleQuiz = (props: ITitleQuiz) => {
       }}
     >
       <Paper elevation={3} sx={TitleQuizPaper}>
-        <Typography>{SERVICE_MESSAGES.addImage}</Typography>
-        <TextField
-          multiline
-          rows={1}
-          placeholder={SERVICE_MESSAGES.addLink}
-          sx={{ width: '100%', mb: '15px' }}
-          onChange={(e: ChangeEvent<HTMLInputElement>) => setImg(e.target.value)}
-        />
         <Box>
           <Typography sx={{ mb: '2px' }}>{SERVICE_MESSAGES.title}</Typography>
           <TextField
             multiline
-            rows={3}
+            rows={2}
             placeholder={SERVICE_MESSAGES.writeSmth}
             sx={{ width: '100%' }}
             onChange={(e: ChangeEvent<HTMLInputElement>) => setTitle(e.target.value)}
@@ -73,10 +73,20 @@ export const TitleQuiz = (props: ITitleQuiz) => {
           <TextField
             id="outlined-multiline-static"
             multiline
-            rows={2}
+            rows={3}
             placeholder={SERVICE_MESSAGES.writeSmth}
             sx={{ width: '100%' }}
             onChange={(e: ChangeEvent<HTMLInputElement>) => setDescription(e.target.value)}
+          />
+        </Box>
+        <Box>
+          <Typography>{SERVICE_MESSAGES.addImage}</Typography>
+          <TextField
+            multiline
+            rows={1}
+            placeholder={SERVICE_MESSAGES.addLink}
+            sx={{ width: '100%', mb: '15px' }}
+            onChange={(e: ChangeEvent<HTMLInputElement>) => setImg(e.target.value)}
           />
         </Box>
         <Button sx={TitleQuizPaperBtn}>
@@ -92,6 +102,7 @@ export const TitleQuiz = (props: ITitleQuiz) => {
           {SERVICE_MESSAGES.configure}
         </Button>
       </Box>
+      <BtnAddBlock handleClick={handleClick} />
     </Container>
   );
 };

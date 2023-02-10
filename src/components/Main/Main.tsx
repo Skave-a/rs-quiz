@@ -11,7 +11,11 @@ export const Main = () => {
       <Box
         sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', mb: '72px' }}
       >
-        <Typography sx={{ fontSize: '1.8rem', lineHeight: '4rem' }}>
+        <Typography
+          sx={{ fontSize: '1.8rem', lineHeight: '4rem' }}
+          fontFamily={`'Poppins', sans-serif`}
+          fontWeight={700}
+        >
           {SERVICE_MESSAGES.myQuizzes}
         </Typography>
         <Link component={RouterLink} to="/create-quiz" underline="none">
@@ -32,14 +36,12 @@ export const Main = () => {
             <RouterLink key={card.id} style={{ textDecoration: 'none' }} to={`/test/${card.id}`}>
               <QuizCard
                 key={card.id}
-                title={card.title}
-                img={card.img}
-                id={card.id}
                 date={''}
                 desription={''}
                 questionsArr={[]}
                 passed={false}
                 passedOn={0}
+                card={card}
               />
             </RouterLink>
           </Grid>
