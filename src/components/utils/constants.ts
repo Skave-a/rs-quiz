@@ -26,11 +26,16 @@ export const SERVICE_MESSAGES = {
 
 export const LINK_TO_THE_COURSE = 'https://rs.school/js/';
 export const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
-// export const pages = ['Questions list', 'Create new question', 'Some disabled button'];
 export const pages = ['Questions list', 'Create new question', 'Some disabled button'];
 
 export const PAGE_NOT_FOUND = {
   title: 'Oops!',
   subTitle: '404 - The Page can not be found',
   linkTitle: 'Go to homepage',
+};
+
+export const cardMenuText = {
+  delete: 'Delete',
+  edit: 'Edit',
+  testSet: 'Test settings',
 };
