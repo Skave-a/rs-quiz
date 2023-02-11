@@ -1,5 +1,5 @@
 import { Container } from '@mui/material';
-import { BrowserRouter, Navigate, Outlet, Route, Routes, useLocation } from 'react-router-dom';
+import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom';
 import './App.css';
 import { Chat } from './components/Chat/Chat';
 import { Footer } from './components/Footer/Footer';
@@ -33,10 +33,6 @@ function App() {
   const isAuth = useAppSelector((state) => state.users.isAuth);
   const token = useAppSelector((state) => state.users.token);
   console.log(`token, isAuth =>>>>>`, token, isAuth);
-
-  /* function RequireAuth({ redirectTo }: { redirectTo: string }) {
-    return isAuth ? <Outlet /> : <Navigate to={redirectTo} />;
-  } */
 
   return (
     <CssVarsProvider theme={theme}>
