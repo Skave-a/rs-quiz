@@ -37,19 +37,17 @@ const theme = createTheme();
 
 export default function Authorization() {
   const darkMode = useAppSelector((state) => state.darkMode.darkMode);
-  const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
-    const [loginUser, { isLoading, isError, error, isSuccess }] = useLoginUserMutation();
+  const [loginUser, { isLoading, isError, error, isSuccess }] = useLoginUserMutation();
 
-    const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
-      event.preventDefault();
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
 
-      const data = new FormData(event.currentTarget);
-      const email = data.get('email') as string;
-      const password = data.get('password') as string;
-      //const firstName = data.get('firstName') as string;
-      //const lastName = data.get('lastName');
-      await loginUser({ email, password });
-    };
+    const data = new FormData(event.currentTarget);
+    const email = data.get('email') as string;
+    const password = data.get('password') as string;
+    //const firstName = data.get('firstName') as string;
+    //const lastName = data.get('lastName');
+    await loginUser({ email, password });
   };
 
   return (
