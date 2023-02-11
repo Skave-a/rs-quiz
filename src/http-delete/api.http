@@ -1,7 +1,0 @@
-//AIzaSyCyJ-hS_PP1Qkz8OBE0xsxb4BoxMtebK24
-
-###
-GET https://www.googleapis.com/books/v1/volumes?&key=AIzaSyCyJ-hS_PP1Qkz8OBE0xsxb4BoxMtebK24
-
-###
-GET https://www.googleapis.com/books/v1/volumes?q=Bestsellers&key=AIzaSyCyJ-hS_PP1Qkz8OBE0xsxb4BoxMtebK24
