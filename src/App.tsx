@@ -1,5 +1,5 @@
 import { Container } from '@mui/material';
-import { BrowserRouter, Navigate, Outlet, Route, Routes, useLocation } from 'react-router-dom';
+import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom';
 import './App.css';
 import { Chat } from './components/Chat/Chat';
 import { Footer } from './components/Footer/Footer';
@@ -34,18 +34,14 @@ function App() {
   const token = useAppSelector((state) => state.users.token);
   console.log(`token, isAuth =>>>>>`, token, isAuth);
 
-  const PrivateRoute = () => {
-    return isAuth ? <Outlet /> : <Authorization />;
-  };
-
   return (
     <CssVarsProvider theme={theme}>
       <BrowserRouter>
         <Header />
         <Container sx={{ width: { sm: 2 / 2 } }}>
-          <Routes>
-            <Route path="/" element={<Main />} />
-            <Route element={<PrivateRoute />}>
+          {isAuth ? (
+            <Routes>
+              <Route path="/" element={<Main />} />
               <Route
                 path="/authorization"
                 element={isAuth ? <Navigate to="/" replace /> : <Authorization />}
@@ -58,8 +54,15 @@ function App() {
               <Route path="/create-quiz" element={<CreateQuiz />} />
               <Route path="/test/:id" element={<Test />} />
               <Route path="*" element={<Page404 />} />
-            </Route>
-          </Routes>
+            </Routes>
+          ) : (
+            <Routes>
+              <Route path="/" element={<Main />} />
+              <Route path="/authorization" element={<Authorization />} />
+              <Route path="/registration" element={<Registration />} />
+              <Route path="*" element={<Authorization />} />
+            </Routes>
+          )}
         </Container>
         <Footer />
       </BrowserRouter>
