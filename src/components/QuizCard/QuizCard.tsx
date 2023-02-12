@@ -18,6 +18,7 @@ export const QuizCard = (props: IQuizCard) => {
   const { card } = props;
   const { title, img, id } = card;
   const allTests = useAppSelector((state) => state.tests.list);
+  const darkMode = useAppSelector((state) => state.darkMode.darkMode);
   let testPassed, testFailed, testDate;
   allTests.forEach((el) => {
     if (Number(el.id) === id) {
@@ -27,7 +28,7 @@ export const QuizCard = (props: IQuizCard) => {
     }
   });
   return (
-    <Card className={styles.card}>
+    <Card className={styles.card} sx={{ background: darkMode ? '#323a4b' : '#ffffff' }}>
       <CardHeader className={styles.card__header} action={<CardMenu card={card} />} />
       <CardActionArea>
         <CardMedia component="img" height="140" image={img} alt="card" />
@@ -35,7 +36,7 @@ export const QuizCard = (props: IQuizCard) => {
           <Box sx={{ display: 'flex', justifyContent: 'space-between', mb: '10px' }}>
             <Typography
               sx={{
-                color: '#424242',
+                color: darkMode ? '#ffffff' : '#424242',
                 fontSize: '0.9rem',
                 letterSpacing: '.1em',
                 textTransform: 'uppercase',
@@ -50,7 +51,7 @@ export const QuizCard = (props: IQuizCard) => {
             <Box sx={{ display: 'flex', alignItems: 'center', gap: '3px' }}>
               <Typography
                 sx={{
-                  color: 'rgba(66,66,66,.5)',
+                  color: darkMode ? '#ffffff' : 'rgba(66,66,66,.5)',
                   fontSize: '0.7rem',
                   letterSpacing: '.1em',
                   lineHeight: '1.1rem',
@@ -76,13 +77,13 @@ export const QuizCard = (props: IQuizCard) => {
             gutterBottom
             variant="h5"
             component="div"
-            sx={{ color: '#424242', fontSize: '1.5rem', fontWeight: 700 }}
+            sx={{ color: darkMode ? '#ffffff' : '#424242', fontSize: '1.5rem', fontWeight: 700 }}
           >
             {title}
           </Typography>
           <Typography
             sx={{
-              color: 'rgba(66,66,66,.5)',
+              color: darkMode ? '#ffffff' : 'rgba(66,66,66,.5)',
               fontSize: '0.7rem',
               letterSpacing: '.05rem',
               lineHeight: '1.6rem',

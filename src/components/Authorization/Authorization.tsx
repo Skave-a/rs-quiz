@@ -16,7 +16,9 @@ import {
 } from '@mui/material';
 
 import { Link as RouterLink } from 'react-router-dom';
+import { useAppSelector } from '../../store/hooks';
 import { useLoginUserMutation } from '../../store/api/AuthApi';
+import { FormEvent } from 'react';
 
 function Copyright(props: any) {
   return (
@@ -34,6 +36,7 @@ function Copyright(props: any) {
 const theme = createTheme();
 
 export default function Authorization() {
+  const darkMode = useAppSelector((state) => state.darkMode.darkMode);
   const [loginUser, { isLoading, isError, error, isSuccess }] = useLoginUserMutation();
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
@@ -65,7 +68,16 @@ export default function Authorization() {
             backgroundPosition: 'center',
           }}
         />
-        <Grid item xs={12} sm={8} md={5} component={Paper} elevation={6} square>
+        <Grid
+          item
+          xs={12}
+          sm={8}
+          md={5}
+          component={Paper}
+          elevation={6}
+          square
+          sx={{ backgroundColor: darkMode ? '#323a4b' : '' }}
+        >
           <Box
             sx={{
               my: 8,

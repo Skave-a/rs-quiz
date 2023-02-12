@@ -17,23 +17,24 @@ import Registration from './components/Registratiion/Registartion';
 import { Test } from './components/Test/Test';
 import { useAppSelector } from './store/hooks';
 
-const theme = extendTheme({
-  colorSchemes: {
-    light: {
-      palette: {
-        primary: {
-          main: '#19d2f1',
-        },
-      },
-    },
-  },
-});
-
 function App() {
   const isAuth = useAppSelector((state) => state.users.isAuth);
   const token = useAppSelector((state) => state.users.token);
   console.log(`token, isAuth =>>>>>`, token, isAuth);
-
+  const darkMode = useAppSelector((state) => state.darkMode.darkMode);
+  const theme = extendTheme({
+    colorSchemes: {
+      light: {
+        palette: {
+          primary: {
+            main: '#19d2f1',
+          },
+          mode: darkMode ? 'dark' : 'light',
+        },
+      },
+    },
+  });
+  document.body.style.background = darkMode ? '#1e222b' : '#eff4fc';
   return (
     <CssVarsProvider theme={theme}>
       <BrowserRouter>
