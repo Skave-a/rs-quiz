@@ -7,7 +7,7 @@ import { SERVICE_MESSAGES } from '../utils/constants';
 export const BtnAddBlock = (props: IBtnAddBlock) => {
   const { handleClick } = props;
   return (
-    <Tooltip title={SERVICE_MESSAGES.addQBlock} placement="top">
+    <Tooltip title={SERVICE_MESSAGES.addNewQuestion} placement="top">
       <SpeedDial
         ariaLabel="SpeedDial basic example"
         sx={{ position: 'fixed', bottom: 80, right: 26 }}

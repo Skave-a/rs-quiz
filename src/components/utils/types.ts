@@ -1,5 +1,5 @@
 import { Dispatch, SetStateAction } from 'react';
-import { CardData } from '../../store/reducers/cardSlice';
+import { Quiz } from '../../store/reducers/cardSlice';
 
 export interface IQuestion {
   question: string;
@@ -11,20 +11,20 @@ export interface IQuestion {
 export interface IBlockQuiz {
   name: string;
   id: string;
-  setBlock: Dispatch<SetStateAction<string[]>>;
-  block: string[];
+  setQuestions: Dispatch<SetStateAction<string[]>>;
+  questions: string[];
   num: number;
 }
 
-export interface ITitleQuiz {
-  block: string[];
-  setBlock: (arg0: string[]) => void;
-}
+/* export interface ITitleQuiz {
+  questions: string[];
+  setQuestions: (arg0: string[]) => void;
+} */
 
 export interface IItemBlockQuiz {
   name: string;
-  blockQuestion: number[];
-  setBlockQuestion: Dispatch<SetStateAction<number[]>>;
+  answers: number[];
+  setAnswers: Dispatch<SetStateAction<number[]>>;
   id: number;
 }
 
@@ -37,7 +37,7 @@ export interface IBtnAddBlock {
 }
 
 export interface ICardMenu {
-  card: CardData;
+  card: Quiz;
 }
 
 export interface IQuizCard {
@@ -46,5 +46,5 @@ export interface IQuizCard {
   questionsArr: never[];
   passed: boolean;
   passedOn: number;
-  card: CardData;
+  card: Quiz;
 }

@@ -5,7 +5,6 @@ import { Chat } from './components/Chat/Chat';
 import { Footer } from './components/Footer/Footer';
 import { Header } from './components/Header/Header';
 import { Main } from './components/Main/Main';
-
 import {
   Experimental_CssVarsProvider as CssVarsProvider,
   experimental_extendTheme as extendTheme,
@@ -31,8 +30,8 @@ const theme = extendTheme({
 
 function App() {
   const isAuth = useAppSelector((state) => state.users.isAuth);
-  const token = useAppSelector((state) => state.users.token);
-  console.log(`token, isAuth =>>>>>`, token, isAuth);
+  //const token = useAppSelector((state) => state.users.token);
+  //console.log(`token, isAuth =>>>>>`, token, isAuth);
 
   return (
     <CssVarsProvider theme={theme}>
