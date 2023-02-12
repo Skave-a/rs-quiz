@@ -49,7 +49,7 @@ export const Test = () => {
         {/* <Typography variant="h4" className={style.test__title}>{card.title} -
         </Typography> */}
         <Typography className={style.test__description} sx={{ m: 0 }}>
-          {card.desription}
+          {card.description}
         </Typography>
       </Paper>
       <form onSubmit={handleSubmit} style={{ margin: '0 auto' }}>

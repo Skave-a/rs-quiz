@@ -2,7 +2,7 @@ import ControlPointIcon from '@mui/icons-material/ControlPoint';
 import NoteAddOutlinedIcon from '@mui/icons-material/NoteAddOutlined';
 import { Box, Button, Container, Paper, TextField, Typography } from '@mui/material';
 import { ChangeEvent, useState } from 'react';
-import { Question } from '../FormQuestion/Question';
+import { IQuestion, Question } from '../FormQuestion/Question';
 import { useAppDispatch } from '../../store/hooks';
 import { addQuiz } from '../../store/reducers/cardSlice';
 import { BtnAddBlock } from '../BtnAddBlock/BtnAddBlock';
@@ -14,13 +14,16 @@ import {
   TitleQuizPaper,
   TitleQuizPaperBtn,
 } from './styles';
+import { nanoid } from 'nanoid';
 
 export const CreateQuiz = () => {
   const dispatch = useAppDispatch();
   const [title, setTitle] = useState('');
-  const [desription, setDescription] = useState('');
+  const [description, setDescription] = useState('');
   const [img, setImg] = useState('');
-  const [questions, setQuestions] = useState([Date.now().toString()]);
+  const questionEntity = { id: nanoid(), description: '', image: null };
+  const [questions, setQuestions] = useState<IQuestion[]>([questionEntity]);
+
   console.log(`questions`, questions);
 
   const saveQuiz = () =>
@@ -29,7 +32,7 @@ export const CreateQuiz = () => {
         title,
         img,
         date: new Date().toISOString(),
-        desription,
+        description,
         questionsArr: [],
         passed: false,
         passedOn: 0,
@@ -37,7 +40,7 @@ export const CreateQuiz = () => {
     );
 
   function addQuestion() {
-    setQuestions([...questions, Date.now().toString()]);
+    setQuestions([...questions, questionEntity]);
   }
 
   return (
@@ -100,12 +103,12 @@ export const CreateQuiz = () => {
           </Paper>
           <Box sx={CreateQuizBox2}>
             {questions.map((item, i) => {
-              console.log(`el=>>>>>>>>>>>`, item);
+              //console.log(`el=>>>>>>>>>>>`, item);
               return (
                 <Question
-                  name={item}
-                  key={item}
-                  id={item}
+                  questionTitle={item.description}
+                  key={item.id}
+                  id={item.id}
                   setQuestions={setQuestions}
                   questions={questions}
                   num={i + 1}

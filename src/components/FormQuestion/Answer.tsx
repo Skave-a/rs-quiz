@@ -1,27 +1,44 @@
 import { Box, Button, Checkbox, Fade, TextField, Tooltip, Typography } from '@mui/material';
 import { SERVICE_MESSAGES } from '../utils/constants';
 import { ItemBlockQuizBox } from '../CreateQuiz/styles';
-import { ChangeEvent, Dispatch, SetStateAction, useState } from 'react';
+import { ChangeEvent, Dispatch, SetStateAction, useEffect, useState } from 'react';
 import CloseIcon from '@mui/icons-material/Close';
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline';
 import { IAnswer } from './Question';
 
 export interface IAnswers {
-  name: string;
+  questionTitle: string;
   answers: IAnswer[];
   setAnswers: Dispatch<SetStateAction<IAnswer[]>>;
   id: string;
 }
 
 export const Answer = (props: IAnswers) => {
-  const { name, answers, setAnswers, id } = props;
+  const { questionTitle, answers, setAnswers, id } = props;
   const [answerTitle, setAnswerTitle] = useState('');
-  console.log(`answerTitle`, answerTitle);
+  const [checked, setChecked] = useState(false);
+
+  //console.log(`checked`, checked);
+
+  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setChecked(event.target.checked);
+  };
 
   function remove() {
     setAnswers([...answers.filter((item) => item.id !== id)]);
   }
+
+  useEffect(() => {
+    setAnswers([
+      ...answers.map((item) => {
+        if (item.id === id) {
+          return { ...item, title: answerTitle, isCorrect: checked };
+        }
+        return item;
+      }),
+    ]);
+  }, [answerTitle]);
 
   return (
     <Box sx={ItemBlockQuizBox}>
@@ -30,7 +47,7 @@ export const Answer = (props: IAnswers) => {
         placeholder={SERVICE_MESSAGES.answer}
         sx={{ width: '100%' }}
         onChange={(e: ChangeEvent<HTMLInputElement>) => setAnswerTitle(e.target.value)}
-        name={name}
+        //name={questionTitle}
       />
       <Tooltip
         TransitionComponent={Fade}
@@ -42,6 +59,7 @@ export const Answer = (props: IAnswers) => {
         placement="top"
       >
         <Checkbox
+          onChange={handleChange}
           color="success"
           icon={<CheckCircleOutlineIcon />}
           checkedIcon={<CheckCircleIcon />}

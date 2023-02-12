@@ -13,7 +13,7 @@ export type Quiz = {
   img: string;
   id?: number;
   date: string;
-  desription: string;
+  description: string;
   questionsArr: IQuestion[];
   passed: boolean;
   passedOn: number;
@@ -30,7 +30,7 @@ export const initialState: QuizList = {
       img: 'https://i.ytimg.com/vi/s6yKBM3meeE/maxresdefault.jpg',
       date: '2022-09-06 03:00',
       id: 1,
-      desription: `Belarus is mostly made up of forests, rivers and lakes and is mostly referred to as the rib of Europe. 
+      description: `Belarus is mostly made up of forests, rivers and lakes and is mostly referred to as the rib of Europe. 
       The country has a very interesting history and people. Take up this quiz to test your knowledge of Belarus and its people.`,
       questionsArr: questionDefaultHistory,
       passed: false,
@@ -41,7 +41,7 @@ export const initialState: QuizList = {
       img: 'https://obrmos.ru/kur/kur_dr/comp/img/pr.jpg',
       date: '2022-10-25 13:00',
       id: 2,
-      desription: `It's a nice way to see how much you know, or don't know, about JavaScript.`,
+      description: `It's a nice way to see how much you know, or don't know, about JavaScript.`,
       questionsArr: questionDefaultProg,
       passed: false,
       passedOn: 0,
@@ -51,7 +51,7 @@ export const initialState: QuizList = {
       img: 'https://artinvestment.ru/lolo/yan/yan-main.jpg',
       date: '2023-01-06 23:00',
       id: 3,
-      desription: `See What you know about art!`,
+      description: `See What you know about art!`,
       questionsArr: questionDefaultArt,
       passed: false,
       passedOn: 0,
@@ -61,7 +61,7 @@ export const initialState: QuizList = {
       img: 'https://static.mk.ru/upload/entities/2019/04/11/23/articles/detailPicture/ec/ac/6d/01/306db442fae94a1476ddba3306b1f42f.jpg',
       date: '2023-02-01 03:00',
       id: 4,
-      desription: `Take this quiz and learn more about Adult Easy - Literature`,
+      description: `Take this quiz and learn more about Adult Easy - Literature`,
       questionsArr: questionDefaultLit,
       passed: false,
       passedOn: 0,
@@ -71,7 +71,7 @@ export const initialState: QuizList = {
       img: 'https://sadpanda.cn/wordpress/wp-content/uploads/2016/04/62c72e3218c9921f1ac0f28aba96f6c9wood-background-music-beat-wallchan-665381_1015x571.jpg',
       date: '2022-12-10 03:00',
       id: 5,
-      desription: `Music is the soothing balm to a troubled soul. How well versed are you about music? 
+      description: `Music is the soothing balm to a troubled soul. How well versed are you about music? 
       Are you a music fanatic? Take this quiz to test your knowledge about the intricacies of music. 
       It takes more than just a pretty voice to make a memorable melody! Prove yourself to be a musical genius by attempting 
       all the questions.`,
@@ -95,7 +95,7 @@ export const cardSlice = createSlice({
         date: new Date().toISOString(),
         title: action.payload.title,
         img: action.payload.img,
-        desription: action.payload.desription,
+        description: action.payload.description,
         questionsArr: [],
         passed: false,
         passedOn: 0,
