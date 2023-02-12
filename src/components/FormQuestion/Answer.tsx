@@ -1,10 +1,10 @@
-import { Box, Button, Checkbox, Fade, TextField, Tooltip, Typography } from '@mui/material';
-import { SERVICE_MESSAGES } from '../utils/constants';
-import { ItemBlockQuizBox } from '../CreateQuiz/styles';
-import { ChangeEvent, Dispatch, SetStateAction, useEffect, useState } from 'react';
-import CloseIcon from '@mui/icons-material/Close';
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline';
+import DeleteIcon from '@mui/icons-material/Delete';
+import { Box, Checkbox, Fade, IconButton, TextField, Tooltip, Typography } from '@mui/material';
+import { ChangeEvent, Dispatch, SetStateAction, useEffect, useState } from 'react';
+import { ItemBlockQuizBox } from '../CreateQuiz/styles';
+import { SERVICE_MESSAGES } from '../utils/constants';
 import { IAnswer } from './Question';
 
 export interface IAnswers {
@@ -65,15 +65,9 @@ export const Answer = (props: IAnswers) => {
           checkedIcon={<CheckCircleIcon />}
         />
       </Tooltip>
-      <Button
-        onClick={remove}
-        variant="contained"
-        color="error"
-        sx={{ fontSize: '12px', textTransform: 'capitalize' }}
-      >
-        <CloseIcon fontSize="small" />
-        Remove
-      </Button>
+      <IconButton onClick={remove} aria-label="delete" size="small">
+        <DeleteIcon color="error" fontSize="medium" />
+      </IconButton>
     </Box>
   );
 };
