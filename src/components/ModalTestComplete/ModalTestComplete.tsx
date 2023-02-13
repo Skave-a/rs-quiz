@@ -1,10 +1,10 @@
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
-import { SERVICE_MESSAGES } from '../utils/constants';
 import { Link as RouterLink } from 'react-router-dom';
 import { Button, Link } from '@mui/material';
 import { useAppSelector } from '../../store/hooks';
+import { useTranslation } from 'react-i18next';
 
 interface IModalTestComplete {
   open: boolean;
@@ -29,6 +29,7 @@ const style = {
 export const ModalTestComplete = (props: IModalTestComplete) => {
   const { open, handleClose, score, countOfquestions } = props;
   const percent = (score * 100) / countOfquestions;
+  const { t } = useTranslation();
   const darkMode = useAppSelector((state) => state.darkMode.darkMode);
   return (
     <div>
@@ -45,12 +46,10 @@ export const ModalTestComplete = (props: IModalTestComplete) => {
             component="h2"
             sx={{ color: darkMode ? '#ffffff' : '' }}
           >
-            {SERVICE_MESSAGES.complete}
+            {t('complete')}
           </Typography>
           <Typography id="modal-modal-description" sx={{ mt: 2, color: darkMode ? '#ffffff' : '' }}>
-            {percent > 79
-              ? `${SERVICE_MESSAGES.congratulations}${percent}%`
-              : `${SERVICE_MESSAGES.fail}${percent}%`}
+            {percent > 79 ? `${t('congratulations')}${percent}%` : `${t('fail')}${percent}%`}
           </Typography>
           <Link
             component={RouterLink}
@@ -59,7 +58,7 @@ export const ModalTestComplete = (props: IModalTestComplete) => {
             sx={{ mt: '50px', display: 'block', textAlign: 'end' }}
           >
             <Button variant="contained" sx={{ color: '#fff', letterSpacing: '.1em' }}>
-              {SERVICE_MESSAGES.toMain}
+              {t('toMain')}
             </Button>
           </Link>
         </Box>

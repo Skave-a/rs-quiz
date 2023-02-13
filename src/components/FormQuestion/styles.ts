@@ -26,6 +26,15 @@ export const CreateQuizCreate = {
   fontWeight: '700',
 };
 
+export const CreateQuizCreateDark = {
+  fontSize: '30px',
+  letterSpacing: '-0.05em',
+  lineHeight: '1em',
+  color: '#ffffff',
+  fontFamily: `'Poppins',sans-serif`,
+  fontWeight: '700',
+};
+
 export const CreateQuizBox = {
   display: 'flex',
   alignItems: 'flex-start',

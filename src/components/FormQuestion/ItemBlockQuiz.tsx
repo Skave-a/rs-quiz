@@ -1,17 +1,18 @@
 import { Box, Button, TextField } from '@mui/material';
-import { SERVICE_MESSAGES } from '../utils/constants';
 import { ItemBlockQuizBox } from './styles';
 import { ChangeEvent, useState } from 'react';
 import style from './FormQuestion.module.css';
 import { RNDstring } from './RNDstring';
 import { IItemBlockQuiz } from '../../components/utils/types';
 import CloseIcon from '@mui/icons-material/Close';
+import { useTranslation } from 'react-i18next';
 
 export const ItemBlockQuiz = (props: IItemBlockQuiz) => {
   const { name, setBlockQuestion, blockQuestion, id } = props;
   const [answers, setAnswers] = useState('');
   const indx = blockQuestion.indexOf(id);
   const rndStr = RNDstring();
+  const { t } = useTranslation();
 
   function remove() {
     setBlockQuestion([...blockQuestion.slice(0, indx), ...blockQuestion.slice(indx + 1)]);
@@ -21,7 +22,7 @@ export const ItemBlockQuiz = (props: IItemBlockQuiz) => {
     <Box sx={ItemBlockQuizBox}>
       <TextField
         multiline
-        placeholder={SERVICE_MESSAGES.answer}
+        placeholder={t('answer') as string}
         sx={{ width: '100%' }}
         onChange={(e: ChangeEvent<HTMLInputElement>) => setAnswers(e.target.value)}
         name={name}
@@ -35,7 +36,7 @@ export const ItemBlockQuiz = (props: IItemBlockQuiz) => {
         sx={{ fontSize: '12px', textTransform: 'capitalize' }}
       >
         <CloseIcon fontSize="small" />
-        Remove
+        {t('Remove')}
       </Button>
     </Box>
   );

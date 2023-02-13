@@ -6,14 +6,15 @@ import { useParams } from 'react-router-dom';
 import { BreadcrumbsTest } from '../Breadcrumbs/BreadcrumbsTest';
 import { ModalTestComplete } from '../ModalTestComplete/ModalTestComplete';
 import { TestItem } from '../TestItem/TestItem';
-import { SERVICE_MESSAGES } from '../utils/constants';
 import { useAppSelector } from '../../store/hooks';
 import { addTestReduser } from '../../store/reducers/testsSlice';
 import style from './Test.module.css';
+import { useTranslation } from 'react-i18next';
 
 export const Test = () => {
   const { id } = useParams();
   const allCards = useAppSelector((state) => state.cards.list);
+  const { t } = useTranslation();
   let card = allCards[0];
   allCards.forEach((el) => {
     if (el.id === Number(id)) {
@@ -71,7 +72,7 @@ export const Test = () => {
             sx={{ m: '0 auto', color: '#ffffff', mt: '20px' }}
             type="submit"
           >
-            {SERVICE_MESSAGES.check}
+            {t('check')}
           </Button>
         </FormControl>
       </form>

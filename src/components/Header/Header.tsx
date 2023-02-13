@@ -7,7 +7,6 @@ import {
   IconButton,
   Menu,
   MenuItem,
-  Switch,
   Toolbar,
   Typography,
 } from '@mui/material';
@@ -15,12 +14,13 @@ import { useState, MouseEvent } from 'react';
 import { useDispatch } from 'react-redux/es/exports';
 import { Link as RouterLink } from 'react-router-dom';
 import logo from '../../components/assets/logoq.png';
-// import { useAppSelector } from '../../store/hooks';
 import { switchMode } from '../../store/reducers/darkSlice';
 import SwitchMode from '../SwitchMode/SwitchMode';
 import { useAppDispatch, useAppSelector } from '../../store/hooks';
 import { logout } from '../../store/reducers/userSlice';
 import styles from './Header.module.css';
+import { SelectLang } from './SelectLang/SelectLang';
+import { useTranslation } from 'react-i18next';
 
 export const Header = () => {
   const [anchorElNav, setAnchorElNav] = useState<null | HTMLElement>(null);
@@ -28,6 +28,7 @@ export const Header = () => {
   const dispatchDark = useDispatch();
   const isAuth = useAppSelector((state) => state.users.isAuth);
   const dispatch = useAppDispatch();
+  const { t } = useTranslation();
 
   const handleOpenNavMenu = (event: MouseEvent<HTMLElement>) => {
     setAnchorElNav(event.currentTarget);
@@ -93,7 +94,7 @@ export const Header = () => {
                   to="/"
                   textAlign="center"
                 >
-                  Questions list
+                  {t('QuestionsList')}
                 </Typography>
               </MenuItem>
               <MenuItem onClick={handleCloseNavMenu}>
@@ -103,7 +104,7 @@ export const Header = () => {
                   to="/create-quiz"
                   textAlign="center"
                 >
-                  Create new quiz
+                  {t('Create new quiz')}
                 </Typography>
               </MenuItem>
             </Menu>
@@ -118,7 +119,7 @@ export const Header = () => {
               onClick={handleCloseNavMenu}
               sx={{ my: 2, color: darkMode ? '' : '#292626', display: 'block' }}
             >
-              Questions list
+              {t('QuestionsList')}
             </Button>
             <Button
               component={RouterLink}
@@ -126,42 +127,28 @@ export const Header = () => {
               onClick={handleCloseNavMenu}
               sx={{ my: 2, color: darkMode ? '' : '#292626', display: 'block' }}
             >
-              Create new quiz
+              {t('Create new quiz')}
             </Button>
           </Box>
-          {/* <Switch
-            // checked={toggleDark}
-            onChange={handleModeChange}
-            // name="toggleDark"
-            color="default"
-          /> */}
+          <SelectLang />
           <SwitchMode handleModeChange={handleModeChange} />
           <Box sx={{ flexGrow: 0 }}>
-            {/* <Typography
-              style={{ textDecoration: 'none', color: darkMode ? '#19d2f1' : 'black' }}
-              component={RouterLink}
-              to="/authorization"
-              textAlign="center"
-            >
-              LOG IN
-            </Typography> */}
             {isAuth ? (
               <Button
                 component={RouterLink}
                 to="/"
                 onClick={handleLogOut}
-                sx={{ my: 2, color: '#292626', display: 'block' }}
+                sx={{ my: 2, color: darkMode ? '#ffffff' : '#292626', display: 'block' }}
               >
-                LOG OUT
+                {t('LOG OUT')}
               </Button>
             ) : (
               <Button
                 component={RouterLink}
                 to="/authorization"
-                //onClick={handleCloseNavMenu}
-                sx={{ my: 2, color: '#292626', display: 'block' }}
+                sx={{ my: 2, color: darkMode ? '#ffffff' : '#292626', display: 'block' }}
               >
-                LOG IN
+                {t('LOG IN')}
               </Button>
             )}
           </Box>

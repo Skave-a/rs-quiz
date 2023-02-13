@@ -1,5 +1,4 @@
 import { Box, Button, Container, Paper, TextField, Typography } from '@mui/material';
-import { SERVICE_MESSAGES } from '../utils/constants';
 import ControlPointIcon from '@mui/icons-material/ControlPoint';
 import { CreateQuizBox2, TitleQuizPaper, TitleQuizPaperBtn, TitleQuizPaperDark } from './styles';
 import { ChangeEvent, useState } from 'react';
@@ -8,6 +7,7 @@ import { addCard } from '../../store/reducers/cardSlice';
 import { BlockQuiz } from '../../components/FormQuestion/BlockQuiz';
 import { ITitleQuiz } from '../../components/utils/types';
 import { BtnAddBlock } from '../BtnAddBlock/BtnAddBlock';
+import { useTranslation } from 'react-i18next';
 
 export const TitleQuiz = (props: ITitleQuiz) => {
   const dispatch = useAppDispatch();
@@ -17,6 +17,7 @@ export const TitleQuiz = (props: ITitleQuiz) => {
   const [blockQuestion, setBlockQuestion] = useState(['first']);
   const { block, setBlock } = props;
   const darkMode = useAppSelector((state) => state.darkMode.darkMode);
+  const { t } = useTranslation();
 
   const addNewCard = () =>
     dispatch(
@@ -60,32 +61,32 @@ export const TitleQuiz = (props: ITitleQuiz) => {
     >
       <Paper elevation={3} sx={darkMode ? TitleQuizPaperDark : TitleQuizPaper}>
         <Box>
-          <Typography sx={{ mb: '2px' }}>{SERVICE_MESSAGES.title}</Typography>
+          <Typography sx={{ mb: '2px' }}>{t('title')}</Typography>
           <TextField
             multiline
             rows={2}
-            placeholder={SERVICE_MESSAGES.writeSmth}
+            placeholder={t('writeSmth') as string}
             sx={{ width: '100%' }}
             onChange={(e: ChangeEvent<HTMLInputElement>) => setTitle(e.target.value)}
           />
         </Box>
         <Box>
-          <Typography sx={{ mb: '2px' }}>{SERVICE_MESSAGES.description}</Typography>
+          <Typography sx={{ mb: '2px' }}>{t('description')}</Typography>
           <TextField
             id="outlined-multiline-static"
             multiline
             rows={3}
-            placeholder={SERVICE_MESSAGES.writeSmth}
+            placeholder={t('writeSmth') as string}
             sx={{ width: '100%' }}
             onChange={(e: ChangeEvent<HTMLInputElement>) => setDescription(e.target.value)}
           />
         </Box>
         <Box>
-          <Typography>{SERVICE_MESSAGES.addImage}</Typography>
+          <Typography>{t('addImage')}</Typography>
           <TextField
             multiline
             rows={1}
-            placeholder={SERVICE_MESSAGES.addLink}
+            placeholder={t('addLinks') as string}
             sx={{ width: '100%', mb: '15px' }}
             onChange={(e: ChangeEvent<HTMLInputElement>) => setImg(e.target.value)}
           />
@@ -93,14 +94,14 @@ export const TitleQuiz = (props: ITitleQuiz) => {
         <Button sx={TitleQuizPaperBtn}>
           <ControlPointIcon sx={{ color: 'rgb(255, 110, 3)' }} />
           <Typography sx={{ textTransform: 'uppercase' }} onClick={handleClick}>
-            {SERVICE_MESSAGES.addQBlock}
+            {t('addQBlock')}
           </Typography>
         </Button>
       </Paper>
       <Box sx={CreateQuizBox2}>
         {blocksQuestion}
         <Button variant="contained" sx={{ m: '0 auto', color: '#ffffff' }} onClick={addNewCard}>
-          {SERVICE_MESSAGES.configure}
+          {t('configure')}
         </Button>
       </Box>
       <BtnAddBlock handleClick={handleClick} />
