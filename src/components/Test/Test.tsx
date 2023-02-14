@@ -46,9 +46,6 @@ export const Test = () => {
     <Box className={style.test}>
       <BreadcrumbsTest title={card.title} />
       <Paper className={style.test__card}>
-        {/* <CardMedia component="img" image={card.img} alt="card" height={245} /> */}
-        {/* <Typography variant="h4" className={style.test__title}>{card.title} -
-        </Typography> */}
         <Typography className={style.test__description} sx={{ m: 0 }}>
           {card.desription}
         </Typography>
