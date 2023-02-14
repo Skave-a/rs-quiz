@@ -21,6 +21,7 @@ import { logout } from '../../store/reducers/userSlice';
 import styles from './Header.module.css';
 import { SelectLang } from './SelectLang/SelectLang';
 import { useTranslation } from 'react-i18next';
+import { ModalQuit } from '../ModalQuit/ModalQuit';
 
 export const Header = () => {
   const [anchorElNav, setAnchorElNav] = useState<null | HTMLElement>(null);
@@ -29,6 +30,9 @@ export const Header = () => {
   const isAuth = useAppSelector((state) => state.users.isAuth);
   const dispatch = useAppDispatch();
   const { t } = useTranslation();
+  const [open, setOpen] = useState(false);
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
 
   const handleOpenNavMenu = (event: MouseEvent<HTMLElement>) => {
     setAnchorElNav(event.currentTarget);
@@ -42,7 +46,9 @@ export const Header = () => {
   const handleLogOut = () => {
     dispatch(logout());
   };
-
+  const handleSubmit = () => {
+    handleOpen();
+  };
   return (
     <AppBar
       position="static"
@@ -139,7 +145,7 @@ export const Header = () => {
               <Button
                 component={RouterLink}
                 to="/"
-                onClick={handleLogOut}
+                onClick={handleOpen}
                 sx={{ my: 2, color: darkMode ? '#ffffff' : '#292626', display: 'block' }}
               >
                 {t('LOG OUT')}
@@ -156,6 +162,7 @@ export const Header = () => {
           </Box>
         </Toolbar>
       </Container>
+      <ModalQuit open={open} handleClose={handleClose} />
     </AppBar>
   );
 };
