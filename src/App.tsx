@@ -30,7 +30,7 @@ const theme = extendTheme({
 
 function App() {
   const isAuth = useAppSelector((state) => state.users.isAuth);
-  //const token = useAppSelector((state) => state.users.token);
+  const token = useAppSelector((state) => state.users.token);
   //console.log(`token, isAuth =>>>>>`, token, isAuth);
 
   return (

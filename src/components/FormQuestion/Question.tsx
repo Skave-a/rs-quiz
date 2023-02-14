@@ -6,13 +6,14 @@ import { BlockQuizBtn, BlockQuizPaper } from '../CreateQuiz/styles';
 import { SERVICE_MESSAGES } from '../utils/constants';
 import { Answer } from './Answer';
 import { nanoid } from 'nanoid';
+import { useAppDispatch, useAppSelector } from '../../store/hooks';
+import { removeQuestion, setDescription, setImage } from '../../store/reducers/questionSlice';
 //import { IBlockQuiz } from '../../components/utils/types';
 
 export interface IQuestions {
-  questionTitle: string;
   id: string;
-  setQuestions: Dispatch<SetStateAction<IQuestion[]>>;
-  questions: IQuestion[];
+  //setQuestions: Dispatch<SetStateAction<IQuestion[]>>;
+  //questions: IQuestion[];
   num: number;
 }
 export interface IQuestion {
@@ -28,12 +29,20 @@ export interface IAnswer {
 }
 
 export const Question = (props: IQuestions) => {
-  const { questionTitle, id, setQuestions, questions, num } = props;
-
+  const { id, num } = props;
+  const questions = useAppSelector((state) => state.questions.questions);
+  const dispatch = useAppDispatch();
   const answerEntity = { id: nanoid(), title: '', isCorrect: false };
 
-  const [description, setDescription] = useState('');
-  const [image, setImage] = useState('');
+  const handleChangeDescription = (e: ChangeEvent<HTMLInputElement>) => {
+    dispatch(setDescription(e.target.value));
+  };
+  const handleChangeImage = (e: ChangeEvent<HTMLInputElement>) => {
+    dispatch(setImage(e.target.value));
+  };
+
+  //const [description, setDescription] = useState('');
+  //const [image, setImage] = useState('');
 
   const [answers, setAnswers] = useState([
     { id: nanoid(), title: '', isCorrect: false },
@@ -46,13 +55,13 @@ export const Question = (props: IQuestions) => {
   }
 
   function remove() {
-    setQuestions([...questions.filter((item) => item.id !== id)]);
+    dispatch(removeQuestion(id));
   }
 
-  const descriptionHandler = (e: ChangeEvent<HTMLInputElement>) => setDescription(e.target.value);
-  const imageHandler = (e: ChangeEvent<HTMLInputElement>) => setImage(e.target.value);
+  //const descriptionHandler = (e: ChangeEvent<HTMLInputElement>) => setDescription(e.target.value);
+  //const imageHandler = (e: ChangeEvent<HTMLInputElement>) => setImage(e.target.value);
 
-  useEffect(() => {
+  /* useEffect(() => {
     setQuestions([
       ...questions.map((item) => {
         if (item.id === id) {
@@ -62,7 +71,7 @@ export const Question = (props: IQuestions) => {
       }),
     ]);
   }, [description, image]);
-
+ */
   return (
     <Box>
       <Paper elevation={3} sx={BlockQuizPaper}>
@@ -87,26 +96,18 @@ export const Question = (props: IQuestions) => {
           rows={2}
           placeholder={SERVICE_MESSAGES.writeQuest}
           sx={{ width: '100%', mb: '15px' }}
-          onChange={descriptionHandler}
+          onChange={handleChangeDescription}
         />
         <TextField
           multiline
           rows={1}
           placeholder={SERVICE_MESSAGES.addLink}
           sx={{ width: '100%', mb: '15px' }}
-          onChange={imageHandler}
+          onChange={handleChangeImage}
         />
         <Box sx={{ mb: '20px' }}>
           {answers.map((item) => {
-            return (
-              <Answer
-                questionTitle={questionTitle}
-                key={item.id}
-                answers={answers}
-                setAnswers={setAnswers}
-                id={item.id}
-              />
-            );
+            return <Answer key={item.id} answers={answers} setAnswers={setAnswers} id={item.id} />;
           })}
         </Box>
         <Button sx={BlockQuizBtn} onClick={addAnswer}>

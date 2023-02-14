@@ -1,17 +1,24 @@
 import { createApi } from '@reduxjs/toolkit/query/react';
 import { customFetchBase } from '.';
-import { LoginInput } from '../../components/utils/types';
+import { addQuestion } from '../reducers/questionSlice';
 import { logout, setToken, setIsAuth } from '../reducers/userSlice';
-import { IToken } from './RegistrationApi';
 
-export const authApi = createApi({
-  reducerPath: 'authApi',
+export interface IQuestionCerate {
+  id: string;
+  image: string;
+  description: string;
+  userId: number;
+  questId: number;
+}
+
+export const questionApi = createApi({
+  reducerPath: 'questionApi',
   baseQuery: customFetchBase,
   endpoints: (builder) => ({
-    loginUser: builder.mutation<IToken, LoginInput>({
+    createQuestion: builder.mutation<IQuestionCerate, IQuestionCerate>({
       query(data) {
         return {
-          url: 'auth/login',
+          url: 'users/question',
           method: 'POST',
           body: data,
           //credentials: 'include',
@@ -20,14 +27,16 @@ export const authApi = createApi({
       async onQueryStarted(args, { dispatch, queryFulfilled }) {
         try {
           const { data } = await queryFulfilled;
-          dispatch(setToken(data.token));
-          dispatch(setIsAuth(true));
+          console.log(`response data =>>>>>>>>>>>>>>>>`, data);
+          dispatch(addQuestion(data));
+          /* dispatch(setToken(data));
+          dispatch(setIsAuth(true)); */
         } catch (error) {
           console.log(`error auth =>>>>>>>>>>>>>`, error);
         }
       },
     }),
-    logoutUser: builder.mutation<void, void>({
+    /* logoutUser: builder.mutation<void, void>({
       query() {
         return {
           url: 'auth/logout',
@@ -40,8 +49,8 @@ export const authApi = createApi({
           dispatch(logout());
         } catch (error) {}
       },
-    }),
+    }), */
   }),
 });
 
-export const { useLoginUserMutation, useLogoutUserMutation } = authApi;
+export const { useCreateQuestionMutation } = questionApi;

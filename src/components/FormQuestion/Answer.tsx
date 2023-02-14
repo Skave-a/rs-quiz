@@ -8,14 +8,13 @@ import { SERVICE_MESSAGES } from '../utils/constants';
 import { IAnswer } from './Question';
 
 export interface IAnswers {
-  questionTitle: string;
   answers: IAnswer[];
   setAnswers: Dispatch<SetStateAction<IAnswer[]>>;
   id: string;
 }
 
 export const Answer = (props: IAnswers) => {
-  const { questionTitle, answers, setAnswers, id } = props;
+  const { answers, setAnswers, id } = props;
   const [answerTitle, setAnswerTitle] = useState('');
   const [checked, setChecked] = useState(false);
 
