@@ -130,8 +130,10 @@ export const Header = () => {
               {t('Create new quiz')}
             </Button>
           </Box>
-          <SelectLang />
-          <SwitchMode handleModeChange={handleModeChange} />
+          <Box className={styles.settings}>
+            <SelectLang />
+            <SwitchMode handleModeChange={handleModeChange} />
+          </Box>
           <Box sx={{ flexGrow: 0 }}>
             {isAuth ? (
               <Button

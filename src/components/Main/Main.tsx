@@ -14,7 +14,7 @@ export const Main = () => {
         sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', mb: '72px' }}
       >
         <Typography
-          sx={{ fontSize: '1.8rem', lineHeight: '4rem', color: darkMode ? '#ffffff' : '' }}
+          sx={{ fontSize: '1.8rem', color: darkMode ? '#ffffff' : '' }}
           fontFamily={`'Poppins', sans-serif`}
           fontWeight={700}
         >

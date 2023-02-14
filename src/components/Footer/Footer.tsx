@@ -1,6 +1,10 @@
-import { useAppSelector } from '../../store/hooks';
-import { LINK_TO_THE_COURSE } from '../utils/constants';
+import Box from '@mui/material/Box';
+import Typography from '@mui/material/Typography';
+import Container from '@mui/material/Container';
+import Link from '@mui/material/Link';
 import style from './Footer.module.css';
+import { LINK_TO_THE_COURSE } from '../utils/constants';
+import { useAppSelector } from '../../store/hooks';
 
 export const develops = [
   {
@@ -23,19 +27,32 @@ export const develops = [
 export const Footer = () => {
   const darkMode = useAppSelector((state) => state.darkMode.darkMode);
   return (
-    <div className={darkMode ? style.footerDark : style.footer}>
-      <div className={style.dev}>
+    <Box
+      component="footer"
+      sx={{
+        py: 3,
+        px: 2,
+        mt: 'auto',
+        backgroundColor: darkMode ? '#323a4b' : '#ffffff',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'space-around',
+      }}
+    >
+      <Box component={Box} maxWidth="sm" className={style.dev}>
         {develops.map((develop) => (
-          <div key={develop.id}>
+          <Box key={develop.id}>
             <a className={style.github} href={develop.link} target="_blank" rel="noreferrer">
               {develop.name}
             </a>
-          </div>
+          </Box>
         ))}
-      </div>
-      <a className={style.rss} href={LINK_TO_THE_COURSE} target="_blank" rel="noreferrer">
-        <span className={style.year}>2023</span>
-      </a>
-    </div>
+      </Box>
+      <Link className={style.rss} href={LINK_TO_THE_COURSE} target="_blank" rel="noreferrer">
+        <Typography component="span" className={style.year}>
+          2023
+        </Typography>
+      </Link>
+    </Box>
   );
 };
