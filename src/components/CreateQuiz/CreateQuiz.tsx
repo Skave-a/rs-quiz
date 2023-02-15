@@ -16,29 +16,31 @@ import {
 } from './styles';
 import { useCreateQuestionMutation } from '../../store/api/QuestionApi';
 import { nanoid } from 'nanoid';
-import { addQuestion, setUserId } from '../../store/reducers/questionSlice';
+import { addQuestion } from '../../store/reducers/questionSlice';
+import { useCreateAnswerMutation } from '../../store/api/AnswerApi';
+import { ParseJwt } from '../utils/helpers';
 
 export const CreateQuiz = () => {
   const dispatch = useAppDispatch();
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
   const [img, setImg] = useState('');
-  const token = useAppSelector((state) => state.users.token);
 
   //const [questions, setQuestions] = useState<IQuestionCerate[]>([]); //questionApi
   const [createQuestion, { isLoading, isError, error, isSuccess }] = useCreateQuestionMutation();
+  const [createAnswer, { isSuccess: isCreated }] = useCreateAnswerMutation();
+
   //const token = useAppSelector((state) => state.users.token);
   const questions = useAppSelector((state) => state.questions.questions);
   const question = useAppSelector((state) => state.questions.question);
-  console.log(`questions ===>>>>>>`, questions);
-  /* const questionEntity = {
-    id: nanoid(),
-    image: img,
-    description: description,
-    userId: ParseJwt() as number,
-    questId: questions.length,
-  }; */
-  const saveQuiz = async () =>
+  const answers = useAppSelector((state) => state.answers.answers);
+  //const token = useAppSelector((state) => state.users.token);
+  const userId = ParseJwt();
+
+  //console.log(`questions local ===>>>>>>`, questions);
+  // console.log(`isSuccessQuestion ===>>>>>>`, isSuccess);
+
+  const saveQuiz = async () => {
     dispatch(
       addQuiz({
         title,
@@ -50,23 +52,40 @@ export const CreateQuiz = () => {
         passedOn: 0,
       })
     );
+    await createQuestion(questions);
+    await createAnswer(answers);
+  };
 
-  function ParseJwt() {
+  /* function ParseJwt() {
     if (token) {
       const base64Url = token.split('.')[1];
       const base64 = base64Url.replace('-', '+').replace('_', '/');
-      /* console.log(
-        `test userId =>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>.`,
-        Number(JSON.parse(window.atob(base64)).id)
-      ); */
-      /* dispatch(setUserId(Number(JSON.parse(window.atob(base64)).id))); */
+
       return Number(JSON.parse(window.atob(base64)).id);
     }
     return 1;
+  } */
+
+  /* const writeQuestions = () => {
+    dispatch(addQuestion({ ...question, userId }));
+  }; */
+
+  if (!questions.length) {
+    dispatch(addQuestion({ ...question, userId }));
   }
 
+  //useEffect(() => {
+  //setQuestions([...questions, { ...question, userId }]);
+
+  //}, []);
+
   //Get new empty question in server for printing in render page
-  useEffect(() => {
+  /*  useEffect(() => {
+    const userId = ParseJwt();
+    if (!questions.length) {
+      dispatch(addQuestion({ ...question, userId }));
+    }
+
     /* const fetchData = async () => {
       const isRepeated = questions.includes(question.id);
 
@@ -74,14 +93,14 @@ export const CreateQuiz = () => {
 
       await createQuestion({ ...question, userId });
     };
-    fetchData().catch(console.error); */
-  }, []);
+    fetchData().catch(console.error); 
+  }, []); */
 
   /* function addQuestion() {
     setQuestions([...questions, questionEntity]);
   } */
   const addNewQuestion = () => {
-    /* dispatch(addQuestion({ ...questionEntity })); */
+    dispatch(addQuestion({ ...question, userId, id: nanoid() }));
   };
 
   return (
@@ -151,7 +170,7 @@ export const CreateQuiz = () => {
                   id={item.id}
                   //setQuestions={setQuestions}
                   //questions={questions}
-                  num={i + 1}
+                  index={i + 1}
                 />
               );
             })}

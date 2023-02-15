@@ -3,41 +3,52 @@ import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline';
 import DeleteIcon from '@mui/icons-material/Delete';
 import { Box, Checkbox, Fade, IconButton, TextField, Tooltip, Typography } from '@mui/material';
 import { ChangeEvent, Dispatch, SetStateAction, useEffect, useState } from 'react';
+import { useAppDispatch, useAppSelector } from '../../store/hooks';
+import { removeAnswer, setAnswers } from '../../store/reducers/answerSlice';
 import { ItemBlockQuizBox } from '../CreateQuiz/styles';
 import { SERVICE_MESSAGES } from '../utils/constants';
 import { IAnswer } from './Question';
 
 export interface IAnswers {
-  answers: IAnswer[];
-  setAnswers: Dispatch<SetStateAction<IAnswer[]>>;
+  /* answers: IAnswer[];
+  setAnswers: Dispatch<SetStateAction<IAnswer[]>>;*/
   id: string;
 }
 
 export const Answer = (props: IAnswers) => {
-  const { answers, setAnswers, id } = props;
+  const { /* answers, setAnswers, */ id } = props;
   const [answerTitle, setAnswerTitle] = useState('');
   const [checked, setChecked] = useState(false);
+  const answers = useAppSelector((state) => state.answers.answers);
+  const dispatch = useAppDispatch();
 
   //console.log(`checked`, checked);
 
-  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setChecked(event.target.checked);
+  const isCorrectHandler = (e: ChangeEvent<HTMLInputElement>) => {
+    setChecked(e.target.checked);
+  };
+  const setTitleHandler = (e: ChangeEvent<HTMLInputElement>) => {
+    setAnswerTitle(e.target.value);
   };
 
   function remove() {
-    setAnswers([...answers.filter((item) => item.id !== id)]);
+    dispatch(removeAnswer(id));
   }
 
   useEffect(() => {
-    setAnswers([
-      ...answers.map((item) => {
-        if (item.id === id) {
-          return { ...item, title: answerTitle, isCorrect: checked };
-        }
-        return item;
-      }),
-    ]);
-  }, [answerTitle]);
+    if (answers.length) {
+      dispatch(
+        setAnswers([
+          ...answers.map((item) => {
+            if (item.id === id) {
+              return { ...item, title: answerTitle, isCorrect: checked };
+            }
+            return item;
+          }),
+        ])
+      );
+    }
+  }, [answerTitle, checked]);
 
   return (
     <Box sx={ItemBlockQuizBox}>
@@ -45,7 +56,7 @@ export const Answer = (props: IAnswers) => {
         multiline
         placeholder={SERVICE_MESSAGES.answer}
         sx={{ width: '100%' }}
-        onChange={(e: ChangeEvent<HTMLInputElement>) => setAnswerTitle(e.target.value)}
+        onChange={setTitleHandler}
         //name={questionTitle}
       />
       <Tooltip
@@ -58,7 +69,7 @@ export const Answer = (props: IAnswers) => {
         placement="top"
       >
         <Checkbox
-          onChange={handleChange}
+          onChange={isCorrectHandler}
           color="success"
           icon={<CheckCircleOutlineIcon />}
           checkedIcon={<CheckCircleIcon />}

@@ -8,7 +8,6 @@ export interface IQuestion {
   image: string;
   description: string;
   userId: number;
-  questId: number;
 }
 
 interface IQuestionState {
@@ -24,7 +23,6 @@ const initialState: IQuestionState = {
     description: '',
     image: '',
     userId: 0,
-    questId: 1,
   },
 };
 
@@ -34,7 +32,14 @@ export const questionSlice = createSlice({
   reducers: {
     resetQuestState: () => initialState,
     addQuestion: (state, action: PayloadAction<IQuestion>) => {
+      //console.log(`payload +>>>>>>>>>>>>`, action.payload);
       state.questions.push(action.payload);
+      /* if (
+        state.questions.length !== 0 &&
+        !state.questions.some((item) => item.id === action.payload.id)
+      ) {
+        state.questions.push(action.payload);
+      } */
     },
     removeQuestion: (state, action: PayloadAction<string>) => {
       //[...questions.filter((item) => item.id !== id)];
@@ -49,10 +54,13 @@ export const questionSlice = createSlice({
     setUserId: (state, action) => {
       state.question.userId = action.payload;
     },
+    setQuestions: (state, action) => {
+      state.questions = action.payload;
+    },
   },
 });
 
 export default questionSlice.reducer;
 
-export const { addQuestion, removeQuestion, setDescription, setImage, setUserId } =
+export const { addQuestion, removeQuestion, setDescription, setImage, setUserId, setQuestions } =
   questionSlice.actions;

@@ -1,23 +1,25 @@
 import { createApi } from '@reduxjs/toolkit/query/react';
 import { customFetchBase } from '.';
+import { setAnswers } from '../reducers/answerSlice';
 import { addQuestion, setQuestions } from '../reducers/questionSlice';
 import { logout, setToken, setIsAuth } from '../reducers/userSlice';
 
-export interface IQuestionCerate {
+export interface IAnswerCreate {
   id: string;
-  image: string;
-  description: string;
+  title: string;
+  isCorrect: boolean;
   userId: number;
+  questionId: number;
 }
 
-export const questionApi = createApi({
-  reducerPath: 'questionApi',
+export const answerApi = createApi({
+  reducerPath: 'answerApi',
   baseQuery: customFetchBase,
   endpoints: (builder) => ({
-    createQuestion: builder.mutation<IQuestionCerate[], IQuestionCerate[]>({
+    createAnswer: builder.mutation<IAnswerCreate[], IAnswerCreate[]>({
       query(data) {
         return {
-          url: 'questions/create',
+          url: 'answers/create',
           method: 'POST',
           body: data,
           //credentials: 'include',
@@ -26,15 +28,12 @@ export const questionApi = createApi({
       async onQueryStarted(args, { dispatch, queryFulfilled }) {
         try {
           const { data } = await queryFulfilled;
-          console.log(`response questions =>>>>>>>>>>>>>>>>`, data);
+          console.log(`response answer =>>>>>>>>>>>>>>>>`, data);
           if (data) {
-            //dispatch(setQuestions(data));
+            //dispatch(setAnswers(data));
           }
-
-          /* dispatch(setToken(data));
-          dispatch(setIsAuth(true)); */
         } catch (error) {
-          console.log(`error question response:`, error);
+          console.log(`error answer response:`, error);
         }
       },
     }),
@@ -55,4 +54,4 @@ export const questionApi = createApi({
   }),
 });
 
-export const { useCreateQuestionMutation } = questionApi;
+export const { useCreateAnswerMutation } = answerApi;
