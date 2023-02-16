@@ -13,12 +13,14 @@ import {
   CreateQuizCreate,
   TitleQuizPaper,
   TitleQuizPaperBtn,
+  CreateQuizCreateDark,
 } from './styles';
 import { useCreateQuestionMutation, useGetQuestionsMutation } from '../../store/api/QuestionApi';
 import { addQuestion } from '../../store/reducers/questionSlice';
 import { useCreateAnswerMutation, useGetAnswersMutation } from '../../store/api/AnswerApi';
 import { ParseJwt } from '../utils/helpers';
 import { addAnswer } from '../../store/reducers/answerSlice';
+import { useTranslation } from 'react-i18next';
 
 export const CreateQuiz = () => {
   const dispatch = useAppDispatch();
@@ -36,12 +38,14 @@ export const CreateQuiz = () => {
   const questions = useAppSelector((state) => state.questions.questions);
   const question = useAppSelector((state) => state.questions.question);
   const answers = useAppSelector((state) => state.answers.answers);
-  //const token = useAppSelector((state) => state.users.token);
+
   const userId = ParseJwt();
+
+  const { t } = useTranslation();
+  const darkMode = useAppSelector((state) => state.darkMode.darkMode);
 
   console.log(`questions  ===>>>>>>`, questions);
   console.log(`answers  ===>>>>>>`, answers);
-  // console.log(`isSuccessQuestion ===>>>>>>`, isSuccess);
 
   const saveQuiz = async () => {
     dispatch(
@@ -81,7 +85,9 @@ export const CreateQuiz = () => {
     <Box sx={{ pb: '150px' }}>
       <Box sx={{ display: 'flex', alignItems: 'center', gap: '10px', mb: '50px' }}>
         <NoteAddOutlinedIcon fontSize="large" />
-        <Typography sx={CreateQuizCreate}>{SERVICE_MESSAGES.createNew}</Typography>
+        <Typography sx={darkMode ? CreateQuizCreateDark : CreateQuizCreate}>
+          {t('createNew')}
+        </Typography>
       </Box>
       <Box sx={CreateQuizBox}>
         <Container

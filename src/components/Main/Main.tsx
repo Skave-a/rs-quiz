@@ -1,26 +1,28 @@
 import { useAppSelector } from '../../store/hooks';
 import { Box, Button, Grid, Link, Typography } from '@mui/material';
 import { QuizCard } from '../QuizCard/QuizCard';
-import { SERVICE_MESSAGES } from '../utils/constants';
 import { Link as RouterLink } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 
 export const Main = () => {
   const allCards = useAppSelector((state) => state.cards.list);
+  const { t } = useTranslation();
+  const darkMode = useAppSelector((state) => state.darkMode.darkMode);
   return (
     <Box>
       <Box
         sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', mb: '72px' }}
       >
         <Typography
-          sx={{ fontSize: '1.8rem', lineHeight: '4rem' }}
+          sx={{ fontSize: '1.8rem', color: darkMode ? '#ffffff' : '' }}
           fontFamily={`'Poppins', sans-serif`}
           fontWeight={700}
         >
-          {SERVICE_MESSAGES.myQuizzes}
+          {t('myQuizzes')}
         </Typography>
         <Link component={RouterLink} to="/create-quiz" underline="none">
           <Button variant="contained" sx={{ color: '#fff', letterSpacing: '.1em' }}>
-            {SERVICE_MESSAGES.createNew}
+            {t('createNew')}
           </Button>
         </Link>
       </Box>

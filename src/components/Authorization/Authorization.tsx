@@ -16,14 +16,18 @@ import {
 } from '@mui/material';
 
 import { Link as RouterLink } from 'react-router-dom';
+import { useAppSelector } from '../../store/hooks';
 import { useLoginUserMutation } from '../../store/api/AuthApi';
+import { useTranslation } from 'react-i18next';
+import { FormEvent } from 'react';
 
-function Copyright(props: any) {
+function Copyright() {
+  const { t } = useTranslation();
   return (
-    <Typography variant="body2" color="text.secondary" align="center" {...props}>
+    <Typography variant="body2" color="text.secondary" align="center" sx={{ mt: 5 }}>
       {'Copyright © '}
       <Link color="inherit" variant="body2" component={RouterLink} to="/">
-        Quiz-app
+        {t('Quiz-app')}
       </Link>{' '}
       {new Date().getFullYear()}
       {'.'}
@@ -34,18 +38,18 @@ function Copyright(props: any) {
 const theme = createTheme();
 
 export default function Authorization() {
+  const darkMode = useAppSelector((state) => state.darkMode.darkMode);
   const [loginUser, { isLoading, isError, error, isSuccess }] = useLoginUserMutation();
 
-  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
     const data = new FormData(event.currentTarget);
     const email = data.get('email') as string;
     const password = data.get('password') as string;
-    //const firstName = data.get('firstName') as string;
-    //const lastName = data.get('lastName');
     await loginUser({ email, password });
   };
+  const { t } = useTranslation();
 
   return (
     <ThemeProvider theme={theme}>
@@ -65,7 +69,16 @@ export default function Authorization() {
             backgroundPosition: 'center',
           }}
         />
-        <Grid item xs={12} sm={8} md={5} component={Paper} elevation={6} square>
+        <Grid
+          item
+          xs={12}
+          sm={8}
+          md={5}
+          component={Paper}
+          elevation={6}
+          square
+          sx={{ backgroundColor: darkMode ? '#323a4b' : '' }}
+        >
           <Box
             sx={{
               my: 8,
@@ -79,7 +92,7 @@ export default function Authorization() {
               <LockOutlinedIcon />
             </Avatar>
             <Typography component="h1" variant="h5">
-              Sign in
+              {t('Sign in')}
             </Typography>
             <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 1 }}>
               <TextField
@@ -87,7 +100,7 @@ export default function Authorization() {
                 required
                 fullWidth
                 id="email"
-                label="Email Address"
+                label={t('Email Address')}
                 name="email"
                 autoComplete="email"
                 autoFocus
@@ -97,14 +110,14 @@ export default function Authorization() {
                 required
                 fullWidth
                 name="password"
-                label="Password"
+                label={t('Password')}
                 type="password"
                 id="password"
                 autoComplete="current-password"
               />
               <FormControlLabel
                 control={<Checkbox value="remember" color="primary" />}
-                label="Remember me"
+                label={t('Remember me')}
               />
               <Button
                 type="submit"
@@ -112,21 +125,21 @@ export default function Authorization() {
                 variant="contained"
                 sx={{ mt: 3, mb: 2, color: '#fff' }}
               >
-                Sign In
+                {t('Sign in')}
               </Button>
               <Grid container>
                 <Grid item xs>
                   <Link href="#" variant="body2">
-                    Forgot password?
+                    {t('Forgot password?')}
                   </Link>
                 </Grid>
                 <Grid item>
                   <Link variant="body2" component={RouterLink} to="/registration">
-                    {"Don't have an account? Sign Up"}
+                    {t("Don't have an account? Sign Up")}
                   </Link>
                 </Grid>
               </Grid>
-              <Copyright sx={{ mt: 5 }} />
+              <Copyright />
             </Box>
           </Box>
         </Grid>

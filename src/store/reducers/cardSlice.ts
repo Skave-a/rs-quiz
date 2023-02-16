@@ -15,6 +15,7 @@ export type Quiz = {
   date: string;
   description: string;
   questionsArr: IQuestion[];
+  answers?: [];
   passed: boolean;
   passedOn: number;
 };

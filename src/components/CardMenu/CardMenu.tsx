@@ -7,6 +7,7 @@ import { cardMenuText } from '../utils/constants';
 import { useDispatch } from 'react-redux';
 import { ICardMenu } from '../utils/types';
 import { removeQuiz } from '../../store/reducers/cardSlice';
+import { useTranslation } from 'react-i18next';
 
 export const CardMenu = (props: ICardMenu) => {
   const { card } = props;
@@ -25,6 +26,7 @@ export const CardMenu = (props: ICardMenu) => {
     handleClose(event);
     dispatch(removeQuiz(card));
   }
+  const { t } = useTranslation();
   return (
     <Box>
       <Box>
@@ -80,13 +82,13 @@ export const CardMenu = (props: ICardMenu) => {
           <ListItemIcon>
             <EditIcon fontSize="small" />
           </ListItemIcon>
-          {cardMenuText.edit}
+          {t('edit')}
         </MenuItem>
         <MenuItem onClick={handleRemove}>
           <ListItemIcon>
             <DeleteForeverIcon fontSize="small" />
           </ListItemIcon>
-          {cardMenuText.delete}
+          {t('delete')}
         </MenuItem>
       </Menu>
     </Box>

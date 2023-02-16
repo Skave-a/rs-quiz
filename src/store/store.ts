@@ -2,6 +2,7 @@ import { configureStore, ThunkAction, Action } from '@reduxjs/toolkit';
 import counterReducer from './reducers/counterSlice';
 import cardsReducer from './reducers/cardSlice';
 import testsReducer from './reducers/testsSlice';
+import switchMode from './reducers/darkSlice';
 import usersReducer from './reducers/userSlice';
 import questionsReducer from './reducers/questionSlice';
 import answerReducer from './reducers/answerSlice';
@@ -15,6 +16,7 @@ export const store = configureStore({
     counter: counterReducer,
     cards: cardsReducer,
     tests: testsReducer,
+    darkMode: switchMode,
     users: usersReducer,
     questions: questionsReducer,
     answers: answerReducer,
