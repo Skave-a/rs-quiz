@@ -116,6 +116,14 @@ export const Header = () => {
             >
               Create new quiz
             </Button>
+            <Button
+              component={RouterLink}
+              to="/profile"
+              onClick={handleCloseNavMenu}
+              sx={{ my: 2, color: '#292626', display: 'block' }}
+            >
+              Profile
+            </Button>
           </Box>
           <Box sx={{ flexGrow: 0 }}>
             {isAuth ? (

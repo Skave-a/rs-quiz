@@ -1,5 +1,5 @@
 import { Container } from '@mui/material';
-import { BrowserRouter, Navigate, Outlet, Route, Routes, useLocation } from 'react-router-dom';
+import { BrowserRouter, Navigate, Outlet, Route, Routes } from 'react-router-dom';
 import './App.css';
 import { Chat } from './components/Chat/Chat';
 import { Footer } from './components/Footer/Footer';
@@ -16,6 +16,7 @@ import Page404 from './components/Page404/Page404';
 import Registration from './components/Registratiion/Registartion';
 import { Test } from './components/Test/Test';
 import { useAppSelector } from './store/hooks';
+import Profile from './components/Profile/Profile';
 
 const theme = extendTheme({
   colorSchemes: {
@@ -55,6 +56,7 @@ function App() {
                 element={isAuth ? <Navigate to="/" replace /> : <Registration />}
               />
               <Route path="/chat" element={<Chat />} />
+              <Route path="/profile" element={<Profile />} />
               <Route path="/create-quiz" element={<CreateQuiz />} />
               <Route path="/test/:id" element={<Test />} />
               <Route path="*" element={<Page404 />} />

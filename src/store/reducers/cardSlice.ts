@@ -15,6 +15,7 @@ export type CardData = {
   date: string;
   desription: string;
   questionsArr: IQuestion[];
+  answers?: [];
   passed: boolean;
   passedOn: number;
 };
