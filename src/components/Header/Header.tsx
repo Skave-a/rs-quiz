@@ -135,6 +135,14 @@ export const Header = () => {
             >
               {t('Create new quiz')}
             </Button>
+            <Button
+              component={RouterLink}
+              to="/profile"
+              onClick={handleCloseNavMenu}
+              sx={{ my: 2, color: '#292626', display: 'block' }}
+            >
+              Profile
+            </Button>
           </Box>
           <Box className={styles.settings}>
             <SelectLang />

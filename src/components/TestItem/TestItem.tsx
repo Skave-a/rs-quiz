@@ -32,8 +32,8 @@ export const TestItem = (props: ItestItem) => {
           flexDirection: 'column',
           gap: '20px',
           padding: '20px',
-          maxWidth: question.img.length ? '350px' : '100%',
-          m: question.img.length ? '0 auto' : '0',
+          maxWidth: question.imgQuestion.length ? '350px' : '100%',
+          m: question.imgQuestion.length ? '0 auto' : '0',
         }}
       >
         <Typography variant="h4">{question.question}</Typography>
@@ -49,10 +49,10 @@ export const TestItem = (props: ItestItem) => {
           ))}
         </RadioGroup>
       </Box>
-      {question.img.length ? (
+      {question.imgQuestion.length ? (
         <CardMedia
           component="img"
-          image={question.img}
+          image={question.imgQuestion}
           alt="card"
           height={245}
           sx={{ objectFit: 'contain', maxWidth: '295px', m: '0 auto' }}

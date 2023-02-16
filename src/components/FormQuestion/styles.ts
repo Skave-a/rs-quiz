@@ -17,6 +17,17 @@ export const BlockQuizBtn = {
   gap: '10px',
 };
 
+export const BtnRemoveQuest = {
+  position: 'absolute',
+  right: '5%',
+};
+export const BlockAnswer = {
+  mb: '20px',
+  display: 'flex',
+  justifyContent: 'space-between',
+  alignItems: 'center',
+};
+
 export const CreateQuizCreate = {
   fontSize: '30px',
   letterSpacing: '-0.05em',
@@ -45,16 +56,15 @@ export const CreateQuizBox = {
 
 export const CreateQuizBox2 = {
   display: 'flex',
-  flexDirection: 'column',
   gap: '20px',
   margin: '0 auto',
+  position: 'relative',
 };
 
 export const ItemBlockQuizBox = {
   display: 'flex',
   alignItems: 'center',
   gap: '10px',
-  mb: '20px',
 };
 
 export const TitleQuizPaper = {
