@@ -4,6 +4,13 @@ export const BlockQuizPaper = {
   margin: '0 auto',
 };
 
+export const BlockQuizPaperDark = {
+  padding: '1.2rem 2.4rem',
+  maxWidth: '400px',
+  margin: '0 auto',
+  background: '#323a4b',
+};
+
 export const BlockQuizBtn = {
   display: 'flex',
   alignItems: 'center',
@@ -26,6 +33,15 @@ export const CreateQuizCreate = {
   letterSpacing: '-0.05em',
   lineHeight: '1em',
   color: '#424242',
+  fontFamily: `'Poppins',sans-serif`,
+  fontWeight: '700',
+};
+
+export const CreateQuizCreateDark = {
+  fontSize: '30px',
+  letterSpacing: '-0.05em',
+  lineHeight: '1em',
+  color: '#ffffff',
   fontFamily: `'Poppins',sans-serif`,
   fontWeight: '700',
 };
@@ -58,6 +74,16 @@ export const TitleQuizPaper = {
   display: 'flex',
   flexDirection: 'column',
   gap: '15px',
+};
+
+export const TitleQuizPaperDark = {
+  padding: '1.2rem 2.4rem',
+  maxWidth: '300px',
+  margin: '0 auto',
+  display: 'flex',
+  flexDirection: 'column',
+  gap: '15px',
+  background: '#323a4b',
 };
 
 export const TitleQuizPaperBtn = {

@@ -16,10 +16,11 @@ import {
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import { Link as RouterLink } from 'react-router-dom';
 import { useRegistrationUserMutation } from '../../store/api/RegistrationApi';
+import { useTranslation } from 'react-i18next';
 
-function Copyright(props: any) {
+function Copyright() {
   return (
-    <Typography variant="body2" color="text.secondary" align="center" {...props}>
+    <Typography variant="body2" color="text.secondary" align="center" sx={{ mt: 5 }}>
       {'Copyright © '}
       <Link color="inherit" variant="body2" component={RouterLink} to="/">
         Quiz-app
@@ -41,10 +42,9 @@ export default function Registration() {
     const data = new FormData(event.currentTarget);
     const email = data.get('email') as string;
     const password = data.get('password') as string;
-    //const firstName = data.get('firstName') as string;
-    //const lastName = data.get('lastName');
     await registrationUser({ email, password });
   };
+  const { t } = useTranslation();
 
   return (
     <ThemeProvider theme={theme}>
@@ -62,7 +62,7 @@ export default function Registration() {
             <LockOutlinedIcon />
           </Avatar>
           <Typography component="h1" variant="h5">
-            Sign up
+            {t('Sign Up')}
           </Typography>
           <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 3 }}>
             <Grid container spacing={2}>
@@ -73,7 +73,7 @@ export default function Registration() {
                   required
                   fullWidth
                   id="firstName"
-                  label="First Name"
+                  label={t('First Name')}
                   autoFocus
                 />
               </Grid>
@@ -82,7 +82,7 @@ export default function Registration() {
                   required
                   fullWidth
                   id="lastName"
-                  label="Last Name"
+                  label={t('Last Name')}
                   name="lastName"
                   autoComplete="family-name"
                 />
@@ -92,7 +92,7 @@ export default function Registration() {
                   required
                   fullWidth
                   id="email"
-                  label="Email Address"
+                  label={t('Email Address')}
                   name="email"
                   autoComplete="email"
                 />
@@ -102,7 +102,7 @@ export default function Registration() {
                   required
                   fullWidth
                   name="password"
-                  label="Password"
+                  label={t('Password')}
                   type="password"
                   id="password"
                   autoComplete="new-password"
@@ -111,7 +111,7 @@ export default function Registration() {
               <Grid item xs={12}>
                 <FormControlLabel
                   control={<Checkbox value="allowExtraEmails" color="primary" />}
-                  label="I want to receive inspiration, marketing promotions and updates via email."
+                  label={t('receive')}
                 />
               </Grid>
             </Grid>
@@ -121,18 +121,18 @@ export default function Registration() {
               variant="contained"
               sx={{ mt: 3, mb: 2, color: '#fff' }}
             >
-              Sign Up
+              {t('Sign Up')}
             </Button>
             <Grid container justifyContent="flex-end">
               <Grid item>
                 <Link variant="body2" component={RouterLink} to="/authorization">
-                  Already have an account? Sign in
+                  {t('Already have an account? Sign in')}
                 </Link>
               </Grid>
             </Grid>
           </Box>
         </Box>
-        <Copyright sx={{ mt: 5 }} />
+        <Copyright />
       </Container>
     </ThemeProvider>
   );

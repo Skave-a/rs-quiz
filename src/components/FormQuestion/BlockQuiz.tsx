@@ -1,27 +1,43 @@
-import { Box, Button, Paper, TextField, Typography } from '@mui/material';
-import { SERVICE_MESSAGES } from '../utils/constants';
+import { Box, Button, IconButton, Paper, TextField, Typography } from '@mui/material';
 import ControlPointIcon from '@mui/icons-material/ControlPoint';
 import { ItemBlockQuiz } from './ItemBlockQuiz';
-import style from './FormQuestion.module.css';
-import { BlockQuizBtn, BlockQuizPaper, BlockAnswer, ItemBlockQuizBox } from './styles';
+import { BlockQuizBtn, BlockQuizPaper, BlockQuizPaperDark } from './styles';
+import { useState } from 'react';
+import CancelIcon from '@mui/icons-material/Cancel';
 import { IBlockQuiz } from '../../components/utils/types';
-import { useFieldArray, useFormContext, useForm } from 'react-hook-form';
-import { RNDstring } from './RNDstring';
+import { useAppSelector } from '../../store/hooks';
+import { useTranslation } from 'react-i18next';
 
 export const BlockQuiz = (props: IBlockQuiz) => {
-  const { name, num } = props;
-  const methods = useFormContext();
-  const { getValues } = methods;
-  const formData = getValues(['questions', 'imgQuestion', 'questionsArr.answers']);
-  console.log(formData);
-  const { fields, append, remove } = useFieldArray({
-    name: 'answers',
+  const { name, id, setBlock, block, num } = props;
+  const [blockQuestion, setBlockQuestion] = useState([0, 1]);
+  const darkMode = useAppSelector((state) => state.darkMode.darkMode);
+  const { t } = useTranslation();
+
+  const blocksQ = blockQuestion.map((el) => {
+    return (
+      <ItemBlockQuiz
+        name={name}
+        key={el}
+        blockQuestion={blockQuestion}
+        setBlockQuestion={setBlockQuestion}
+        id={el}
+      />
+    );
   });
-  const rndStr = RNDstring();
+
+  function handleClick() {
+    setBlockQuestion([...blockQuestion, Number(new Date())]);
+  }
+
+  function remove() {
+    const indx = block.indexOf(id);
+    setBlock([...block.slice(0, indx), ...block.slice(indx + 1)]);
+  }
 
   return (
     <Box>
-      <Paper elevation={3} sx={BlockQuizPaper}>
+      <Paper elevation={3} sx={darkMode ? BlockQuizPaperDark : BlockQuizPaper}>
         <Box
           sx={{
             display: 'flex',
@@ -31,54 +47,29 @@ export const BlockQuiz = (props: IBlockQuiz) => {
           }}
         >
           <Typography fontSize={'30px'}>
-            {SERVICE_MESSAGES.questionNum}
+            {t('questionNum')}
             {num}
           </Typography>
+          <IconButton color="warning" onClick={remove}>
+            <CancelIcon />
+          </IconButton>
         </Box>
         <TextField
           multiline
           rows={2}
-          placeholder={SERVICE_MESSAGES.writeQuest}
+          placeholder={t('writeQuest') as string}
           sx={{ width: '100%', mb: '15px' }}
-          {...methods.register('questionsArr.questions')}
         />
         <TextField
           multiline
           rows={1}
-          placeholder={SERVICE_MESSAGES.addLink}
+          placeholder={t('addLink') as string}
           sx={{ width: '100%', mb: '15px' }}
-          {...methods.register('questionsArr.imgQuestion')}
         />
-
-        {fields.map((field, index) => {
-          return (
-            <Box sx={BlockAnswer} key={field.id}>
-              <Box sx={ItemBlockQuizBox}>
-                <TextField
-                  multiline
-                  placeholder={SERVICE_MESSAGES.answer}
-                  sx={{ width: '100%' }}
-                  {...methods.register('questionsArr.answers')}
-                  name={name}
-                />
-                <input type="radio" name={name} id={rndStr} className={style.inputQuestion} />
-                <label htmlFor={rndStr}></label>
-              </Box>
-              <Button
-                onClick={() => remove(index)}
-                variant="contained"
-                color="error"
-                sx={{ fontSize: '12px', textTransform: 'capitalize' }}
-              >
-                Remove
-              </Button>
-            </Box>
-          );
-        })}
-
-        <Button sx={BlockQuizBtn} type="submit" onClick={append}>
+        <Box sx={{ mb: '20px' }}>{blocksQ}</Box>
+        <Button sx={BlockQuizBtn} onClick={handleClick}>
           <ControlPointIcon sx={{ color: 'rgb(255, 110, 3)' }} />
-          <Typography sx={{ textTransform: 'uppercase' }}>{SERVICE_MESSAGES.addAnswer}</Typography>
+          <Typography sx={{ textTransform: 'uppercase' }}>{t('addAnswer')}</Typography>
         </Button>
       </Paper>
     </Box>

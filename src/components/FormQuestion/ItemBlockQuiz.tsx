@@ -1,27 +1,43 @@
-import { Box, TextField } from '@mui/material';
-import { SERVICE_MESSAGES } from '../utils/constants';
+import { Box, Button, TextField } from '@mui/material';
 import { ItemBlockQuizBox } from './styles';
+import { ChangeEvent, useState } from 'react';
 import style from './FormQuestion.module.css';
 import { RNDstring } from './RNDstring';
 import { IItemBlockQuiz } from '../../components/utils/types';
-import { useFormContext } from 'react-hook-form';
+import CloseIcon from '@mui/icons-material/Close';
+import { useTranslation } from 'react-i18next';
 
 export const ItemBlockQuiz = (props: IItemBlockQuiz) => {
-  const methods = useFormContext();
-  const { name } = props;
+  const { name, setBlockQuestion, blockQuestion, id } = props;
+  const [answers, setAnswers] = useState('');
+  const indx = blockQuestion.indexOf(id);
   const rndStr = RNDstring();
+  const { t } = useTranslation();
+
+  function remove() {
+    setBlockQuestion([...blockQuestion.slice(0, indx), ...blockQuestion.slice(indx + 1)]);
+  }
 
   return (
     <Box sx={ItemBlockQuizBox}>
       <TextField
         multiline
-        placeholder={SERVICE_MESSAGES.answer}
+        placeholder={t('answer') as string}
         sx={{ width: '100%' }}
-        // {...methods.register('questionsArr.answers')}
+        onChange={(e: ChangeEvent<HTMLInputElement>) => setAnswers(e.target.value)}
         name={name}
       />
       <input type="radio" name={name} id={rndStr} className={style.inputQuestion} />
       <label htmlFor={rndStr}></label>
+      <Button
+        onClick={remove}
+        variant="contained"
+        color="error"
+        sx={{ fontSize: '12px', textTransform: 'capitalize' }}
+      >
+        <CloseIcon fontSize="small" />
+        {t('Remove')}
+      </Button>
     </Box>
   );
 };

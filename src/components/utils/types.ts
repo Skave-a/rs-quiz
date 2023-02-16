@@ -57,3 +57,6 @@ export interface DataInput {
 export interface NamesInput {
   [fieldName: string]: string;
 }
+export interface ISwitchMode {
+  handleModeChange: () => void;
+}

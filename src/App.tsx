@@ -1,11 +1,9 @@
-import { Container } from '@mui/material';
-import { BrowserRouter, Navigate, Outlet, Route, Routes } from 'react-router-dom';
+import { Box, Container } from '@mui/material';
+import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom';
 import './App.css';
 import { Chat } from './components/Chat/Chat';
-import { Footer } from './components/Footer/Footer';
 import { Header } from './components/Header/Header';
 import { Main } from './components/Main/Main';
-
 import {
   Experimental_CssVarsProvider as CssVarsProvider,
   experimental_extendTheme as extendTheme,
@@ -16,29 +14,25 @@ import Page404 from './components/Page404/Page404';
 import Registration from './components/Registratiion/Registartion';
 import { Test } from './components/Test/Test';
 import { useAppSelector } from './store/hooks';
-import Profile from './components/Profile/Profile';
-
-const theme = extendTheme({
-  colorSchemes: {
-    light: {
-      palette: {
-        primary: {
-          main: '#19d2f1',
-        },
-      },
-    },
-  },
-});
 
 function App() {
   const isAuth = useAppSelector((state) => state.users.isAuth);
   const token = useAppSelector((state) => state.users.token);
   console.log(`token, isAuth =>>>>>`, token, isAuth);
-
-  const PrivateRoute = () => {
-    return isAuth ? <Outlet /> : <Authorization />;
-  };
-
+  const darkMode = useAppSelector((state) => state.darkMode.darkMode);
+  const theme = extendTheme({
+    colorSchemes: {
+      light: {
+        palette: {
+          primary: {
+            main: '#19d2f1',
+          },
+          mode: darkMode ? 'dark' : 'light',
+        },
+      },
+    },
+  });
+  document.body.style.background = darkMode ? '#1e222b' : '#eff4fc';
   return (
     <CssVarsProvider theme={theme}>
       <BrowserRouter>
@@ -56,7 +50,6 @@ function App() {
                 element={isAuth ? <Navigate to="/" replace /> : <Registration />}
               />
               <Route path="/chat" element={<Chat />} />
-              <Route path="/profile" element={<Profile />} />
               <Route path="/create-quiz" element={<CreateQuiz />} />
               <Route path="/test/:id" element={<Test />} />
               <Route path="*" element={<Page404 />} />
