@@ -39,15 +39,14 @@ export const Question = (props: IQuestionsProps) => {
   const userId = ParseJwt();
 
   if (!answers.length) {
-    console.log('answers lenght =>>>>><<<<<');
+    //console.log('answers lenght =>>>>><<<<<');
     dispatch(addAnswer({ ...answer, userId }));
   }
 
-  console.log(`index =>>>>>>>>>>>>>>>>>>>>`, index);
+  console.log(`item.id =>>>>>>>>>>>>>>>>>>>>`, item.id);
 
   function addAnswerHandler() {
-    console.log(`add answerHandler =>>>>>>>>>>>>>>>>>>>>`);
-    dispatch(addAnswer({ ...answer, userId, questionId: index, id: answers.length + 1 }));
+    dispatch(addAnswer({ ...answer, userId, questionId: item.id, id: answers.length + 1 }));
   }
 
   function remove() {
@@ -110,7 +109,7 @@ export const Question = (props: IQuestionsProps) => {
         />
         <Box sx={{ mb: '20px' }}>
           {answers.map((item) => {
-            if (item.questionId === index) {
+            if (item.questionId === id) {
               return <Answer key={item.id} item={item} id={item.id} />;
             }
             return null;
