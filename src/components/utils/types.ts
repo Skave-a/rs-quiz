@@ -3,7 +3,7 @@ import { CardData } from '../../store/reducers/cardSlice';
 
 export interface IQuestion {
   question: string;
-  img: string;
+  imgQuestion: string;
   answers: string[];
   correctAnswer: string;
 }
@@ -23,8 +23,6 @@ export interface ITitleQuiz {
 
 export interface IItemBlockQuiz {
   name: string;
-  blockQuestion: number[];
-  setBlockQuestion: Dispatch<SetStateAction<number[]>>;
   id: number;
 }
 
@@ -47,4 +45,18 @@ export interface IQuizCard {
   passed: boolean;
   passedOn: number;
   card: CardData;
+}
+interface DataRows {
+  nameUser: string;
+  about: string;
+  id: string;
+}
+export interface DataInput {
+  rows: DataRows[];
+}
+export interface NamesInput {
+  [fieldName: string]: string;
+}
+export interface ISwitchMode {
+  handleModeChange: () => void;
 }

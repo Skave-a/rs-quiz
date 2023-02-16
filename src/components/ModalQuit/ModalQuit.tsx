@@ -3,14 +3,13 @@ import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
 import { Link as RouterLink } from 'react-router-dom';
 import { Button, Link } from '@mui/material';
-import { useAppSelector } from '../../store/hooks';
+import { useAppDispatch, useAppSelector } from '../../store/hooks';
 import { useTranslation } from 'react-i18next';
+import { logout } from '../../store/reducers/userSlice';
 
 interface IModalTestComplete {
   open: boolean;
   handleClose: () => void;
-  score: number;
-  countOfquestions: number;
 }
 
 const style = {
@@ -26,11 +25,16 @@ const style = {
   p: 4,
 };
 
-export const ModalTestComplete = (props: IModalTestComplete) => {
-  const { open, handleClose, score, countOfquestions } = props;
-  const percent = (score * 100) / countOfquestions;
+export const ModalQuit = (props: IModalTestComplete) => {
+  const { open, handleClose } = props;
   const { t } = useTranslation();
   const darkMode = useAppSelector((state) => state.darkMode.darkMode);
+  const dispatch = useAppDispatch();
+
+  const handleLogOut = () => {
+    dispatch(logout());
+    handleClose();
+  };
   return (
     <div>
       <Modal
@@ -46,21 +50,18 @@ export const ModalTestComplete = (props: IModalTestComplete) => {
             component="h2"
             sx={{ color: darkMode ? '#ffffff' : '' }}
           >
-            {t('complete')}
+            {t('logout')}
           </Typography>
           <Typography id="modal-modal-description" sx={{ mt: 2, color: darkMode ? '#ffffff' : '' }}>
-            {percent > 79 ? `${t('congratulations')}${percent}%` : `${t('fail')}${percent}%`}
+            {t('sure')}
           </Typography>
-          <Link
-            component={RouterLink}
-            to="/"
-            underline="none"
-            sx={{ mt: '50px', display: 'block', textAlign: 'end' }}
+          <Button
+            variant="contained"
+            sx={{ color: '#fff', letterSpacing: '.1em', mt: '20px', display: 'block', ml: 'auto' }}
+            onClick={handleLogOut}
           >
-            <Button variant="contained" sx={{ color: '#fff', letterSpacing: '.1em' }}>
-              {t('toMain')}
-            </Button>
-          </Link>
+            {t('Yes')}
+          </Button>
         </Box>
       </Modal>
     </div>
