@@ -1,10 +1,9 @@
 import { createApi } from '@reduxjs/toolkit/query/react';
 import { customFetchBase } from '.';
-import { addQuestion, setQuestions } from '../reducers/questionSlice';
-import { logout, setToken, setIsAuth } from '../reducers/userSlice';
+import { setQuestions } from '../reducers/questionSlice';
 
 export interface IQuestionCerate {
-  id: string;
+  id: number;
   image: string;
   description: string;
   userId: number;
@@ -30,29 +29,30 @@ export const questionApi = createApi({
           if (data) {
             //dispatch(setQuestions(data));
           }
-
-          /* dispatch(setToken(data));
-          dispatch(setIsAuth(true)); */
         } catch (error) {
           console.log(`error question response:`, error);
         }
       },
     }),
-    /* logoutUser: builder.mutation<void, void>({
+    getQuestions: builder.mutation<IQuestionCerate[], void>({
       query() {
         return {
-          url: 'auth/logout',
-          credentials: 'include',
+          url: 'questions',
+          method: 'GET',
+          //credentials: 'include',
         };
       },
       async onQueryStarted(args, { dispatch, queryFulfilled }) {
         try {
-          await queryFulfilled;
-          dispatch(logout());
-        } catch (error) {}
+          const { data } = await queryFulfilled;
+          console.error(`response getQuestions =>>>>>>>>>>>>>>>>`, data);
+          dispatch(setQuestions(data));
+        } catch (error) {
+          console.log(`error question response:`, error);
+        }
       },
-    }), */
+    }),
   }),
 });
 
-export const { useCreateQuestionMutation } = questionApi;
+export const { useCreateQuestionMutation, useGetQuestionsMutation } = questionApi;

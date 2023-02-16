@@ -14,30 +14,33 @@ import {
   TitleQuizPaper,
   TitleQuizPaperBtn,
 } from './styles';
-import { useCreateQuestionMutation } from '../../store/api/QuestionApi';
-import { nanoid } from 'nanoid';
+import { useCreateQuestionMutation, useGetQuestionsMutation } from '../../store/api/QuestionApi';
 import { addQuestion } from '../../store/reducers/questionSlice';
-import { useCreateAnswerMutation } from '../../store/api/AnswerApi';
+import { useCreateAnswerMutation, useGetAnswersMutation } from '../../store/api/AnswerApi';
 import { ParseJwt } from '../utils/helpers';
+import { addAnswer } from '../../store/reducers/answerSlice';
 
 export const CreateQuiz = () => {
   const dispatch = useAppDispatch();
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
   const [img, setImg] = useState('');
+  const answer = useAppSelector((state) => state.answers.answer);
 
-  //const [questions, setQuestions] = useState<IQuestionCerate[]>([]); //questionApi
-  const [createQuestion, { isLoading, isError, error, isSuccess }] = useCreateQuestionMutation();
-  const [createAnswer, { isSuccess: isCreated }] = useCreateAnswerMutation();
+  const [createQuestion, { isLoading, isError, error, isSuccess: isQuestionCreated }] =
+    useCreateQuestionMutation();
+  const [getQuestions] = useGetQuestionsMutation();
+  const [createAnswer, { isSuccess: isAnswerCreated }] = useCreateAnswerMutation();
+  const [getAnswers] = useGetAnswersMutation();
 
-  //const token = useAppSelector((state) => state.users.token);
   const questions = useAppSelector((state) => state.questions.questions);
   const question = useAppSelector((state) => state.questions.question);
   const answers = useAppSelector((state) => state.answers.answers);
   //const token = useAppSelector((state) => state.users.token);
   const userId = ParseJwt();
 
-  //console.log(`questions local ===>>>>>>`, questions);
+  console.log(`questions  ===>>>>>>`, questions);
+  console.log(`answers  ===>>>>>>`, answers);
   // console.log(`isSuccessQuestion ===>>>>>>`, isSuccess);
 
   const saveQuiz = async () => {
@@ -56,51 +59,22 @@ export const CreateQuiz = () => {
     await createAnswer(answers);
   };
 
-  /* function ParseJwt() {
-    if (token) {
-      const base64Url = token.split('.')[1];
-      const base64 = base64Url.replace('-', '+').replace('_', '/');
-
-      return Number(JSON.parse(window.atob(base64)).id);
+  useEffect(() => {
+    if (isQuestionCreated && isAnswerCreated) {
+      getQuestions();
+      getAnswers();
     }
-    return 1;
-  } */
-
-  /* const writeQuestions = () => {
-    dispatch(addQuestion({ ...question, userId }));
-  }; */
+  }, [isQuestionCreated, isAnswerCreated]);
 
   if (!questions.length) {
     dispatch(addQuestion({ ...question, userId }));
   }
 
-  //useEffect(() => {
-  //setQuestions([...questions, { ...question, userId }]);
-
-  //}, []);
-
-  //Get new empty question in server for printing in render page
-  /*  useEffect(() => {
-    const userId = ParseJwt();
-    if (!questions.length) {
-      dispatch(addQuestion({ ...question, userId }));
-    }
-
-    /* const fetchData = async () => {
-      const isRepeated = questions.includes(question.id);
-
-      const userId = ParseJwt();
-
-      await createQuestion({ ...question, userId });
-    };
-    fetchData().catch(console.error); 
-  }, []); */
-
-  /* function addQuestion() {
-    setQuestions([...questions, questionEntity]);
-  } */
   const addNewQuestion = () => {
-    dispatch(addQuestion({ ...question, userId, id: nanoid() }));
+    dispatch(addQuestion({ ...question, userId, id: questions.length + 1 }));
+    dispatch(
+      addAnswer({ ...answer, userId, questionId: questions.length + 1, id: questions.length + 1 })
+    );
   };
 
   return (
@@ -163,16 +137,7 @@ export const CreateQuiz = () => {
           </Paper>
           <Box sx={CreateQuizBox2}>
             {questions.map((item, i) => {
-              //console.log(`el=>>>>>>>>>>>`, item);
-              return (
-                <Question
-                  key={item.id}
-                  id={item.id}
-                  //setQuestions={setQuestions}
-                  //questions={questions}
-                  index={i + 1}
-                />
-              );
+              return <Question key={item.id} id={item.id} item={item} index={i + 1} />;
             })}
             <Button variant="contained" sx={{ m: '0 auto', color: '#ffffff' }} onClick={saveQuiz}>
               {SERVICE_MESSAGES.saveQuestions}

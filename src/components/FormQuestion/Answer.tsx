@@ -2,7 +2,7 @@ import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline';
 import DeleteIcon from '@mui/icons-material/Delete';
 import { Box, Checkbox, Fade, IconButton, TextField, Tooltip, Typography } from '@mui/material';
-import { ChangeEvent, Dispatch, SetStateAction, useEffect, useState } from 'react';
+import { ChangeEvent, useEffect, useState } from 'react';
 import { useAppDispatch, useAppSelector } from '../../store/hooks';
 import { removeAnswer, setAnswers } from '../../store/reducers/answerSlice';
 import { ItemBlockQuizBox } from '../CreateQuiz/styles';
@@ -10,19 +10,16 @@ import { SERVICE_MESSAGES } from '../utils/constants';
 import { IAnswer } from './Question';
 
 export interface IAnswers {
-  /* answers: IAnswer[];
-  setAnswers: Dispatch<SetStateAction<IAnswer[]>>;*/
-  id: string;
+  id: number;
+  item: IAnswer;
 }
 
 export const Answer = (props: IAnswers) => {
-  const { /* answers, setAnswers, */ id } = props;
+  const { id, item } = props;
   const [answerTitle, setAnswerTitle] = useState('');
   const [checked, setChecked] = useState(false);
   const answers = useAppSelector((state) => state.answers.answers);
   const dispatch = useAppDispatch();
-
-  //console.log(`checked`, checked);
 
   const isCorrectHandler = (e: ChangeEvent<HTMLInputElement>) => {
     setChecked(e.target.checked);
@@ -57,7 +54,7 @@ export const Answer = (props: IAnswers) => {
         placeholder={SERVICE_MESSAGES.answer}
         sx={{ width: '100%' }}
         onChange={setTitleHandler}
-        //name={questionTitle}
+        value={item.title}
       />
       <Tooltip
         TransitionComponent={Fade}
@@ -73,6 +70,7 @@ export const Answer = (props: IAnswers) => {
           color="success"
           icon={<CheckCircleOutlineIcon />}
           checkedIcon={<CheckCircleIcon />}
+          checked={item.isCorrect}
         />
       </Tooltip>
       <IconButton onClick={remove} aria-label="delete" size="small">

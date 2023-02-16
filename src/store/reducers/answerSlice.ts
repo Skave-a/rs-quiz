@@ -1,9 +1,9 @@
-import { createSlice, nanoid, PayloadAction } from '@reduxjs/toolkit';
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 export type Roles = 'admin' | 'user';
 
 export interface IAnswer {
-  id: string;
+  id: number;
   title: string;
   isCorrect: boolean;
   userId: number;
@@ -18,7 +18,7 @@ interface IAnswerState {
 const initialState: IAnswerState = {
   answers: [],
   answer: {
-    id: nanoid(),
+    id: 1,
     title: '',
     isCorrect: false,
     userId: 0,
@@ -34,8 +34,11 @@ export const answerSlice = createSlice({
     addAnswer: (state, action: PayloadAction<IAnswer>) => {
       state.answers.push(action.payload);
     },
-    removeAnswer: (state, action: PayloadAction<string>) => {
+    removeAnswer: (state, action: PayloadAction<number>) => {
       state.answers = state.answers.filter((item) => item.id !== action.payload);
+    },
+    deleteAnswers: (state, action: PayloadAction<number>) => {
+      state.answers = state.answers.filter((item) => item.questionId !== action.payload);
     },
     setTitle: (state, action) => {
       state.answer.title = action.payload;
@@ -51,4 +54,5 @@ export const answerSlice = createSlice({
 
 export default answerSlice.reducer;
 
-export const { addAnswer, removeAnswer, setTitle, setUserId, setAnswers } = answerSlice.actions;
+export const { addAnswer, removeAnswer, setTitle, setUserId, setAnswers, deleteAnswers } =
+  answerSlice.actions;

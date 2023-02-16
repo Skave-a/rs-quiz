@@ -5,66 +5,54 @@ import { ChangeEvent, useEffect, useState } from 'react';
 import { BlockQuizBtn, BlockQuizPaper } from '../CreateQuiz/styles';
 import { SERVICE_MESSAGES } from '../utils/constants';
 import { Answer } from './Answer';
-import { nanoid } from 'nanoid';
 import { useAppDispatch, useAppSelector } from '../../store/hooks';
 import { removeQuestion, setQuestions } from '../../store/reducers/questionSlice';
-import { addAnswer } from '../../store/reducers/answerSlice';
+import { addAnswer, deleteAnswers } from '../../store/reducers/answerSlice';
 import { ParseJwt } from '../utils/helpers';
 
-export interface IQuestions {
-  id: string;
+export interface IQuestionsProps {
+  id: number;
   index: number;
+  item: IQuestion;
 }
 export interface IQuestion {
-  id: string;
+  id: number;
   description: string;
   image: string | null;
 }
 
 export interface IAnswer {
-  id: string;
+  id: number;
   title: string;
   isCorrect: boolean;
 }
 
-export const Question = (props: IQuestions) => {
-  const { id, index } = props;
+export const Question = (props: IQuestionsProps) => {
+  const { id, index, item } = props;
   const questions = useAppSelector((state) => state.questions.questions);
   const answer = useAppSelector((state) => state.answers.answer);
   const answers = useAppSelector((state) => state.answers.answers);
   const dispatch = useAppDispatch();
-  //const answerEntity = { id: nanoid(), title: '', isCorrect: false };
+
   const [description, setDescription] = useState('');
   const [image, setImage] = useState('');
   const userId = ParseJwt();
 
-  /*  const handleChangeDescription = (e: ChangeEvent<HTMLInputElement>) => {
-    dispatch(setDescription(e.target.value));
-  };
-  const handleChangeImage = (e: ChangeEvent<HTMLInputElement>) => {
-    dispatch(setImage(e.target.value));
-  }; */
-
-  //const [description, setDescription] = useState('');
-  //const [image, setImage] = useState('');
-
   if (!answers.length) {
+    console.log('answers lenght =>>>>><<<<<');
     dispatch(addAnswer({ ...answer, userId }));
   }
 
-  /* const [answers, setAnswers] = useState([
-    { id: nanoid(), title: '', isCorrect: false },
-    { id: nanoid(), title: '', isCorrect: false },
-  ]); */
-  console.log(`questions index =>>>>>>>>>>>>>>>>>>>>`, index);
-  console.log(`answers =>>>>>>>>>>>>>>>>>>>>`, answers);
+  console.log(`index =>>>>>>>>>>>>>>>>>>>>`, index);
 
   function addAnswerHandler() {
-    dispatch(addAnswer({ ...answer, userId, questionId: index, id: nanoid() }));
+    console.log(`add answerHandler =>>>>>>>>>>>>>>>>>>>>`);
+    dispatch(addAnswer({ ...answer, userId, questionId: index, id: answers.length + 1 }));
   }
 
   function remove() {
     dispatch(removeQuestion(id));
+    dispatch(deleteAnswers(index));
   }
 
   const descriptionHandler = (e: ChangeEvent<HTMLInputElement>) => setDescription(e.target.value);
@@ -110,6 +98,7 @@ export const Question = (props: IQuestions) => {
           placeholder={SERVICE_MESSAGES.writeQuest}
           sx={{ width: '100%', mb: '15px' }}
           onChange={descriptionHandler}
+          value={item.description}
         />
         <TextField
           multiline
@@ -117,12 +106,14 @@ export const Question = (props: IQuestions) => {
           placeholder={SERVICE_MESSAGES.addLink}
           sx={{ width: '100%', mb: '15px' }}
           onChange={imageHandler}
+          value={item.image}
         />
         <Box sx={{ mb: '20px' }}>
           {answers.map((item) => {
-            return (
-              <Answer key={item.id} /* answers={answers} setAnswers={setAnswers} */ id={item.id} />
-            );
+            if (item.questionId === index) {
+              return <Answer key={item.id} item={item} id={item.id} />;
+            }
+            return null;
           })}
         </Box>
         <Button sx={BlockQuizBtn} onClick={addAnswerHandler}>

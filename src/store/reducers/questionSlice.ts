@@ -1,10 +1,9 @@
-import { createSlice, nanoid, PayloadAction } from '@reduxjs/toolkit';
-//import { ParseJwt } from '../../components/utils/helpers';
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 export type Roles = 'admin' | 'user';
 
 export interface IQuestion {
-  id: string;
+  id: number;
   image: string;
   description: string;
   userId: number;
@@ -14,12 +13,11 @@ interface IQuestionState {
   question: IQuestion;
   questions: IQuestion[];
 }
-//const idUser = ParseJwt();
 
 const initialState: IQuestionState = {
   questions: [],
   question: {
-    id: nanoid(),
+    id: 1,
     description: '',
     image: '',
     userId: 0,
@@ -32,17 +30,9 @@ export const questionSlice = createSlice({
   reducers: {
     resetQuestState: () => initialState,
     addQuestion: (state, action: PayloadAction<IQuestion>) => {
-      //console.log(`payload +>>>>>>>>>>>>`, action.payload);
       state.questions.push(action.payload);
-      /* if (
-        state.questions.length !== 0 &&
-        !state.questions.some((item) => item.id === action.payload.id)
-      ) {
-        state.questions.push(action.payload);
-      } */
     },
-    removeQuestion: (state, action: PayloadAction<string>) => {
-      //[...questions.filter((item) => item.id !== id)];
+    removeQuestion: (state, action: PayloadAction<number>) => {
       state.questions = state.questions.filter((item) => item.id !== action.payload);
     },
     setDescription: (state, action) => {

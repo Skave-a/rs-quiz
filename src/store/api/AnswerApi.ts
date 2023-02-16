@@ -1,11 +1,9 @@
 import { createApi } from '@reduxjs/toolkit/query/react';
 import { customFetchBase } from '.';
 import { setAnswers } from '../reducers/answerSlice';
-import { addQuestion, setQuestions } from '../reducers/questionSlice';
-import { logout, setToken, setIsAuth } from '../reducers/userSlice';
 
 export interface IAnswerCreate {
-  id: string;
+  id: number;
   title: string;
   isCorrect: boolean;
   userId: number;
@@ -37,21 +35,23 @@ export const answerApi = createApi({
         }
       },
     }),
-    /* logoutUser: builder.mutation<void, void>({
+    getAnswers: builder.mutation<IAnswerCreate[], void>({
       query() {
         return {
-          url: 'auth/logout',
-          credentials: 'include',
+          url: 'answers',
+          method: 'GET',
+          //credentials: 'include',
         };
       },
       async onQueryStarted(args, { dispatch, queryFulfilled }) {
         try {
-          await queryFulfilled;
-          dispatch(logout());
+          const { data } = await queryFulfilled;
+          console.error(`response getAnswer =>>>>>>>>>>>>>>>>`, data);
+          dispatch(setAnswers(data));
         } catch (error) {}
       },
-    }), */
+    }),
   }),
 });
 
-export const { useCreateAnswerMutation } = answerApi;
+export const { useCreateAnswerMutation, useGetAnswersMutation } = answerApi;
