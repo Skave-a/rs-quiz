@@ -3,7 +3,7 @@ import { customFetchBase } from '.';
 import { LoginInput } from '../../components/utils/types';
 import { setIsAuth, setToken } from '../reducers/userSlice';
 
-type IToken = {
+export type IToken = {
   token: string;
 };
 
@@ -25,8 +25,6 @@ export const registrationApi = createApi({
           const { data } = await queryFulfilled;
           dispatch(setToken(data.token));
           dispatch(setIsAuth(true));
-          //console.log(`data =>>>>>>>>`, data.token);
-          //localStorage.setItem('token', data.token);
         } catch (error) {
           console.log(`error =>>>>>>>>>>`, error);
         }

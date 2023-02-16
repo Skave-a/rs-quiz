@@ -1,0 +1,126 @@
+import CancelIcon from '@mui/icons-material/Cancel';
+import ControlPointIcon from '@mui/icons-material/ControlPoint';
+import { Box, Button, IconButton, Paper, TextField, Typography } from '@mui/material';
+import { ChangeEvent, useEffect, useState } from 'react';
+import { BlockQuizBtn, BlockQuizPaper } from '../CreateQuiz/styles';
+import { SERVICE_MESSAGES } from '../utils/constants';
+import { Answer } from './Answer';
+import { useAppDispatch, useAppSelector } from '../../store/hooks';
+import { removeQuestion, setQuestions } from '../../store/reducers/questionSlice';
+import { addAnswer, deleteAnswers } from '../../store/reducers/answerSlice';
+import { ParseJwt } from '../utils/helpers';
+
+export interface IQuestionsProps {
+  id: number;
+  index: number;
+  item: IQuestion;
+}
+export interface IQuestion {
+  id: number;
+  description: string;
+  image: string | null;
+}
+
+export interface IAnswer {
+  id: number;
+  title: string;
+  isCorrect: boolean;
+}
+
+export const Question = (props: IQuestionsProps) => {
+  const { id, index, item } = props;
+  const questions = useAppSelector((state) => state.questions.questions);
+  const answer = useAppSelector((state) => state.answers.answer);
+  const answers = useAppSelector((state) => state.answers.answers);
+  const dispatch = useAppDispatch();
+
+  const [description, setDescription] = useState('');
+  const [image, setImage] = useState('');
+  const userId = ParseJwt();
+
+  if (!answers.length) {
+    console.log('answers lenght =>>>>><<<<<');
+    dispatch(addAnswer({ ...answer, userId }));
+  }
+
+  console.log(`index =>>>>>>>>>>>>>>>>>>>>`, index);
+
+  function addAnswerHandler() {
+    console.log(`add answerHandler =>>>>>>>>>>>>>>>>>>>>`);
+    dispatch(addAnswer({ ...answer, userId, questionId: index, id: answers.length + 1 }));
+  }
+
+  function remove() {
+    dispatch(removeQuestion(id));
+    dispatch(deleteAnswers(index));
+  }
+
+  const descriptionHandler = (e: ChangeEvent<HTMLInputElement>) => setDescription(e.target.value);
+  const imageHandler = (e: ChangeEvent<HTMLInputElement>) => setImage(e.target.value);
+
+  useEffect(() => {
+    if (questions.length) {
+      dispatch(
+        setQuestions(
+          questions.map((item) => {
+            if (item.id === id) {
+              return { ...item, description, image };
+            }
+            return item;
+          })
+        )
+      );
+    }
+  }, [description, image]);
+
+  return (
+    <Box>
+      <Paper elevation={3} sx={BlockQuizPaper}>
+        <Box
+          sx={{
+            display: 'flex',
+            justifyContent: 'space-between',
+            mb: '20px',
+            alignItems: 'flex-end',
+          }}
+        >
+          <Typography fontSize={'30px'}>
+            {SERVICE_MESSAGES.questionNum}
+            {index}
+          </Typography>
+          <IconButton color="warning" onClick={remove}>
+            <CancelIcon />
+          </IconButton>
+        </Box>
+        <TextField
+          multiline
+          rows={2}
+          placeholder={SERVICE_MESSAGES.writeQuest}
+          sx={{ width: '100%', mb: '15px' }}
+          onChange={descriptionHandler}
+          value={item.description}
+        />
+        <TextField
+          multiline
+          rows={1}
+          placeholder={SERVICE_MESSAGES.addLink}
+          sx={{ width: '100%', mb: '15px' }}
+          onChange={imageHandler}
+          value={item.image}
+        />
+        <Box sx={{ mb: '20px' }}>
+          {answers.map((item) => {
+            if (item.questionId === index) {
+              return <Answer key={item.id} item={item} id={item.id} />;
+            }
+            return null;
+          })}
+        </Box>
+        <Button sx={BlockQuizBtn} onClick={addAnswerHandler}>
+          <ControlPointIcon sx={{ color: 'rgb(255, 110, 3)' }} />
+          <Typography sx={{ textTransform: 'uppercase' }}>{SERVICE_MESSAGES.addAnswer}</Typography>
+        </Button>
+      </Paper>
+    </Box>
+  );
+};

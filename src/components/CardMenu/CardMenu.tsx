@@ -6,7 +6,7 @@ import MoreVertIcon from '@mui/icons-material/MoreVert';
 import { cardMenuText } from '../utils/constants';
 import { useDispatch } from 'react-redux';
 import { ICardMenu } from '../utils/types';
-import { removeCard } from '../../store/reducers/cardSlice';
+import { removeQuiz } from '../../store/reducers/cardSlice';
 import { useTranslation } from 'react-i18next';
 
 export const CardMenu = (props: ICardMenu) => {
@@ -24,7 +24,7 @@ export const CardMenu = (props: ICardMenu) => {
   };
   function handleRemove(event: MouseEvent<HTMLElement>) {
     handleClose(event);
-    dispatch(removeCard(card));
+    dispatch(removeQuiz(card));
   }
   const { t } = useTranslation();
   return (

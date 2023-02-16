@@ -1,4 +1,4 @@
-import { Box, Container } from '@mui/material';
+import { Container } from '@mui/material';
 import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom';
 import './App.css';
 import { Chat } from './components/Chat/Chat';
@@ -14,11 +14,13 @@ import Page404 from './components/Page404/Page404';
 import Registration from './components/Registratiion/Registartion';
 import { Test } from './components/Test/Test';
 import { useAppSelector } from './store/hooks';
+import { Footer } from './components/Footer/Footer';
+import Profile from './components/Profile/Profile';
 
 function App() {
   const isAuth = useAppSelector((state) => state.users.isAuth);
-  const token = useAppSelector((state) => state.users.token);
-  console.log(`token, isAuth =>>>>>`, token, isAuth);
+  //const token = useAppSelector((state) => state.users.token);
+  //console.log(`token, isAuth =>>>>>`, token, isAuth);
   const darkMode = useAppSelector((state) => state.darkMode.darkMode);
   const theme = extendTheme({
     colorSchemes: {
@@ -38,9 +40,9 @@ function App() {
       <BrowserRouter>
         <Header />
         <Container sx={{ width: { sm: 2 / 2 } }}>
-          <Routes>
-            <Route path="/" element={<Main />} />
-            <Route element={<PrivateRoute />}>
+          {isAuth ? (
+            <Routes>
+              <Route path="/" element={<Main />} />
               <Route
                 path="/authorization"
                 element={isAuth ? <Navigate to="/" replace /> : <Authorization />}
@@ -50,11 +52,19 @@ function App() {
                 element={isAuth ? <Navigate to="/" replace /> : <Registration />}
               />
               <Route path="/chat" element={<Chat />} />
+              <Route path="/profile" element={<Profile />} />
               <Route path="/create-quiz" element={<CreateQuiz />} />
               <Route path="/test/:id" element={<Test />} />
               <Route path="*" element={<Page404 />} />
-            </Route>
-          </Routes>
+            </Routes>
+          ) : (
+            <Routes>
+              <Route path="/" element={<Main />} />
+              <Route path="/authorization" element={<Authorization />} />
+              <Route path="/registration" element={<Registration />} />
+              <Route path="*" element={<Authorization />} />
+            </Routes>
+          )}
         </Container>
         <Footer />
       </BrowserRouter>

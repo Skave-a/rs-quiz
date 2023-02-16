@@ -4,10 +4,12 @@ import cardsReducer from './reducers/cardSlice';
 import testsReducer from './reducers/testsSlice';
 import switchMode from './reducers/darkSlice';
 import usersReducer from './reducers/userSlice';
+import questionsReducer from './reducers/questionSlice';
+import answerReducer from './reducers/answerSlice';
 import { registrationApi } from './api/RegistrationApi';
 import { authApi } from './api/AuthApi';
-
-// import { booksApi } from './booksApi';
+import { questionApi } from './api/QuestionApi';
+import { answerApi } from './api/AnswerApi';
 
 export const store = configureStore({
   reducer: {
@@ -16,12 +18,21 @@ export const store = configureStore({
     tests: testsReducer,
     darkMode: switchMode,
     users: usersReducer,
-    // [booksApi.reducerPath]: booksApi.reducer,
+    questions: questionsReducer,
+    answers: answerReducer,
+
     [registrationApi.reducerPath]: registrationApi.reducer,
     [authApi.reducerPath]: authApi.reducer,
+    [questionApi.reducerPath]: questionApi.reducer,
+    [answerApi.reducerPath]: answerApi.reducer,
   },
   middleware: (getDefaultMiddleware) =>
-    getDefaultMiddleware().concat([registrationApi.middleware, authApi.middleware]),
+    getDefaultMiddleware().concat([
+      registrationApi.middleware,
+      authApi.middleware,
+      questionApi.middleware,
+      answerApi.middleware,
+    ]),
 });
 
 export type AppDispatch = typeof store.dispatch;
