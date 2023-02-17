@@ -1,6 +1,5 @@
 import { createApi } from '@reduxjs/toolkit/query/react';
 import { customFetchBase } from '.';
-import { setAnswers } from '../reducers/answerSlice';
 
 export interface IAnswerCreate {
   id: number;
@@ -13,8 +12,38 @@ export interface IAnswerCreate {
 export const answerApi = createApi({
   reducerPath: 'answerApi',
   baseQuery: customFetchBase,
-  endpoints: (builder) => ({
-    createAnswer: builder.mutation<IAnswerCreate[], IAnswerCreate[]>({
+  tagTypes: ['Answers'],
+  endpoints: (build) => ({
+    getAnswers: build.query<IAnswerCreate[], void>({
+      query: () => ({ url: 'answers', method: 'GET' }),
+      transformResponse: (response: IAnswerCreate[]) => {
+        const modQuestions = response.map((item) => {
+          return {
+            id: item.id,
+            title: item.title,
+            isCorrect: item.isCorrect,
+            userId: item.userId,
+            questionId: item.questionId,
+          };
+        });
+        return modQuestions;
+      },
+      providesTags: (result) =>
+        result
+          ? [
+              ...result.map(({ id }) => ({ type: 'Answers' as const, id })),
+              { type: 'Answers', id: 'LIST' },
+            ]
+          : [{ type: 'Answers', id: 'LIST' }],
+      /* async onQueryStarted(args, { dispatch, queryFulfilled }) {
+        try {
+          const { data } = await queryFulfilled;
+          console.error(`response getAnswer =>>>>>>>>>>>>>>>>`, data);
+          dispatch(setAnswers(data));
+        } catch (error) {}
+      },*/
+    }),
+    createAnswer: build.mutation<IAnswerCreate[], IAnswerCreate[]>({
       query(data) {
         return {
           url: 'answers/create',
@@ -34,24 +63,9 @@ export const answerApi = createApi({
           console.log(`error answer response:`, error);
         }
       },
-    }),
-    getAnswers: builder.mutation<IAnswerCreate[], void>({
-      query() {
-        return {
-          url: 'answers',
-          method: 'GET',
-          //credentials: 'include',
-        };
-      },
-      async onQueryStarted(args, { dispatch, queryFulfilled }) {
-        try {
-          const { data } = await queryFulfilled;
-          console.error(`response getAnswer =>>>>>>>>>>>>>>>>`, data);
-          dispatch(setAnswers(data));
-        } catch (error) {}
-      },
+      invalidatesTags: [{ type: 'Answers', id: 'LIST' }],
     }),
   }),
 });
 
-export const { useCreateAnswerMutation, useGetAnswersMutation } = answerApi;
+export const { useCreateAnswerMutation, useGetAnswersQuery } = answerApi;
