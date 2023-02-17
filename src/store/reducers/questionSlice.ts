@@ -52,5 +52,12 @@ export const questionSlice = createSlice({
 
 export default questionSlice.reducer;
 
-export const { addQuestion, removeQuestion, setDescription, setImage, setUserId, setQuestions } =
-  questionSlice.actions;
+export const {
+  addQuestion,
+  removeQuestion,
+  setDescription,
+  setImage,
+  setUserId,
+  setQuestions,
+  resetQuestState,
+} = questionSlice.actions;

@@ -7,8 +7,14 @@ import { SERVICE_MESSAGES } from '../utils/constants';
 import { Answer } from './Answer';
 import { useAppDispatch, useAppSelector } from '../../store/hooks';
 import { removeQuestion, setQuestions } from '../../store/reducers/questionSlice';
-import { addAnswer, deleteAnswers } from '../../store/reducers/answerSlice';
+import {
+  addAnswer,
+  deleteAnswers,
+  resetAnswerState,
+  setAnswers,
+} from '../../store/reducers/answerSlice';
 import { ParseJwt } from '../utils/helpers';
+import { useGetAnswersQuery } from '../../store/api/AnswerApi';
 
 export interface IQuestionsProps {
   id: number;
@@ -38,12 +44,13 @@ export const Question = (props: IQuestionsProps) => {
   const [image, setImage] = useState('');
   const userId = ParseJwt();
 
-  if (!answers.length) {
-    //console.log('answers lenght =>>>>><<<<<');
-    dispatch(addAnswer({ ...answer, userId }));
-  }
-
-  console.log(`item.id =>>>>>>>>>>>>>>>>>>>>`, item.id);
+  const { data: getAnswersServer = [] } = useGetAnswersQuery();
+  useEffect(() => {
+    if (getAnswersServer.length) {
+      dispatch(resetAnswerState());
+      dispatch(setAnswers(getAnswersServer));
+    }
+  }, [getAnswersServer]);
 
   function addAnswerHandler() {
     dispatch(addAnswer({ ...answer, userId, questionId: item.id, id: answers.length + 1 }));
