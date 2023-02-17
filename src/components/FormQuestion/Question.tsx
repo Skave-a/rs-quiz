@@ -52,7 +52,6 @@ export const Question = (props: IQuestionsProps) => {
     }
   }, [getAnswersServer]);
 
-
   function addAnswerHandler() {
     dispatch(addAnswer({ ...answer, userId, questionId: item.id, id: answers.length + 1 }));
   }
