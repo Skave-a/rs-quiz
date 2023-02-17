@@ -54,5 +54,12 @@ export const answerSlice = createSlice({
 
 export default answerSlice.reducer;
 
-export const { addAnswer, removeAnswer, setTitle, setUserId, setAnswers, deleteAnswers } =
-  answerSlice.actions;
+export const {
+  addAnswer,
+  removeAnswer,
+  setTitle,
+  setUserId,
+  setAnswers,
+  deleteAnswers,
+  resetAnswerState,
+} = answerSlice.actions;

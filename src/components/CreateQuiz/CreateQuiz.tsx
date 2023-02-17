@@ -15,9 +15,9 @@ import {
   TitleQuizPaperBtn,
   CreateQuizCreateDark,
 } from './styles';
-import { useCreateQuestionMutation, useGetQuestionsMutation } from '../../store/api/QuestionApi';
-import { addQuestion } from '../../store/reducers/questionSlice';
-import { useCreateAnswerMutation, useGetAnswersMutation } from '../../store/api/AnswerApi';
+import { useCreateQuestionMutation, useGetQuestionsQuery } from '../../store/api/QuestionApi';
+import { addQuestion, resetQuestState, setQuestions } from '../../store/reducers/questionSlice';
+import { useCreateAnswerMutation } from '../../store/api/AnswerApi';
 import { ParseJwt } from '../utils/helpers';
 import { addAnswer } from '../../store/reducers/answerSlice';
 import { useTranslation } from 'react-i18next';
@@ -28,16 +28,22 @@ export const CreateQuiz = () => {
   const [description, setDescription] = useState('');
   const [img, setImg] = useState('');
   const answer = useAppSelector((state) => state.answers.answer);
-
-  const [createQuestion, { isLoading, isError, error, isSuccess: isQuestionCreated }] =
-    useCreateQuestionMutation();
-  const [getQuestions] = useGetQuestionsMutation();
-  const [createAnswer, { isSuccess: isAnswerCreated }] = useCreateAnswerMutation();
-  const [getAnswers] = useGetAnswersMutation();
-
   const questions = useAppSelector((state) => state.questions.questions);
   const question = useAppSelector((state) => state.questions.question);
   const answers = useAppSelector((state) => state.answers.answers);
+
+  const [createQuestion, { isLoading, isError, error, isSuccess: isQuestionCreated }] =
+    useCreateQuestionMutation();
+
+  const { data: getQuestionsServer = [] } = useGetQuestionsQuery();
+  useEffect(() => {
+    if (getQuestionsServer.length) {
+      dispatch(resetQuestState());
+      dispatch(setQuestions(getQuestionsServer));
+    }
+  }, [getQuestionsServer]);
+
+  const [createAnswer, { isSuccess: isAnswerCreated }] = useCreateAnswerMutation();
 
   const userId = ParseJwt();
 
@@ -64,15 +70,10 @@ export const CreateQuiz = () => {
   };
 
   useEffect(() => {
-    if (isQuestionCreated && isAnswerCreated) {
-      getQuestions();
-      getAnswers();
+    if (!questions.length) {
+      dispatch(addQuestion({ ...question, userId }));
     }
-  }, [isQuestionCreated, isAnswerCreated]);
-
-  if (!questions.length) {
-    dispatch(addQuestion({ ...question, userId }));
-  }
+  }, []);
 
   const addNewQuestion = () => {
     dispatch(addQuestion({ ...question, userId, id: questions.length + 1 }));
