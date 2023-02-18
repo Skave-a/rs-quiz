@@ -43,12 +43,12 @@ export const Header = () => {
   };
 
   const handleModeChange = () => dispatchDark(switchMode());
-  const handleLogOut = () => {
-    dispatch(logout());
-  };
-  const handleSubmit = () => {
-    handleOpen();
-  };
+  // const handleLogOut = () => {
+  //   dispatch(logout());
+  // };
+  // const handleSubmit = () => {
+  //   handleOpen();
+  // };
   return (
     <AppBar
       position="static"
@@ -139,9 +139,9 @@ export const Header = () => {
               component={RouterLink}
               to="/profile"
               onClick={handleCloseNavMenu}
-              sx={{ my: 2, color: '#292626', display: 'block' }}
+              sx={{ my: 2, color: darkMode ? '' : '#292626', display: 'block' }}
             >
-              Profile
+              {t('ProfileU')}
             </Button>
           </Box>
           <Box className={styles.settings}>
