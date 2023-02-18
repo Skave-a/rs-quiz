@@ -2,8 +2,7 @@ import CancelIcon from '@mui/icons-material/Cancel';
 import ControlPointIcon from '@mui/icons-material/ControlPoint';
 import { Box, Button, IconButton, Paper, TextField, Typography } from '@mui/material';
 import { ChangeEvent, useEffect, useState } from 'react';
-import { BlockQuizBtn, BlockQuizPaper } from '../CreateQuiz/styles';
-import { SERVICE_MESSAGES } from '../utils/constants';
+import { BlockQuizBtn, BlockQuizPaper, BlockQuizPaperDark } from '../CreateQuiz/styles';
 import { Answer } from './Answer';
 import { useAppDispatch, useAppSelector } from '../../store/hooks';
 import { removeQuestion, setQuestions } from '../../store/reducers/questionSlice';
@@ -15,6 +14,7 @@ import {
 } from '../../store/reducers/answerSlice';
 import { ParseJwt } from '../utils/helpers';
 import { useGetAnswersQuery } from '../../store/api/AnswerApi';
+import { useTranslation } from 'react-i18next';
 
 export interface IQuestionsProps {
   id: number;
@@ -39,6 +39,8 @@ export const Question = (props: IQuestionsProps) => {
   const answer = useAppSelector((state) => state.answers.answer);
   const answers = useAppSelector((state) => state.answers.answers);
   const dispatch = useAppDispatch();
+  const darkMode = useAppSelector((state) => state.darkMode.darkMode);
+  const { t } = useTranslation();
 
   const [description, setDescription] = useState('');
   const [image, setImage] = useState('');
@@ -81,7 +83,7 @@ export const Question = (props: IQuestionsProps) => {
 
   return (
     <Box>
-      <Paper elevation={3} sx={BlockQuizPaper}>
+      <Paper elevation={3} sx={darkMode ? BlockQuizPaperDark : BlockQuizPaper}>
         <Box
           sx={{
             display: 'flex',
@@ -91,7 +93,7 @@ export const Question = (props: IQuestionsProps) => {
           }}
         >
           <Typography fontSize={'30px'}>
-            {SERVICE_MESSAGES.questionNum}
+            {t('questionNum')}
             {index}
           </Typography>
           <IconButton color="warning" onClick={remove}>
@@ -101,7 +103,7 @@ export const Question = (props: IQuestionsProps) => {
         <TextField
           multiline
           rows={2}
-          placeholder={SERVICE_MESSAGES.writeQuest}
+          placeholder={t('writeQuest') as string}
           sx={{ width: '100%', mb: '15px' }}
           onChange={descriptionHandler}
           value={item.description}
@@ -109,7 +111,7 @@ export const Question = (props: IQuestionsProps) => {
         <TextField
           multiline
           rows={1}
-          placeholder={SERVICE_MESSAGES.addLink}
+          placeholder={t('addLinkImg') as string}
           sx={{ width: '100%', mb: '15px' }}
           onChange={imageHandler}
           value={item.image}
@@ -124,7 +126,7 @@ export const Question = (props: IQuestionsProps) => {
         </Box>
         <Button sx={BlockQuizBtn} onClick={addAnswerHandler}>
           <ControlPointIcon sx={{ color: 'rgb(255, 110, 3)' }} />
-          <Typography sx={{ textTransform: 'uppercase' }}>{SERVICE_MESSAGES.addAnswer}</Typography>
+          <Typography sx={{ textTransform: 'uppercase' }}>{t('addAnswer')}</Typography>
         </Button>
       </Paper>
     </Box>
