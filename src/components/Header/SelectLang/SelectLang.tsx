@@ -9,7 +9,7 @@ export const SelectLang = () => {
     i18n.changeLanguage(language);
   };
   return (
-    <FormControl sx={{ m: 1, minWidth: 120 }} size="small">
+    <FormControl sx={{ m: 1, minWidth: 120, mr: '35px' }} size="small">
       <InputLabel id="demo-select-small">Language</InputLabel>
       <Select
         labelId="demo-select-small"

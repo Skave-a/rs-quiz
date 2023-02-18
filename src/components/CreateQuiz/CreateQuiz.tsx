@@ -6,7 +6,6 @@ import { Question } from '../FormQuestion/Question';
 import { useAppDispatch, useAppSelector } from '../../store/hooks';
 import { addQuiz } from '../../store/reducers/cardSlice';
 import { BtnAddBlock } from '../BtnAddBlock/BtnAddBlock';
-import { SERVICE_MESSAGES } from '../utils/constants';
 import {
   CreateQuizBox,
   CreateQuizBox2,
@@ -14,6 +13,7 @@ import {
   TitleQuizPaper,
   TitleQuizPaperBtn,
   CreateQuizCreateDark,
+  TitleQuizPaperDark,
 } from './styles';
 import { useCreateQuestionMutation, useGetQuestionsQuery } from '../../store/api/QuestionApi';
 import { addQuestion, resetQuestState, setQuestions } from '../../store/reducers/questionSlice';
@@ -21,6 +21,7 @@ import { useCreateAnswerMutation } from '../../store/api/AnswerApi';
 import { ParseJwt } from '../utils/helpers';
 import { addAnswer } from '../../store/reducers/answerSlice';
 import { useTranslation } from 'react-i18next';
+import { Link as RouterLink } from 'react-router-dom';
 
 export const CreateQuiz = () => {
   const dispatch = useAppDispatch();
@@ -101,36 +102,34 @@ export const CreateQuiz = () => {
             gap: '20px',
           }}
         >
-          <Paper elevation={3} sx={TitleQuizPaper}>
+          <Paper elevation={3} sx={darkMode ? TitleQuizPaperDark : TitleQuizPaper}>
             <Box>
-              <Typography sx={{ mb: '15px', fontSize: '30px' }}>
-                {SERVICE_MESSAGES.title}
-              </Typography>
+              <Typography sx={{ mb: '15px', fontSize: '30px' }}>{t('title')}</Typography>
               <TextField
                 multiline
                 rows={2}
-                placeholder={SERVICE_MESSAGES.titleCover}
+                placeholder={t('titleCover') as string}
                 sx={{ width: '100%' }}
                 onChange={(e: ChangeEvent<HTMLInputElement>) => setTitle(e.target.value)}
               />
             </Box>
             <Box>
-              <Typography sx={{ mb: '7px' }}>{SERVICE_MESSAGES.description}</Typography>
+              <Typography sx={{ mb: '7px' }}>{t('description')}</Typography>
               <TextField
                 id="outlined-multiline-static"
                 multiline
+                placeholder={t('descriptionCover') as string}
                 rows={3}
-                placeholder={SERVICE_MESSAGES.descriptionCover}
                 sx={{ width: '100%' }}
                 onChange={(e: ChangeEvent<HTMLInputElement>) => setDescription(e.target.value)}
               />
             </Box>
             <Box>
-              <Typography sx={{ mb: '7px' }}>{SERVICE_MESSAGES.addImage}</Typography>
+              <Typography sx={{ mb: '7px' }}>{t('Cover of quiz')}</Typography>
               <TextField
                 multiline
                 rows={1}
-                placeholder={SERVICE_MESSAGES.addLink}
+                placeholder={t('addLink') as string}
                 sx={{ width: '100%', mb: '15px' }}
                 onChange={(e: ChangeEvent<HTMLInputElement>) => setImg(e.target.value)}
               />
@@ -138,7 +137,7 @@ export const CreateQuiz = () => {
             <Button sx={TitleQuizPaperBtn}>
               <ControlPointIcon sx={{ color: 'rgb(255, 110, 3)' }} />
               <Typography sx={{ textTransform: 'uppercase' }} onClick={addNewQuestion}>
-                {SERVICE_MESSAGES.addNewQuestion}
+                {t('addNewQuestion')}
               </Typography>
             </Button>
           </Paper>
@@ -147,7 +146,7 @@ export const CreateQuiz = () => {
               return <Question key={item.id} id={item.id} item={item} index={i + 1} />;
             })}
             <Button variant="contained" sx={{ m: '0 auto', color: '#ffffff' }} onClick={saveQuiz}>
-              {SERVICE_MESSAGES.saveQuestions}
+              {t('saveQuestions')}
             </Button>
           </Box>
           <BtnAddBlock handleClick={addNewQuestion} />

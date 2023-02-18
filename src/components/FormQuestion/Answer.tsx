@@ -3,10 +3,10 @@ import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline';
 import DeleteIcon from '@mui/icons-material/Delete';
 import { Box, Checkbox, Fade, IconButton, TextField, Tooltip, Typography } from '@mui/material';
 import { ChangeEvent, useEffect, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { useAppDispatch, useAppSelector } from '../../store/hooks';
 import { removeAnswer, setAnswers } from '../../store/reducers/answerSlice';
 import { ItemBlockQuizBox } from '../CreateQuiz/styles';
-import { SERVICE_MESSAGES } from '../utils/constants';
 import { IAnswer } from './Question';
 
 export interface IAnswers {
@@ -20,6 +20,7 @@ export const Answer = (props: IAnswers) => {
   const [checked, setChecked] = useState(false);
   const answers = useAppSelector((state) => state.answers.answers);
   const dispatch = useAppDispatch();
+  const { t } = useTranslation();
 
   const isCorrectHandler = (e: ChangeEvent<HTMLInputElement>) => {
     setChecked(e.target.checked);
@@ -51,7 +52,7 @@ export const Answer = (props: IAnswers) => {
     <Box sx={ItemBlockQuizBox}>
       <TextField
         multiline
-        placeholder={SERVICE_MESSAGES.answer}
+        placeholder={t('answer') as string}
         sx={{ width: '100%' }}
         onChange={setTitleHandler}
         value={item.title}
@@ -60,7 +61,7 @@ export const Answer = (props: IAnswers) => {
         TransitionComponent={Fade}
         title={
           <Typography sx={{ p: 0.5 }} fontSize={18}>
-            {SERVICE_MESSAGES.isCorrectTip}
+            {t('isCorrectTip')}
           </Typography>
         }
         placement="top"

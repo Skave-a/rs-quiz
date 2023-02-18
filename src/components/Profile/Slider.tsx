@@ -1,4 +1,3 @@
-import React from 'react';
 import { useAppSelector } from '../../store/hooks';
 import { Navigation, Pagination, A11y } from 'swiper';
 import { Link as RouterLink } from 'react-router-dom';

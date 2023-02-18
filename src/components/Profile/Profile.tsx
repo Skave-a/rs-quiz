@@ -1,11 +1,9 @@
-import { useState } from 'react';
 import {
   Grid,
   Container,
   Typography,
   CardActionArea,
   Card,
-  CardContent,
   Box,
   IconButton,
   ListItemIcon,
@@ -22,14 +20,19 @@ import styles from './Profile.module.css';
 import PhotoIcon from '@mui/icons-material/Photo';
 import ProfileInput from './ProfileInput';
 import Slider from './Slider';
-import { SERVICE_MESSAGES, dataProfile } from '../utils/constants';
+import { dataProfile } from '../utils/constants';
 import { Link as RouterLink } from 'react-router-dom';
+import { useState, MouseEvent } from 'react';
+import { useAppSelector } from '../../store/hooks';
+import { useTranslation } from 'react-i18next';
 
 export default function Profile() {
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const open = Boolean(anchorEl);
+  const darkMode = useAppSelector((state) => state.darkMode.darkMode);
+  const { t } = useTranslation();
 
-  const handleClick = (event: React.MouseEvent<HTMLElement>) => {
+  const handleClick = (event: MouseEvent<HTMLElement>) => {
     setAnchorEl(event.currentTarget);
   };
   const handleClose = () => {
@@ -39,8 +42,12 @@ export default function Profile() {
   return (
     <>
       <Container maxWidth="xl">
-        <Typography variant="h4" sx={{ mb: 5 }} className={styles.title}>
-          Hi, Welcome back
+        <Typography
+          variant="h4"
+          sx={{ mb: 5, color: darkMode ? '#ffffff' : '#292626' }}
+          className={styles.title}
+        >
+          {t('Hi, Welcome back')}
         </Typography>
 
         <Grid container spacing={3}>
@@ -48,7 +55,7 @@ export default function Profile() {
             <Card sx={{ maxWidth: 345, mb: 2 }}>
               <CardActionArea>
                 <Box className={styles.profile__header}>
-                  <Tooltip title="Account settings" className={styles.profile__header_tool}>
+                  <Tooltip title={t('Account settings')} className={styles.profile__header_tool}>
                     <IconButton
                       onClick={handleClick}
                       size="small"
@@ -106,13 +113,15 @@ export default function Profile() {
                     <ListItemIcon>
                       <PhotoIcon fontSize="small" />
                     </ListItemIcon>
-                    Add another photo
+
+                    {t('Add another photo')}
                   </MenuItem>
                   <MenuItem onClick={handleClose}>
                     <ListItemIcon>
                       <Settings fontSize="small" />
                     </ListItemIcon>
-                    Delete photo
+
+                    {t('Delete photo')}
                   </MenuItem>
                 </Menu>
                 {/* <CardContent>
@@ -122,17 +131,22 @@ export default function Profile() {
             </Card>
             <Link component={RouterLink} to="/create-quiz" underline="none">
               <Button variant="contained" sx={{ color: '#fff', letterSpacing: '.1em' }}>
-                {SERVICE_MESSAGES.createNew}
+                {t('Create new quiz')}
               </Button>
             </Link>
           </Grid>
           <Grid item xs={12} md={6} lg={8} sx={{ mb: 5 }}>
             <ProfileInput rows={dataProfile} />
             <Typography
-              sx={{ mb: 5, fontSize: '1.6rem', fontFamily: '"Poppins", sans-serif' }}
+              sx={{
+                mb: 5,
+                fontSize: '1.6rem',
+                fontFamily: '"Poppins", sans-serif',
+                color: darkMode ? '#ffffff' : '#292626',
+              }}
               className={styles.title}
             >
-              My quizes
+              {t('myQuizzes')}
             </Typography>
             <Slider />
           </Grid>

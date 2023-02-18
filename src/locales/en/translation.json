@@ -7,7 +7,7 @@
   "addImage": "Add image",
   "title": "Theme",
   "writeSmth": "Write something ...",
-  "writeQuest": "Write a question ...",
+  "writeQuest": "Write a question",
   "description": "Description (optional)",
   "addQBlock": "Add a new question block",
   "questionNum": "Question #",
@@ -55,5 +55,20 @@
   "receive": "I want to receive marketing promotions and updates via email.",
   "sure": "Are you sure?",
   "Yes": "Yes",
-  "logout": "You are about to leave the site"
+  "logout": "You are about to leave the site",
+  "ProfileU": "Profile",
+  "Hi, Welcome back": "Hi, Welcome back!",
+  "Delete photo": "Delete photo",
+  "Add another photo": "Add another photo",
+  "Account settings": "Account settings",
+  "Save": "Save",
+  "About me": "About me",
+  "Cover of quiz": "Cover of quiz",
+  "titleCover": "Write a theme",
+  "descriptionCover": "Write description",
+  "addNewQuestion": "Create a new question",
+  "saveQuestions": "Save quiz",
+  "isCorrectTip": "Is correct answer",
+  "addLinkImg": "Add link to img"
+
 }

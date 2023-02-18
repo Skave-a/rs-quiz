@@ -4,6 +4,8 @@ import { useState } from 'react';
 import styles from './Profile.module.css';
 import CreateIcon from '@mui/icons-material/Create';
 import { DataInput, NamesInput } from '../utils/types';
+import { useAppSelector } from '../../store/hooks';
+import { useTranslation } from 'react-i18next';
 
 export default function ProfileInput(props: DataInput) {
   const { rows } = props;
@@ -14,6 +16,8 @@ export default function ProfileInput(props: DataInput) {
     setIsEditMode(true);
     setEditedRow(undefined);
   };
+  const darkMode = useAppSelector((state) => state.darkMode.darkMode);
+  const { t } = useTranslation();
 
   const handleOnChangeField = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name: fildName, value } = e.target;
@@ -49,6 +53,7 @@ export default function ProfileInput(props: DataInput) {
                 flexWrap: 'wrap',
                 p: 1,
                 m: 1,
+                color: darkMode ? '#ffffff' : '#292626',
               }}
             >
               {isEditMode ? (
@@ -57,6 +62,7 @@ export default function ProfileInput(props: DataInput) {
                   name="nameUser"
                   id={row.id}
                   variant="standard"
+                  sx={{ color: darkMode ? '#ffffff' : '#292626' }}
                   defaultValue={editedRow ? editedRow.nameUser : row.nameUser}
                   onChange={(e) => handleOnChangeField(e)}
                 />
@@ -71,17 +77,17 @@ export default function ProfileInput(props: DataInput) {
                     style={{ background: 'rgb(120 217 124)' }}
                     variant="contained"
                   >
-                    Save
+                    {t('Save')}
                   </Button>
                 ) : (
                   <CreateIcon onClick={() => handleEdit()} />
                 )}
               </Box>
             </Box>
-            <Box className={styles.profile__about}>
+            <Box className={styles.profile__about} sx={{ color: darkMode ? '#ffffff' : '#292626' }}>
               <Box className={styles.profile__about_txt}>
-                <Typography variant="h6" mt={2}>
-                  About me
+                <Typography variant="h6" mt={2} sx={{ color: darkMode ? '#ffffff' : '#292626' }}>
+                  {t('About me')}
                 </Typography>
                 &nbsp;
                 <Box className={styles.profile__btns}>
@@ -91,7 +97,7 @@ export default function ProfileInput(props: DataInput) {
                       style={{ background: 'rgb(120 217 124)' }}
                       variant="contained"
                     >
-                      Save
+                      {t('Save')}
                     </Button>
                   ) : (
                     <CreateIcon onClick={() => handleEdit()} />
