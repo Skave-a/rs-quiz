@@ -25,7 +25,7 @@ import Slider from './Slider';
 import { SERVICE_MESSAGES, dataProfile } from '../utils/constants';
 import { Link as RouterLink } from 'react-router-dom';
 
-export default function Profile() {
+export function Profile() {
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const open = Boolean(anchorEl);
 
