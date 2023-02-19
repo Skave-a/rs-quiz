@@ -1,5 +1,6 @@
 import { createApi } from '@reduxjs/toolkit/query/react';
 import { customFetchBase } from '.';
+import { setQuestions } from '../reducers/questionSlice';
 
 export interface IQuestionCerate {
   id: number;
@@ -33,15 +34,18 @@ export const questionApi = createApi({
               { type: 'Questions', id: 'LIST' },
             ]
           : [{ type: 'Questions', id: 'LIST' }],
-      /* async onQueryStarted(args, { dispatch, queryFulfilled }) {
+      async onQueryStarted(args, { dispatch, queryFulfilled }) {
         try {
           const { data } = await queryFulfilled;
           console.error(`response getQuestions =>>>>>>>>>>>>>>>>`, data);
-          if (data.length) dispatch(setQuestions(data));
+          if (data.length) {
+            console.log('set In ApiQuestion');
+            dispatch(setQuestions(data));
+          }
         } catch (error) {
           console.log(`error question response:`, error);
         }
-      }, */
+      },
     }),
 
     createQuestion: build.mutation<IQuestionCerate[], IQuestionCerate[]>({
@@ -53,7 +57,7 @@ export const questionApi = createApi({
           //credentials: 'include',
         };
       },
-      async onQueryStarted(args, { dispatch, queryFulfilled }) {
+      /* async onQueryStarted(args, { dispatch, queryFulfilled }) {
         try {
           const { data } = await queryFulfilled;
           console.log(`response questions =>>>>>>>>>>>>>>>>`, data);
@@ -63,10 +67,20 @@ export const questionApi = createApi({
         } catch (error) {
           console.log(`error question response:`, error);
         }
+      }, */
+      invalidatesTags: [{ type: 'Questions', id: 'LIST' }],
+    }),
+    deleteQuestion: build.mutation<number, number>({
+      query(id) {
+        return {
+          url: `questions/delete/${id}`,
+          method: 'DELETE',
+        };
       },
       invalidatesTags: [{ type: 'Questions', id: 'LIST' }],
     }),
   }),
 });
 
-export const { useCreateQuestionMutation, useGetQuestionsQuery } = questionApi;
+export const { useCreateQuestionMutation, useGetQuestionsQuery, useDeleteQuestionMutation } =
+  questionApi;

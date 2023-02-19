@@ -4,6 +4,7 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import { Box, Checkbox, Fade, IconButton, TextField, Tooltip, Typography } from '@mui/material';
 import { ChangeEvent, useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
+import { useDeleteAnswerMutation } from '../../store/api/AnswerApi';
 import { useAppDispatch, useAppSelector } from '../../store/hooks';
 import { removeAnswer, setAnswers } from '../../store/reducers/answerSlice';
 import { ItemBlockQuizBox } from '../CreateQuiz/styles';
@@ -16,8 +17,8 @@ export interface IAnswers {
 
 export const Answer = (props: IAnswers) => {
   const { id, item } = props;
-  const [answerTitle, setAnswerTitle] = useState('');
-  const [checked, setChecked] = useState(false);
+  const [answerTitle, setAnswerTitle] = useState(item.title ? item.title : '');
+  const [checked, setChecked] = useState(item.isCorrect ? item.isCorrect : false);
   const answers = useAppSelector((state) => state.answers.answers);
   const dispatch = useAppDispatch();
   const { t } = useTranslation();
@@ -29,12 +30,15 @@ export const Answer = (props: IAnswers) => {
     setAnswerTitle(e.target.value);
   };
 
-  function remove() {
+  const [deleteAnswer, { isSuccess }] = useDeleteAnswerMutation();
+
+  async function remove() {
     dispatch(removeAnswer(id));
+    await deleteAnswer(id);
   }
 
   useEffect(() => {
-    if (answers.length) {
+    if (answers.length && answerTitle) {
       dispatch(
         setAnswers([
           ...answers.map((item) => {
@@ -55,7 +59,7 @@ export const Answer = (props: IAnswers) => {
         placeholder={t('answer') as string}
         sx={{ width: '100%' }}
         onChange={setTitleHandler}
-        value={item.title}
+        value={answerTitle}
       />
       <Tooltip
         TransitionComponent={Fade}
@@ -71,7 +75,7 @@ export const Answer = (props: IAnswers) => {
           color="success"
           icon={<CheckCircleOutlineIcon />}
           checkedIcon={<CheckCircleIcon />}
-          checked={item.isCorrect}
+          checked={checked}
         />
       </Tooltip>
       <IconButton onClick={remove} aria-label="delete" size="small">

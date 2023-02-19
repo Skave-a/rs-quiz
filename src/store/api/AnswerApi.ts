@@ -1,5 +1,6 @@
 import { createApi } from '@reduxjs/toolkit/query/react';
 import { customFetchBase } from '.';
+import { setAnswers } from '../reducers/answerSlice';
 
 export interface IAnswerCreate {
   id: number;
@@ -35,13 +36,13 @@ export const answerApi = createApi({
               { type: 'Answers', id: 'LIST' },
             ]
           : [{ type: 'Answers', id: 'LIST' }],
-      /* async onQueryStarted(args, { dispatch, queryFulfilled }) {
+      async onQueryStarted(args, { dispatch, queryFulfilled }) {
         try {
           const { data } = await queryFulfilled;
           console.error(`response getAnswer =>>>>>>>>>>>>>>>>`, data);
-          dispatch(setAnswers(data));
+          if (data.length) dispatch(setAnswers(data));
         } catch (error) {}
-      },*/
+      },
     }),
     createAnswer: build.mutation<IAnswerCreate[], IAnswerCreate[]>({
       query(data) {
@@ -52,7 +53,7 @@ export const answerApi = createApi({
           //credentials: 'include',
         };
       },
-      async onQueryStarted(args, { dispatch, queryFulfilled }) {
+      /* async onQueryStarted(args, { dispatch, queryFulfilled }) {
         try {
           const { data } = await queryFulfilled;
           console.log(`response answer =>>>>>>>>>>>>>>>>`, data);
@@ -62,10 +63,19 @@ export const answerApi = createApi({
         } catch (error) {
           console.log(`error answer response:`, error);
         }
+      }, */
+      invalidatesTags: [{ type: 'Answers', id: 'LIST' }],
+    }),
+    deleteAnswer: build.mutation<number, number>({
+      query(id) {
+        return {
+          url: `answers/delete/${id}`,
+          method: 'DELETE',
+        };
       },
       invalidatesTags: [{ type: 'Answers', id: 'LIST' }],
     }),
   }),
 });
 
-export const { useCreateAnswerMutation, useGetAnswersQuery } = answerApi;
+export const { useCreateAnswerMutation, useGetAnswersQuery, useDeleteAnswerMutation } = answerApi;

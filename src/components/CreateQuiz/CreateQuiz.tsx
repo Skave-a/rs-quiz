@@ -30,19 +30,23 @@ export const CreateQuiz = () => {
   const [img, setImg] = useState('');
   const answer = useAppSelector((state) => state.answers.answer);
   const questions = useAppSelector((state) => state.questions.questions);
+
+  console.log('questions', questions);
+
   const question = useAppSelector((state) => state.questions.question);
   const answers = useAppSelector((state) => state.answers.answers);
 
   const [createQuestion, { isLoading, isError, error, isSuccess: isQuestionCreated }] =
     useCreateQuestionMutation();
 
-  const { data: getQuestionsServer = [] } = useGetQuestionsQuery();
-  useEffect(() => {
-    if (getQuestionsServer.length) {
-      dispatch(resetQuestState());
+  const { data: getQuestionsServer = [], isSuccess: isGetQuestions } = useGetQuestionsQuery();
+
+  /*  useEffect(() => {
+    if (isGetQuestions) {
+      //console.log('isSuccess and setQuestions');
       dispatch(setQuestions(getQuestionsServer));
     }
-  }, [getQuestionsServer]);
+  }, [isGetQuestions]); */
 
   const [createAnswer, { isSuccess: isAnswerCreated }] = useCreateAnswerMutation();
 

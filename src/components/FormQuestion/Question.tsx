@@ -15,6 +15,7 @@ import {
 import { ParseJwt } from '../utils/helpers';
 import { useGetAnswersQuery } from '../../store/api/AnswerApi';
 import { useTranslation } from 'react-i18next';
+import { useDeleteQuestionMutation } from '../../store/api/QuestionApi';
 
 export interface IQuestionsProps {
   id: number;
@@ -42,32 +43,50 @@ export const Question = (props: IQuestionsProps) => {
   const darkMode = useAppSelector((state) => state.darkMode.darkMode);
   const { t } = useTranslation();
 
-  const [description, setDescription] = useState('');
-  const [image, setImage] = useState('');
+  const [description, setDescription] = useState(item.description ? item.description : '');
+  const [image, setImage] = useState(item.image ? item.image : '');
   const userId = ParseJwt();
 
-  const { data: getAnswersServer = [] } = useGetAnswersQuery();
+  const [deleteQuestion, { isLoading, isError, error, isSuccess: isQuestionDeleted }] =
+    useDeleteQuestionMutation();
+  const { data: getAnswersServer = [], isSuccess } = useGetAnswersQuery();
   useEffect(() => {
-    if (getAnswersServer.length) {
-      dispatch(resetAnswerState());
+    if (!answers.length) {
+      dispatch(addAnswer({ ...answer, userId }));
+    }
+  }, []);
+
+  /*   useEffect(() => {
+    if (isSuccess) {
+      //console.log('render setter');
       dispatch(setAnswers(getAnswersServer));
     }
-  }, [getAnswersServer]);
+  }, [isSuccess]); */
 
   function addAnswerHandler() {
-    dispatch(addAnswer({ ...answer, userId, questionId: item.id, id: answers.length + 1 }));
+    if (!answers.length) {
+      dispatch(addAnswer({ ...answer, userId, questionId: item.id, id: answers.length + 1 }));
+    } else {
+      const maxId = Math.max(
+        ...answers.map(function (o) {
+          return o.id;
+        })
+      );
+      dispatch(addAnswer({ ...answer, userId, questionId: item.id, id: maxId + 1 }));
+    }
   }
 
-  function remove() {
+  async function removeQuestionHandler() {
     dispatch(removeQuestion(id));
     dispatch(deleteAnswers(index));
+    await deleteQuestion(id);
   }
 
   const descriptionHandler = (e: ChangeEvent<HTMLInputElement>) => setDescription(e.target.value);
   const imageHandler = (e: ChangeEvent<HTMLInputElement>) => setImage(e.target.value);
 
   useEffect(() => {
-    if (questions.length) {
+    if ((questions.length && description, image)) {
       dispatch(
         setQuestions(
           questions.map((item) => {
@@ -96,7 +115,7 @@ export const Question = (props: IQuestionsProps) => {
             {t('questionNum')}
             {index}
           </Typography>
-          <IconButton color="warning" onClick={remove}>
+          <IconButton color="warning" onClick={removeQuestionHandler}>
             <CancelIcon />
           </IconButton>
         </Box>
@@ -106,7 +125,7 @@ export const Question = (props: IQuestionsProps) => {
           placeholder={t('writeQuest') as string}
           sx={{ width: '100%', mb: '15px' }}
           onChange={descriptionHandler}
-          value={item.description}
+          value={description}
         />
         <TextField
           multiline
@@ -114,7 +133,7 @@ export const Question = (props: IQuestionsProps) => {
           placeholder={t('addLinkImg') as string}
           sx={{ width: '100%', mb: '15px' }}
           onChange={imageHandler}
-          value={item.image}
+          value={image}
         />
         <Box sx={{ mb: '20px' }}>
           {answers.map((item) => {
