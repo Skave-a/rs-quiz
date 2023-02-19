@@ -38,6 +38,7 @@ export const Footer = () => {
         alignItems: 'center',
         justifyContent: 'space-around',
       }}
+      className={style.footer}
     >
       <Box component={Box} maxWidth="sm" className={style.dev}>
         {develops.map((develop) => (
