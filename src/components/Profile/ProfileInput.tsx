@@ -2,7 +2,6 @@ import { Box, TextField, Button, TextareaAutosize, Typography } from '@mui/mater
 import { ChangeEvent } from 'react';
 import { useState } from 'react';
 import styles from './Profile.module.css';
-import CreateIcon from '@mui/icons-material/Create';
 import { DataInput, NamesInput } from '../utils/types';
 import { useAppSelector } from '../../store/hooks';
 import { useTranslation } from 'react-i18next';
@@ -51,8 +50,7 @@ export default function ProfileInput(props: DataInput) {
               sx={{
                 display: 'flex',
                 flexWrap: 'wrap',
-                p: 1,
-                m: 1,
+                justifyContent: 'space-between',
                 color: darkMode ? '#ffffff' : '#292626',
               }}
             >
@@ -80,7 +78,13 @@ export default function ProfileInput(props: DataInput) {
                     {t('Save')}
                   </Button>
                 ) : (
-                  <CreateIcon onClick={() => handleEdit()} />
+                  <Button
+                    onClick={() => handleEdit()}
+                    variant="contained"
+                    sx={{ color: '#fff', letterSpacing: '0' }}
+                  >
+                    {t('edit profile')}
+                  </Button>
                 )}
               </Box>
             </Box>
@@ -90,19 +94,6 @@ export default function ProfileInput(props: DataInput) {
                   {t('About me')}
                 </Typography>
                 &nbsp;
-                <Box className={styles.profile__btns}>
-                  {isEditMode ? (
-                    <Button
-                      onClick={() => handleSaveRowChanges()}
-                      style={{ background: 'rgb(120 217 124)' }}
-                      variant="contained"
-                    >
-                      {t('Save')}
-                    </Button>
-                  ) : (
-                    <CreateIcon onClick={() => handleEdit()} />
-                  )}
-                </Box>
               </Box>
               {isEditMode ? (
                 <TextareaAutosize

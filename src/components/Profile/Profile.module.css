@@ -24,7 +24,7 @@
 }
 .profile__btns {
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     align-items: center;
     max-width: 130px;
     width: 100%;
@@ -38,5 +38,5 @@
     font-weight: 600;display: flex;
 }
 .swiper {
-    padding-bottom: 45px;
-}
+        padding: 0 45px 45px!important;
+    }
