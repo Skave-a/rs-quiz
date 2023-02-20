@@ -1,62 +1,39 @@
 import ControlPointIcon from '@mui/icons-material/ControlPoint';
 import NoteAddOutlinedIcon from '@mui/icons-material/NoteAddOutlined';
 import { Box, Button, Container, Paper, TextField, Typography } from '@mui/material';
-import { ChangeEvent, useEffect, useState } from 'react';
-import { Question } from '../FormQuestion/Question';
+import { ChangeEvent, useState } from 'react';
+import { useTranslation } from 'react-i18next';
+import { useCreateQuestionMutation, useGetQuestionsQuery } from '../../store/api/QuestionApi';
 import { useAppDispatch, useAppSelector } from '../../store/hooks';
 import { addQuiz } from '../../store/reducers/cardSlice';
 import { BtnAddBlock } from '../BtnAddBlock/BtnAddBlock';
+import { Question } from '../FormQuestion/Question';
+import { ParseJwt } from '../utils/helpers';
 import {
   CreateQuizBox,
   CreateQuizBox2,
   CreateQuizCreate,
+  CreateQuizCreateDark,
   TitleQuizPaper,
   TitleQuizPaperBtn,
-  CreateQuizCreateDark,
   TitleQuizPaperDark,
 } from './styles';
-import { useCreateQuestionMutation, useGetQuestionsQuery } from '../../store/api/QuestionApi';
-import { addQuestion, resetQuestState, setQuestions } from '../../store/reducers/questionSlice';
-import { useCreateAnswerMutation } from '../../store/api/AnswerApi';
-import { ParseJwt } from '../utils/helpers';
-import { addAnswer } from '../../store/reducers/answerSlice';
-import { useTranslation } from 'react-i18next';
-import { Link as RouterLink } from 'react-router-dom';
 
 export const CreateQuiz = () => {
   const dispatch = useAppDispatch();
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
   const [img, setImg] = useState('');
-  const answer = useAppSelector((state) => state.answers.answer);
-  const questions = useAppSelector((state) => state.questions.questions);
-
-  console.log('questions', questions);
-
-  const question = useAppSelector((state) => state.questions.question);
-  const answers = useAppSelector((state) => state.answers.answers);
 
   const [createQuestion, { isLoading, isError, error, isSuccess: isQuestionCreated }] =
     useCreateQuestionMutation();
 
   const { data: getQuestionsServer = [], isSuccess: isGetQuestions } = useGetQuestionsQuery();
-
-  /*  useEffect(() => {
-    if (isGetQuestions) {
-      //console.log('isSuccess and setQuestions');
-      dispatch(setQuestions(getQuestionsServer));
-    }
-  }, [isGetQuestions]); */
-
-  const [createAnswer, { isSuccess: isAnswerCreated }] = useCreateAnswerMutation();
-
+  const arrayForSort = [...getQuestionsServer];
+  const questionsInOrder = arrayForSort?.sort((a, b) => a.id - b.id);
   const userId = ParseJwt();
-
   const { t } = useTranslation();
   const darkMode = useAppSelector((state) => state.darkMode.darkMode);
-
-  console.log(`questions  ===>>>>>>`, questions);
-  console.log(`answers  ===>>>>>>`, answers);
 
   const saveQuiz = async () => {
     dispatch(
@@ -70,21 +47,16 @@ export const CreateQuiz = () => {
         passedOn: 0,
       })
     );
-    await createQuestion(questions);
-    await createAnswer(answers);
+    //await createQuestion(questions);
+    //await createAnswer(answers);
   };
 
-  useEffect(() => {
-    if (!questions.length) {
-      dispatch(addQuestion({ ...question, userId }));
-    }
-  }, []);
-
-  const addNewQuestion = () => {
-    dispatch(addQuestion({ ...question, userId, id: questions.length + 1 }));
-    dispatch(
-      addAnswer({ ...answer, userId, questionId: questions.length + 1, id: questions.length + 1 })
-    );
+  const addNewQuestion = async () => {
+    await createQuestion({
+      image: '',
+      description: '',
+      userId: userId,
+    });
   };
 
   return (
@@ -146,8 +118,8 @@ export const CreateQuiz = () => {
             </Button>
           </Paper>
           <Box sx={CreateQuizBox2}>
-            {questions.map((item, i) => {
-              return <Question key={item.id} id={item.id} item={item} index={i + 1} />;
+            {questionsInOrder.map((item, i) => {
+              return <Question key={item.id} questionItem={item} index={i + 1} />;
             })}
             <Button variant="contained" sx={{ m: '0 auto', color: '#ffffff' }} onClick={saveQuiz}>
               {t('saveQuestions')}

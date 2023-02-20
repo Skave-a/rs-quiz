@@ -1,9 +1,15 @@
 import { createApi } from '@reduxjs/toolkit/query/react';
 import { customFetchBase } from '.';
-import { setAnswers } from '../reducers/answerSlice';
 
 export interface IAnswerCreate {
   id: number;
+  title: string;
+  isCorrect: boolean;
+  userId: number;
+  questionId: number;
+}
+export interface IAnswerCreateSend {
+  id?: number;
   title: string;
   isCorrect: boolean;
   userId: number;
@@ -36,18 +42,19 @@ export const answerApi = createApi({
               { type: 'Answers', id: 'LIST' },
             ]
           : [{ type: 'Answers', id: 'LIST' }],
-      async onQueryStarted(args, { dispatch, queryFulfilled }) {
+      /* async onQueryStarted(args, { dispatch, queryFulfilled }) {
         try {
           const { data } = await queryFulfilled;
           console.error(`response getAnswer =>>>>>>>>>>>>>>>>`, data);
           if (data.length) dispatch(setAnswers(data));
         } catch (error) {}
-      },
+      }, */
     }),
-    createAnswer: build.mutation<IAnswerCreate[], IAnswerCreate[]>({
+
+    createAnswer: build.mutation<IAnswerCreate, IAnswerCreateSend>({
       query(data) {
         return {
-          url: 'answers/create',
+          url: 'answers/create/one',
           method: 'POST',
           body: data,
           //credentials: 'include',
@@ -66,6 +73,7 @@ export const answerApi = createApi({
       }, */
       invalidatesTags: [{ type: 'Answers', id: 'LIST' }],
     }),
+
     deleteAnswer: build.mutation<number, number>({
       query(id) {
         return {

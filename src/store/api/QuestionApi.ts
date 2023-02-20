@@ -1,9 +1,15 @@
 import { createApi } from '@reduxjs/toolkit/query/react';
 import { customFetchBase } from '.';
-import { setQuestions } from '../reducers/questionSlice';
 
 export interface IQuestionCerate {
   id: number;
+  image: string;
+  description: string;
+  userId: number;
+}
+
+export interface IQuestionCerateSend {
+  id?: number;
   image: string;
   description: string;
   userId: number;
@@ -34,24 +40,24 @@ export const questionApi = createApi({
               { type: 'Questions', id: 'LIST' },
             ]
           : [{ type: 'Questions', id: 'LIST' }],
-      async onQueryStarted(args, { dispatch, queryFulfilled }) {
+      /* async onQueryStarted(args, { dispatch, queryFulfilled }) {
         try {
           const { data } = await queryFulfilled;
           console.error(`response getQuestions =>>>>>>>>>>>>>>>>`, data);
           if (data.length) {
-            console.log('set In ApiQuestion');
+            //console.log('set In ApiQuestion');
             dispatch(setQuestions(data));
           }
         } catch (error) {
           console.log(`error question response:`, error);
         }
-      },
+      }, */
     }),
 
-    createQuestion: build.mutation<IQuestionCerate[], IQuestionCerate[]>({
+    createQuestion: build.mutation<IQuestionCerate, IQuestionCerateSend>({
       query(data) {
         return {
-          url: 'questions/create',
+          url: 'questions/create/one',
           method: 'POST',
           body: data,
           //credentials: 'include',
@@ -70,6 +76,7 @@ export const questionApi = createApi({
       }, */
       invalidatesTags: [{ type: 'Questions', id: 'LIST' }],
     }),
+
     deleteQuestion: build.mutation<number, number>({
       query(id) {
         return {
