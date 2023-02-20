@@ -1,4 +1,4 @@
-import { Box, Menu, MenuItem, ListItemIcon, IconButton, Tooltip } from '@mui/material/';
+import { Box, Menu, MenuItem, ListItemIcon, IconButton, Tooltip, Link } from '@mui/material/';
 import { MouseEvent, useState } from 'react';
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
@@ -8,6 +8,7 @@ import { useDispatch } from 'react-redux';
 import { ICardMenu } from '../utils/types';
 import { removeQuiz } from '../../store/reducers/cardSlice';
 import { useTranslation } from 'react-i18next';
+import { Link as RouterLink } from 'react-router-dom';
 
 export const CardMenu = (props: ICardMenu) => {
   const { card } = props;
@@ -79,10 +80,12 @@ export const CardMenu = (props: ICardMenu) => {
         anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
       >
         <MenuItem onClick={handleClose}>
-          <ListItemIcon>
-            <EditIcon fontSize="small" />
-          </ListItemIcon>
-          {t('edit')}
+          <Link component={RouterLink} to={`/edit/${card.id}`} underline="none">
+            <ListItemIcon>
+              <EditIcon fontSize="small" />
+            </ListItemIcon>
+            {t('edit')}
+          </Link>
         </MenuItem>
         <MenuItem onClick={handleRemove}>
           <ListItemIcon>

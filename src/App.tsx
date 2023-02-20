@@ -16,6 +16,7 @@ import { Test } from './components/Test/Test';
 import { useAppSelector } from './store/hooks';
 import { Footer } from './components/Footer/Footer';
 import Profile from './components/Profile/Profile';
+import { EditPage } from './components/EditPage/EditPage';
 
 function App() {
   const isAuth = useAppSelector((state) => state.users.isAuth);
@@ -54,6 +55,7 @@ function App() {
               <Route path="/chat" element={<Chat />} />
               <Route path="/profile" element={<Profile />} />
               <Route path="/create-quiz" element={<CreateQuiz />} />
+              <Route path="/edit/:id" element={<EditPage />} />
               <Route path="/test/:id" element={<Test />} />
               <Route path="*" element={<Page404 />} />
             </Routes>
