@@ -87,12 +87,26 @@ export const CreateQuiz = () => {
 
   return (
     <Box sx={{ pb: '150px' }}>
-      <Box sx={{ display: 'flex', alignItems: 'center', gap: '10px', mb: '50px' }}>
-        <NoteAddOutlinedIcon fontSize="large" />
-        <Typography sx={darkMode ? CreateQuizCreateDark : CreateQuizCreate}>
-          {t('createNew')}
-        </Typography>
+      <Box
+        sx={{
+          display: 'flex',
+          alignItems: 'start',
+          gap: '10px',
+          mb: '50px',
+          justifyContent: 'space-between',
+        }}
+      >
+        <Box sx={{ display: 'flex', alignItems: 'center', gap: '10px', mb: '50px' }}>
+          <NoteAddOutlinedIcon fontSize="large" />
+          <Typography sx={darkMode ? CreateQuizCreateDark : CreateQuizCreate}>
+            {t('createNew')}
+          </Typography>
+        </Box>
+        <Button variant="contained" sx={{ color: '#ffffff' }} onClick={saveQuiz}>
+          {t('saveQuestions')}
+        </Button>
       </Box>
+
       <Box sx={CreateQuizBox}>
         <Container
           sx={{
@@ -147,11 +161,11 @@ export const CreateQuiz = () => {
             {questions.map((item, i) => {
               return <Question key={item.id} id={item.id} item={item} index={i + 1} />;
             })}
-            <Link component={RouterLink} to="/" underline="none">
+            {/* <Link component={RouterLink} to="/" underline="none">
               <Button variant="contained" sx={{ m: '0 auto', color: '#ffffff' }} onClick={saveQuiz}>
                 {t('saveQuestions')}
               </Button>
-            </Link>
+            </Link> */}
           </Box>
           <BtnAddBlock handleClick={addNewQuestion} />
         </Container>

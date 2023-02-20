@@ -34,11 +34,9 @@ export default function Slider() {
           spaceBetween: 50,
         },
       }}
-      // onSwiper={(swiper) => console.log(swiper)}
-      // onSlideChange={() => console.log('slide change')}
     >
       {allCards.map((card, index) => (
-        <SwiperSlide>
+        <SwiperSlide key={card.id}>
           <RouterLink key={card.id} style={{ textDecoration: 'none' }} to={`/test/${card.id}`}>
             <QuizCard
               key={card.id}

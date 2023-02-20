@@ -59,13 +59,16 @@ export const CreateQuizBox2 = {
   gap: '20px',
   margin: '0 auto',
   position: 'relative',
-  flexDirection: 'column',
+  // flexDirection: 'column',
+  flexWrap: 'wrap',
+  justifyContent: 'center',
 };
 
 export const ItemBlockQuizBox = {
   display: 'flex',
   alignItems: 'center',
   gap: '10px',
+  marginBottom: '1rem',
 };
 
 export const TitleQuizPaper = {
