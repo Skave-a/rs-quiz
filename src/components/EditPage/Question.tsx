@@ -41,7 +41,7 @@ export interface IAnswer {
 
 export const Question = (props: IQuestionsProps) => {
   const { id, index, item } = props;
-  console.log(item);
+  // console.log(item);
   // const questions = useAppSelector((state) => state.questions.questions);
   const answer = useAppSelector((state) => state.answers.answer);
   const answers = useAppSelector((state) => state.answers.answers);
@@ -113,7 +113,7 @@ export const Question = (props: IQuestionsProps) => {
           placeholder={t('writeQuest') as string}
           sx={{ width: '100%', mb: '15px' }}
           onChange={descriptionHandler}
-          value={item.question}
+          defaultValue={item.question}
         />
         <TextField
           multiline
@@ -121,7 +121,7 @@ export const Question = (props: IQuestionsProps) => {
           placeholder={t('addLinkImg') as string}
           sx={{ width: '100%', mb: '15px' }}
           // onChange={imageHandler}
-          value={item.imgQuestion}
+          defaultValue={item.imgQuestion}
         />
         <Box sx={{ mb: '20px' }}>
           {/* {answers.map((item) => {
@@ -131,7 +131,7 @@ export const Question = (props: IQuestionsProps) => {
             return null;
           })} */}
           {item.answers.map((answer, index) => (
-            <Answer id={index} answer={answer} rightAnswer={item.correctAnswer} />
+            <Answer id={index} answer={answer} rightAnswer={item.correctAnswer} key={index} />
           ))}
         </Box>
         <Button sx={BlockQuizBtn} onClick={addAnswerHandler}>

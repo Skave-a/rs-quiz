@@ -59,6 +59,7 @@ export const CreateQuizBox2 = {
   gap: '20px',
   margin: '0 auto',
   position: 'relative',
+  flexDirection: 'column',
 };
 
 export const ItemBlockQuizBox = {

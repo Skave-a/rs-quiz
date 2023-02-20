@@ -56,7 +56,7 @@ export const Answer = (props: IAnswers) => {
         placeholder={t('answer') as string}
         sx={{ width: '100%' }}
         onChange={setTitleHandler}
-        value={answer}
+        defaultValue={answer}
       />
       <Tooltip
         TransitionComponent={Fade}

@@ -1,6 +1,6 @@
 import ControlPointIcon from '@mui/icons-material/ControlPoint';
 import NoteAddOutlinedIcon from '@mui/icons-material/NoteAddOutlined';
-import { Box, Button, Container, Paper, TextField, Typography } from '@mui/material';
+import { Box, Button, Container, Link, Paper, TextField, Typography } from '@mui/material';
 import { ChangeEvent, useEffect, useState } from 'react';
 import { Question } from '../FormQuestion/Question';
 import { useAppDispatch, useAppSelector } from '../../store/hooks';
@@ -22,6 +22,7 @@ import { ParseJwt } from '../utils/helpers';
 import { addAnswer } from '../../store/reducers/answerSlice';
 import { useTranslation } from 'react-i18next';
 import { Link as RouterLink } from 'react-router-dom';
+import { nanoid } from '@reduxjs/toolkit';
 
 export const CreateQuiz = () => {
   const dispatch = useAppDispatch();
@@ -64,6 +65,7 @@ export const CreateQuiz = () => {
         questionsArr: [],
         passed: false,
         passedOn: 0,
+        id: nanoid(),
       })
     );
     await createQuestion(questions);
@@ -145,9 +147,11 @@ export const CreateQuiz = () => {
             {questions.map((item, i) => {
               return <Question key={item.id} id={item.id} item={item} index={i + 1} />;
             })}
-            <Button variant="contained" sx={{ m: '0 auto', color: '#ffffff' }} onClick={saveQuiz}>
-              {t('saveQuestions')}
-            </Button>
+            <Link component={RouterLink} to="/" underline="none">
+              <Button variant="contained" sx={{ m: '0 auto', color: '#ffffff' }} onClick={saveQuiz}>
+                {t('saveQuestions')}
+              </Button>
+            </Link>
           </Box>
           <BtnAddBlock handleClick={addNewQuestion} />
         </Container>

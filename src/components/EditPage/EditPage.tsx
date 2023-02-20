@@ -1,9 +1,9 @@
 import ControlPointIcon from '@mui/icons-material/ControlPoint';
 import NoteAddOutlinedIcon from '@mui/icons-material/NoteAddOutlined';
-import { Box, Button, Container, Paper, TextField, Typography } from '@mui/material';
+import { Box, Button, Container, Link, Paper, TextField, Typography } from '@mui/material';
 import { ChangeEvent, useEffect, useState } from 'react';
 import { useAppDispatch, useAppSelector } from '../../store/hooks';
-import { addQuiz } from '../../store/reducers/cardSlice';
+import { addQuiz, removeQuiz } from '../../store/reducers/cardSlice';
 import { BtnAddBlock } from '../BtnAddBlock/BtnAddBlock';
 import {
   CreateQuizBox,
@@ -22,6 +22,8 @@ import { addAnswer } from '../../store/reducers/answerSlice';
 import { useTranslation } from 'react-i18next';
 import { Link as RouterLink, useParams } from 'react-router-dom';
 import { Question } from './Question';
+import { nanoid } from '@reduxjs/toolkit';
+// import { customAlphabet } from 'nanoid/non-secure';
 
 export const EditPage = () => {
   const { id } = useParams();
@@ -32,7 +34,7 @@ export const EditPage = () => {
       card = el;
     }
   });
-  console.log('card', card);
+  // console.log('card', card);
   const dispatch = useAppDispatch();
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
@@ -40,7 +42,7 @@ export const EditPage = () => {
   const answer = useAppSelector((state) => state.answers.answer);
   const questions = useAppSelector((state) => state.questions.questions);
   const question = useAppSelector((state) => state.questions.question);
-  const answers = useAppSelector((state) => state.answers.answers);
+  // const answers = useAppSelector((state) => state.answers.answers);
 
   // const [createQuestion, { isLoading, isError, error, isSuccess: isQuestionCreated }] =
   //   useCreateQuestionMutation();
@@ -62,8 +64,10 @@ export const EditPage = () => {
 
   // console.log(`questions  ===>>>>>>`, questions);
   // console.log(`answers  ===>>>>>>`, answers);
-
+  // const nanoid = customAlphabet('1234567890', 5);
+  // console.log(nanoid);
   const saveQuiz = async () => {
+    dispatch(removeQuiz(card));
     dispatch(
       addQuiz({
         title,
@@ -73,6 +77,7 @@ export const EditPage = () => {
         questionsArr: [],
         passed: false,
         passedOn: 0,
+        id: nanoid(),
       })
     );
     // await createQuestion(questions);
@@ -120,7 +125,7 @@ export const EditPage = () => {
                 placeholder={t('titleCover') as string}
                 sx={{ width: '100%' }}
                 onChange={(e: ChangeEvent<HTMLInputElement>) => setTitle(e.target.value)}
-                value={card.title}
+                defaultValue={card.title}
               />
             </Box>
             <Box>
@@ -132,7 +137,7 @@ export const EditPage = () => {
                 rows={3}
                 sx={{ width: '100%' }}
                 onChange={(e: ChangeEvent<HTMLInputElement>) => setDescription(e.target.value)}
-                value={card.description}
+                defaultValue={card.description}
               />
             </Box>
             <Box>
@@ -143,7 +148,7 @@ export const EditPage = () => {
                 placeholder={t('addLink') as string}
                 sx={{ width: '100%', mb: '15px' }}
                 onChange={(e: ChangeEvent<HTMLInputElement>) => setImg(e.target.value)}
-                value={card.img}
+                defaultValue={card.img}
               />
             </Box>
             <Button sx={TitleQuizPaperBtn}>
@@ -158,11 +163,13 @@ export const EditPage = () => {
               return <Question key={item.id} id={item.id} item={item} index={i + 1} />;
             })} */}
             {card.questionsArr.map((item, index) => (
-              <Question index={index} item={item} id={card.id} />
+              <Question index={index} item={item} id={card.id} key={index} />
             ))}
-            <Button variant="contained" sx={{ m: '0 auto', color: '#ffffff' }} onClick={saveQuiz}>
-              {t('saveQuestions')}
-            </Button>
+            <Link component={RouterLink} to="/" underline="none">
+              <Button variant="contained" sx={{ m: '0 auto', color: '#ffffff' }} onClick={saveQuiz}>
+                {t('saveQuestions')}
+              </Button>
+            </Link>
           </Box>
           <BtnAddBlock handleClick={addNewQuestion} />
         </Container>

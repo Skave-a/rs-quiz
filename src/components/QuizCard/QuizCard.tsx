@@ -35,7 +35,7 @@ export const QuizCard = (props: IQuizCard) => {
         <CardMedia component="img" height="140" image={img} alt="card" />
         <CardContent>
           <Box sx={{ display: 'flex', justifyContent: 'space-between', mb: '10px' }}>
-            <Typography
+            {/* <Typography
               sx={{
                 color: darkMode ? '#ffffff' : '#424242',
                 fontSize: '0.9rem',
@@ -48,8 +48,8 @@ export const QuizCard = (props: IQuizCard) => {
             >
               <QuizIcon />
               {t('quiz')}
-            </Typography>
-            <Box sx={{ display: 'flex', alignItems: 'center', gap: '3px' }}>
+            </Typography> */}
+            <Box sx={{ display: 'flex', alignItems: 'center', gap: '3px', ml: 'auto' }}>
               <Typography
                 sx={{
                   color: darkMode ? '#ffffff' : 'rgba(66,66,66,.5)',
