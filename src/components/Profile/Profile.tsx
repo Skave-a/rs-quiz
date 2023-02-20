@@ -53,20 +53,19 @@ export default function Profile() {
         <Grid container spacing={3}>
           <Grid item xs={12} sm={6} md={3}>
             <Card sx={{ maxWidth: 345, mb: 2 }}>
+              <IconButton
+                onClick={handleClick}
+                className={styles.profile__header_tool}
+                size="small"
+                sx={{ ml: 2 }}
+                aria-controls={open ? 'account-menu' : undefined}
+                aria-haspopup="true"
+                aria-expanded={open ? 'true' : undefined}
+              >
+                <MoreVertIcon />
+              </IconButton>
               <CardActionArea>
                 <Box className={styles.profile__header}>
-                  <Tooltip title={t('Account settings')} className={styles.profile__header_tool}>
-                    <IconButton
-                      onClick={handleClick}
-                      size="small"
-                      sx={{ ml: 2 }}
-                      aria-controls={open ? 'account-menu' : undefined}
-                      aria-haspopup="true"
-                      aria-expanded={open ? 'true' : undefined}
-                    >
-                      <MoreVertIcon />
-                    </IconButton>
-                  </Tooltip>
                   <CardMedia
                     component="img"
                     height="194"
