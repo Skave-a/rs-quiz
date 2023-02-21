@@ -68,6 +68,9 @@
   "addNewQuestion": "Создать вопрос",
   "saveQuestions": "Сохранить тест",
   "isCorrectTip": "Верный ответ",
-  "addLinkImg": "Вставьте ссылку на изображение"
+  "addLinkImg": "Вставьте ссылку на изображение",
+  "deleteQuestion": "Удалить вопрос",
+  "saveQuestion": "Сохранить вопрос",
+  "saveAnswer": "Сохранить ответ"
 
 }

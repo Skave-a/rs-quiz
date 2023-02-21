@@ -1,5 +1,8 @@
 export const SERVICE_MESSAGES = {
   isCorrectTip: 'Is correct answer',
+  deleteQuestion: 'Delete question',
+  saveQuestion: 'Save question',
+  saveAnswer: 'Save answer',
   quiz: 'Quiz',
   published: 'published',
   createNew: 'CREATE A NEW QUIZ',

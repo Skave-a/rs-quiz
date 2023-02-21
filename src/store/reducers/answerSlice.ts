@@ -43,6 +43,9 @@ export const answerSlice = createSlice({
     setTitle: (state, action) => {
       state.answer.title = action.payload;
     },
+    setIsCorrect: (state, action) => {
+      state.answer.isCorrect = action.payload;
+    },
     setUserId: (state, action) => {
       state.answer.userId = action.payload;
     },
@@ -62,4 +65,5 @@ export const {
   setAnswers,
   deleteAnswers,
   resetAnswerState,
+  setIsCorrect,
 } = answerSlice.actions;
