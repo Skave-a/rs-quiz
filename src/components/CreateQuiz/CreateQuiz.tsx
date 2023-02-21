@@ -10,8 +10,8 @@ import { BtnAddBlock } from '../BtnAddBlock/BtnAddBlock';
 import { Question } from '../FormQuestion/Question';
 import { ParseJwt } from '../utils/helpers';
 import {
-  // CreateQuizBox,
-  // CreateQuizBox2,
+  CreateQuizBox,
+  CreateQuizBox2,
   CreateQuizCreate,
   CreateQuizCreateDark,
   TitleQuizPaper,
@@ -68,7 +68,6 @@ export const CreateQuiz = () => {
           gap: '10px',
           mb: '50px',
           justifyContent: 'space-between',
-          flexWrap: 'wrap',
         }}
       >
         <Box sx={{ display: 'flex', alignItems: 'center', gap: '10px', mb: '50px' }}>
@@ -82,12 +81,12 @@ export const CreateQuiz = () => {
         </Button>
       </Box>
 
-      <Box>
+      <Box sx={CreateQuizBox}>
         <Container
           sx={{
             margin: '0 auto',
             display: 'flex',
-            justifyContent: 'start',
+            justifyContent: 'space-between',
             alignItems: 'start',
             flexWrap: 'wrap',
             gap: '20px',
@@ -133,10 +132,10 @@ export const CreateQuiz = () => {
             </Button>
           </Paper>
           {/* <Box sx={CreateQuizBox2}></Box> */}
-          {questionsInOrder.map((item, i) => {
+            {questionsInOrder.map((item, i) => {
               return <Question key={item.id} questionItem={item} index={i + 1} />;
             })}
-
+          
           <BtnAddBlock handleClick={addNewQuestion} />
         </Container>
       </Box>
