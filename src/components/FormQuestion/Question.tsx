@@ -1,25 +1,30 @@
-import CancelIcon from '@mui/icons-material/Cancel';
 import ControlPointIcon from '@mui/icons-material/ControlPoint';
-import { Box, Button, IconButton, Paper, TextField, Typography } from '@mui/material';
-import { ChangeEvent, useEffect, useState } from 'react';
-import { BlockQuizBtn, BlockQuizPaper, BlockQuizPaperDark } from '../CreateQuiz/styles';
-import { Answer } from './Answer';
-import { useAppDispatch, useAppSelector } from '../../store/hooks';
-import { removeQuestion, setQuestions } from '../../store/reducers/questionSlice';
+import DeleteIcon from '@mui/icons-material/Delete';
+import SaveIcon from '@mui/icons-material/Save';
 import {
-  addAnswer,
-  deleteAnswers,
-  resetAnswerState,
-  setAnswers,
-} from '../../store/reducers/answerSlice';
-import { ParseJwt } from '../utils/helpers';
-import { useGetAnswersQuery } from '../../store/api/AnswerApi';
+  Box,
+  Button,
+  Checkbox,
+  Fade,
+  IconButton,
+  Paper,
+  TextField,
+  Tooltip,
+  Typography,
+} from '@mui/material';
+import LinearProgress from '@mui/material/LinearProgress';
+import { ChangeEvent, useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
+import { useCreateAnswerMutation, useGetAnswersQuery } from '../../store/api/AnswerApi';
+import { useCreateQuestionMutation, useDeleteQuestionMutation } from '../../store/api/QuestionApi';
+import { useAppSelector } from '../../store/hooks';
+import { BlockQuizBtn, BlockQuizPaper, BlockQuizPaperDark } from '../CreateQuiz/styles';
+import { ParseJwt } from '../utils/helpers';
+import { Answer } from './Answer';
 
 export interface IQuestionsProps {
-  id: number;
   index: number;
-  item: IQuestion;
+  questionItem: IQuestion;
 }
 export interface IQuestion {
   id: number;
@@ -34,55 +39,70 @@ export interface IAnswer {
 }
 
 export const Question = (props: IQuestionsProps) => {
-  const { id, index, item } = props;
-  const questions = useAppSelector((state) => state.questions.questions);
-  const answer = useAppSelector((state) => state.answers.answer);
-  const answers = useAppSelector((state) => state.answers.answers);
-  const dispatch = useAppDispatch();
+  const { index, questionItem } = props;
   const darkMode = useAppSelector((state) => state.darkMode.darkMode);
+  const [checked, setChecked] = useState(false);
   const { t } = useTranslation();
-
-  const [description, setDescription] = useState('');
-  const [image, setImage] = useState('');
+  const [descriptionLocal, setLocalDescription] = useState(questionItem.description);
+  const [imageLocal, setImageLocal] = useState(questionItem.image ?? '');
   const userId = ParseJwt();
 
-  const { data: getAnswersServer = [] } = useGetAnswersQuery();
-  useEffect(() => {
-    if (getAnswersServer.length) {
-      dispatch(resetAnswerState());
-      dispatch(setAnswers(getAnswersServer));
-    }
-  }, [getAnswersServer]);
+  const [createAnswer, { /* isLoading, isError, error, */ isSuccess: isAnswerCreated }] =
+    useCreateAnswerMutation();
 
-  function addAnswerHandler() {
-    dispatch(addAnswer({ ...answer, userId, questionId: item.id, id: answers.length + 1 }));
+  const [deleteQuestion, { isLoading, isError, error, isSuccess: isQuestionDeleted }] =
+    useDeleteQuestionMutation();
+
+  const { data: getAnswersServer = [], isSuccess } = useGetAnswersQuery();
+  const arrayForSort = [...getAnswersServer];
+  const answersInOrder = arrayForSort?.sort((a, b) => a.id - b.id);
+
+  const [
+    createQuestion,
+    { isLoading: loading, /* , isError, error, */ isSuccess: isQuestionSaved },
+  ] = useCreateQuestionMutation();
+
+  async function addAnswerHandler() {
+    await createAnswer({
+      title: '',
+      isCorrect: false,
+      userId: userId,
+      questionId: questionItem.id,
+    });
   }
 
-  function remove() {
-    dispatch(removeQuestion(id));
-    dispatch(deleteAnswers(index));
+  async function removeQuestionHandler() {
+    await deleteQuestion(questionItem.id);
   }
 
-  const descriptionHandler = (e: ChangeEvent<HTMLInputElement>) => setDescription(e.target.value);
-  const imageHandler = (e: ChangeEvent<HTMLInputElement>) => setImage(e.target.value);
+  const descriptionHandler = (e: ChangeEvent<HTMLInputElement>) =>
+    setLocalDescription(e.target.value);
+
+  const imageHandler = (e: ChangeEvent<HTMLInputElement>) => setImageLocal(e.target.value);
+
+  const saveQuestionHandler = async () => {
+    await createQuestion({
+      id: questionItem.id,
+      image: imageLocal,
+      description: descriptionLocal,
+      userId: userId,
+    });
+  };
 
   useEffect(() => {
-    if (questions.length) {
-      dispatch(
-        setQuestions(
-          questions.map((item) => {
-            if (item.id === id) {
-              return { ...item, description, image };
-            }
-            return item;
-          })
-        )
-      );
-    }
-  }, [description, image]);
+    if (isQuestionSaved) setChecked(true);
+    setTimeout(() => {
+      setChecked(false);
+    }, 1000);
+  }, [isQuestionSaved]);
 
   return (
     <Box>
+      {loading ? (
+        <Box sx={{ width: '100%' }}>
+          <LinearProgress />
+        </Box>
+      ) : null}
       <Paper elevation={3} sx={darkMode ? BlockQuizPaperDark : BlockQuizPaper}>
         <Box
           sx={{
@@ -96,9 +116,36 @@ export const Question = (props: IQuestionsProps) => {
             {t('questionNum')}
             {index}
           </Typography>
-          <IconButton color="warning" onClick={remove}>
-            <CancelIcon />
-          </IconButton>
+          <Tooltip
+            TransitionComponent={Fade}
+            title={
+              <Typography sx={{ p: 0.5 }} fontSize={18}>
+                {t('deleteQuestion')}
+              </Typography>
+            }
+            placement="top"
+          >
+            <IconButton onClick={removeQuestionHandler} aria-label="delete" size="small">
+              <DeleteIcon color="error" fontSize="medium" />
+            </IconButton>
+          </Tooltip>
+          <Tooltip
+            TransitionComponent={Fade}
+            title={
+              <Typography sx={{ p: 0.5 }} fontSize={18}>
+                {t('saveQuestion')}
+              </Typography>
+            }
+            placement="top"
+          >
+            <Checkbox
+              onChange={saveQuestionHandler}
+              color="success"
+              icon={<SaveIcon />}
+              checkedIcon={<SaveIcon color="success" />}
+              checked={checked}
+            />
+          </Tooltip>
         </Box>
         <TextField
           multiline
@@ -106,7 +153,7 @@ export const Question = (props: IQuestionsProps) => {
           placeholder={t('writeQuest') as string}
           sx={{ width: '100%', mb: '15px' }}
           onChange={descriptionHandler}
-          value={item.description}
+          value={descriptionLocal}
         />
         <TextField
           multiline
@@ -114,12 +161,12 @@ export const Question = (props: IQuestionsProps) => {
           placeholder={t('addLinkImg') as string}
           sx={{ width: '100%', mb: '15px' }}
           onChange={imageHandler}
-          value={item.image}
+          value={imageLocal}
         />
         <Box sx={{ mb: '20px' }}>
-          {answers.map((item) => {
-            if (item.questionId === id) {
-              return <Answer key={item.id} item={item} id={item.id} />;
+          {answersInOrder.map((item) => {
+            if (item.questionId === questionItem.id) {
+              return <Answer key={item.id} item={item} questionItemId={questionItem.id} />;
             }
             return null;
           })}

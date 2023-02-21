@@ -69,7 +69,9 @@
   "saveQuestions": "Сохранить тест",
   "isCorrectTip": "Верный ответ",
   "addLinkImg": "Вставьте ссылку на изображение",
-  "Edit quiz": "Изменить тест"
-
+  "Edit quiz": "Изменить тест",
+  "deleteQuestion": "Удалить вопрос",
+  "saveQuestion": "Сохранить вопрос",
+  "saveAnswer": "Сохранить ответ"
 
 }

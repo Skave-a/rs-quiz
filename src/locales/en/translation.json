@@ -22,14 +22,14 @@
   "toMain": "To main",
   "testDate": "Test Date",
   "main": "Main",
-  "Profile": "Profile", 
-  "Account": "Account", 
-  "Dashboard": "Dashboard", 
+  "Profile": "Profile",
+  "Account": "Account",
+  "Dashboard": "Dashboard",
   "Logout": "Logout",
-  "QuestionsList":"Questions list", 
-  "CreateNewQuestion":"Create new question", 
-  "CreateNewQuiz":"Create new quiz", 
-  "SomeDisabledButton":"Some disabled button",
+  "QuestionsList": "Questions list",
+  "CreateNewQuestion": "Create new question",
+  "CreateNewQuiz": "Create new quiz",
+  "SomeDisabledButton": "Some disabled button",
   "delete": "Delete",
   "edit": "Edit",
   "testSet": "Test settings",
@@ -70,7 +70,8 @@
   "saveQuestions": "Save quiz",
   "isCorrectTip": "Is correct answer",
   "addLinkImg": "Add link to img",
-  "Edit quiz": "Edit quiz"
-
-
+  "Edit quiz": "Edit quiz",
+  "deleteQuestion": "Delete question",
+  "saveQuestion": "Save question",
+  "saveAnswer": "Save answer"
 }

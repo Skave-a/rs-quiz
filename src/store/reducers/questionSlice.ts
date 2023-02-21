@@ -39,7 +39,7 @@ export const questionSlice = createSlice({
       state.question.description = action.payload;
     },
     setImage: (state, action) => {
-      state.question.description = action.payload;
+      state.question.image = action.payload;
     },
     setUserId: (state, action) => {
       state.question.userId = action.payload;
