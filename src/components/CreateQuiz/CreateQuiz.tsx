@@ -132,10 +132,10 @@ export const CreateQuiz = () => {
             </Button>
           </Paper>
           {/* <Box sx={CreateQuizBox2}></Box> */}
-            {questionsInOrder.map((item, i) => {
-              return <Question key={item.id} questionItem={item} index={i + 1} />;
-            })}
-          
+          {questionsInOrder.map((item, i) => {
+            return <Question key={item.id} questionItem={item} index={i + 1} />;
+          })}
+
           <BtnAddBlock handleClick={addNewQuestion} />
         </Container>
       </Box>
