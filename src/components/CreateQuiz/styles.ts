@@ -46,13 +46,13 @@ export const CreateQuizCreateDark = {
   fontWeight: '700',
 };
 
-export const CreateQuizBox = {
-  display: 'flex',
-  alignItems: 'flex-start',
-  justifyContent: 'space-between',
-  flexWrap: 'wrap',
-  gap: '20px',
-};
+// export const CreateQuizBox = {
+//   display: 'flex',
+//   alignItems: 'flex-start',
+//   justifyContent: 'space-between',
+//   flexWrap: 'wrap',
+//   gap: '20px',
+// };
 
 export const CreateQuizBox2 = {
   display: 'flex',
@@ -60,7 +60,7 @@ export const CreateQuizBox2 = {
   margin: '0 auto',
   position: 'relative',
   flexWrap: 'wrap',
-  justifyContent: 'center',
+  justifyContent: 'start',
 };
 
 export const ItemBlockQuizBox = {
@@ -72,8 +72,8 @@ export const ItemBlockQuizBox = {
 
 export const TitleQuizPaper = {
   padding: '1.2rem 2.4rem',
-  maxWidth: '300px',
-  margin: '0 auto',
+  maxWidth: '400px',
+  width: '100%',
   display: 'flex',
   flexDirection: 'column',
   gap: '15px',
@@ -81,8 +81,8 @@ export const TitleQuizPaper = {
 
 export const TitleQuizPaperDark = {
   padding: '1.2rem 2.4rem',
-  maxWidth: '300px',
-  margin: '0 auto',
+  maxWidth: '400px',
+  width: '100%',
   display: 'flex',
   flexDirection: 'column',
   gap: '15px',

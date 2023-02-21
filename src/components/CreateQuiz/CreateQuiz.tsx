@@ -7,8 +7,8 @@ import { useAppDispatch, useAppSelector } from '../../store/hooks';
 import { addQuiz } from '../../store/reducers/cardSlice';
 import { BtnAddBlock } from '../BtnAddBlock/BtnAddBlock';
 import {
-  CreateQuizBox,
-  CreateQuizBox2,
+  // CreateQuizBox,
+  // CreateQuizBox2,
   CreateQuizCreate,
   TitleQuizPaper,
   TitleQuizPaperBtn,
@@ -92,6 +92,7 @@ export const CreateQuiz = () => {
           gap: '10px',
           mb: '50px',
           justifyContent: 'space-between',
+          flexWrap: 'wrap',
         }}
       >
         <Box sx={{ display: 'flex', alignItems: 'center', gap: '10px', mb: '50px' }}>
@@ -105,12 +106,12 @@ export const CreateQuiz = () => {
         </Button>
       </Box>
 
-      <Box sx={CreateQuizBox}>
+      <Box>
         <Container
           sx={{
             margin: '0 auto',
             display: 'flex',
-            justifyContent: 'space-between',
+            justifyContent: 'start',
             alignItems: 'start',
             flexWrap: 'wrap',
             gap: '20px',
@@ -155,11 +156,11 @@ export const CreateQuiz = () => {
               </Typography>
             </Button>
           </Paper>
-          <Box sx={CreateQuizBox2}>
-            {questions.map((item, i) => {
-              return <Question key={item.id} id={item.id} item={item} index={i + 1} />;
-            })}
-          </Box>
+          {/* <Box sx={CreateQuizBox2}></Box> */}
+          {questions.map((item, i) => {
+            return <Question key={item.id} id={item.id} item={item} index={i + 1} />;
+          })}
+
           <BtnAddBlock handleClick={addNewQuestion} />
         </Container>
       </Box>
