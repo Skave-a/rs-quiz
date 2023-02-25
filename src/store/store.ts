@@ -6,6 +6,7 @@ import switchMode from './reducers/darkSlice';
 import usersReducer from './reducers/userSlice';
 import questionsReducer from './reducers/questionSlice';
 import answerReducer from './reducers/answerSlice';
+import serviceReducer from './reducers/serviceSlice';
 import { registrationApi } from './api/RegistrationApi';
 import { authApi } from './api/AuthApi';
 import { questionApi } from './api/QuestionApi';
@@ -20,6 +21,7 @@ export const store = configureStore({
     users: usersReducer,
     questions: questionsReducer,
     answers: answerReducer,
+    service: serviceReducer,
 
     [registrationApi.reducerPath]: registrationApi.reducer,
     [authApi.reducerPath]: authApi.reducer,

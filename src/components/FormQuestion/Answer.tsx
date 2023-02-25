@@ -10,8 +10,11 @@ import { useAppDispatch } from '../../store/hooks';
 import { removeAnswer } from '../../store/reducers/answerSlice';
 import { ItemBlockQuizBox } from '../CreateQuiz/styles';
 import { ParseJwt } from '../utils/helpers';
-import { IAnswer } from './Question';
-
+export interface IAnswer {
+  id: number;
+  title: string;
+  isCorrect: boolean;
+}
 export interface IAnswers {
   item: IAnswer;
   questionItemId: number;
