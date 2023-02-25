@@ -1,6 +1,6 @@
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
-import Container from '@mui/material/Container';
+// import Container from '@mui/material/Container';
 import Link from '@mui/material/Link';
 import style from './Footer.module.css';
 import { LINK_TO_THE_COURSE } from '../utils/constants';
@@ -38,7 +38,7 @@ export const Footer = () => {
         alignItems: 'center',
         justifyContent: 'space-around',
       }}
-      className={style.footer}
+      className={darkMode ? style.footerDark : style.footer}
     >
       <Box component={Box} maxWidth="sm" className={style.dev}>
         {develops.map((develop) => (

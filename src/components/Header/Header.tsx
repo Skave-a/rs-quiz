@@ -17,7 +17,7 @@ import logo from '../../components/assets/logoq.png';
 import { switchMode } from '../../store/reducers/darkSlice';
 import SwitchMode from '../SwitchMode/SwitchMode';
 import { useAppDispatch, useAppSelector } from '../../store/hooks';
-import { logout } from '../../store/reducers/userSlice';
+// import { logout } from '../../store/reducers/userSlice';
 import styles from './Header.module.css';
 import { SelectLang } from './SelectLang/SelectLang';
 import { useTranslation } from 'react-i18next';
@@ -28,7 +28,7 @@ export const Header = () => {
   const darkMode = useAppSelector((state) => state.darkMode.darkMode);
   const dispatchDark = useDispatch();
   const isAuth = useAppSelector((state) => state.users.isAuth);
-  const dispatch = useAppDispatch();
+  // const dispatch = useAppDispatch();
   const { t } = useTranslation();
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
