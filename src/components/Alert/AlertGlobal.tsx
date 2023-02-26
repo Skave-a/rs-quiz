@@ -45,7 +45,7 @@ const AlertGlobal: FC<IAlertGlobalProps> = ({
   return (
     <Snackbar
       open={severityProp ? onSuccess?.openSuccessAlert : onError?.openErrorAlert}
-      autoHideDuration={1300}
+      autoHideDuration={2000}
       onClose={handleClose}
       anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
       sx={{ marginTop: '10%' }}
