@@ -148,6 +148,15 @@ export const CreateQuiz = () => {
           <BtnAddBlock handleClick={addNewQuestion} />
         </Container>
       </Box>
+      <Link component={RouterLink} to="/" underline="none">
+        <Button
+          variant="contained"
+          sx={{ color: '#ffffff', display: 'block', margin: '0 auto', mt: '50px' }}
+          onClick={saveQuiz}
+        >
+          {t('saveQuestions')}
+        </Button>
+      </Link>
     </Box>
   );
 };

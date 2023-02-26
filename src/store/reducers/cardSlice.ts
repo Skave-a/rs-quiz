@@ -74,10 +74,10 @@ export const cardSlice = createSlice({
           'https://cdn.riddle.com/website/riddle/2019/placeholders/placeholder-quiz.png';
       }
       state.list.push({
-        title: action.payload.title,
+        title: action.payload.title ? action.payload.title : 'Quiz',
         img: action.payload.img,
         description: action.payload.description,
-        questionsArr: [],
+        questionsArr: action.payload.questionsArr,
         id: action.payload.id,
       });
     },

@@ -78,12 +78,12 @@ export const CardMenu = (props: ICardMenu) => {
         transformOrigin={{ horizontal: 'right', vertical: 'top' }}
         anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
       >
-        <MenuItem onClick={handleClose}>
+        {/* <MenuItem onClick={handleClose}>
           <ListItemIcon>
             <EditIcon fontSize="small" />
           </ListItemIcon>
           {t('edit')}
-        </MenuItem>
+        </MenuItem> */}
         <MenuItem onClick={handleRemove}>
           <ListItemIcon>
             <DeleteForeverIcon fontSize="small" />

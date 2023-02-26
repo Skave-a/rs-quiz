@@ -175,7 +175,7 @@ export const Question = (props: IQuestionsProps) => {
             placeholder={t('writeQuest') as string}
             sx={{ width: '100%', mb: '15px' }}
             onChange={descriptionHandler}
-            value={descriptionLocal}
+            // value={descriptionLocal}
           />
           <TextField
             multiline
@@ -183,7 +183,7 @@ export const Question = (props: IQuestionsProps) => {
             placeholder={t('addLinkImg') as string}
             sx={{ width: '100%', mb: '15px' }}
             onChange={imageHandler}
-            value={imageLocal}
+            // value={imageLocal}
           />
           <Box sx={{ mb: '20px' }}>
             {answersInOrder.map((item) => {
