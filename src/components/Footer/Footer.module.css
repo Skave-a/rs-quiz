@@ -15,6 +15,11 @@
   background: white;
   padding: 15px 0;
   margin-top: 20px;
+  width: -webkit-fill-available;
+}
+.footerDark:after{
+  content: "";
+  box-shadow: inset 0rem -4rem 1rem -0.5rem #1e222b;
 }
 .footer:after {
   background: linear-gradient(90deg, #ffe9d9 10%, #dabdfe 45%, #bdf4fe 90%);
