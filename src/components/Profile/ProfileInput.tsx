@@ -1,6 +1,5 @@
 import { Box, TextField, Button, TextareaAutosize, Typography } from '@mui/material';
-import { ChangeEvent } from 'react';
-import { useState } from 'react';
+import { ChangeEvent, useState, useEffect } from 'react';
 import styles from './Profile.module.css';
 import { DataInput, NamesInput } from '../utils/types';
 import { useAppSelector } from '../../store/hooks';
@@ -24,7 +23,12 @@ export default function ProfileInput(props: DataInput) {
       [fildName]: value,
     });
   };
-
+  useEffect(() => {
+    rowsState.map((row) => {
+      localStorage.setItem('nameUser', JSON.stringify(row.nameUser));
+      localStorage.setItem('about', JSON.stringify(row.about));
+    });
+  });
   const handleSaveRowChanges = () => {
     setTimeout(() => {
       setIsEditMode(false);

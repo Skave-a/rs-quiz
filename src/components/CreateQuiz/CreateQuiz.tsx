@@ -44,17 +44,6 @@ export const CreateQuiz = () => {
     const theme = { title: title, img: img, description: description, userId: userId, id: id };
     localStorage.setItem('theme', JSON.stringify(theme));
     dataUser(getQuestionsServer, isGetQuestions, getAnswersServer, dispatch);
-    // dispatch(
-    //   addQuiz({
-    //     title,
-    //     img,
-    //     description,
-    //     questionsArr: [],
-    //     id: id,
-    //   })
-    // );
-    //await createQuestion(questions);
-    //await createAnswer(answers);
   };
 
   const addNewQuestion = async () => {
@@ -66,7 +55,7 @@ export const CreateQuiz = () => {
   };
 
   return (
-    <Box sx={{ pb: '150px' }}>
+    <Box sx={{ pb: '150px', position: 'relative' }}>
       <Box
         sx={{
           display: 'flex',
@@ -83,7 +72,11 @@ export const CreateQuiz = () => {
           </Typography>
         </Box>
         <Link component={RouterLink} to="/" underline="none">
-          <Button variant="contained" sx={{ color: '#ffffff' }} onClick={saveQuiz}>
+          <Button
+            variant="contained"
+            sx={{ color: '#ffffff', position: 'fixed', top: '11rem', right: '3rem' }}
+            onClick={saveQuiz}
+          >
             {t('saveQuestions')}
           </Button>
         </Link>
@@ -94,7 +87,7 @@ export const CreateQuiz = () => {
           sx={{
             margin: '0 auto',
             display: 'flex',
-            justifyContent: 'space-between',
+            justifyContent: 'center',
             alignItems: 'start',
             flexWrap: 'wrap',
             gap: '20px',
@@ -139,6 +132,9 @@ export const CreateQuiz = () => {
               </Typography>
             </Button>
           </Paper>
+          {/* {questionsInOrder.map((item, i) => {
+            return <Question key={item.id} questionItem={item} index={i + 1} />;
+          })} */}
           <Box sx={CreateQuizBox2}>
             {questionsInOrder.map((item, i) => {
               return <Question key={item.id} questionItem={item} index={i + 1} />;
@@ -147,7 +143,7 @@ export const CreateQuiz = () => {
           <BtnAddBlock handleClick={addNewQuestion} />
         </Container>
       </Box>
-      <Link component={RouterLink} to="/" underline="none">
+      {/* <Link component={RouterLink} to="/" underline="none">
         <Button
           variant="contained"
           sx={{ color: '#ffffff', display: 'block', margin: '0 auto', mt: '50px' }}
@@ -155,7 +151,7 @@ export const CreateQuiz = () => {
         >
           {t('saveQuestions')}
         </Button>
-      </Link>
+      </Link> */}
     </Box>
   );
 };
