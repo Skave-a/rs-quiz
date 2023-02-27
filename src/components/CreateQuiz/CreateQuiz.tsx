@@ -1,14 +1,17 @@
 import ControlPointIcon from '@mui/icons-material/ControlPoint';
 import NoteAddOutlinedIcon from '@mui/icons-material/NoteAddOutlined';
-import { Box, Button, Container, Paper, TextField, Typography } from '@mui/material';
+import { Box, Button, Container, Link, Paper, TextField, Typography } from '@mui/material';
 import { ChangeEvent, useState } from 'react';
 import { useTranslation } from 'react-i18next';
+import { useGetAnswersQuery } from '../../store/api/AnswerApi';
 import { useCreateQuestionMutation, useGetQuestionsQuery } from '../../store/api/QuestionApi';
 import { useAppDispatch, useAppSelector } from '../../store/hooks';
-import { addQuiz } from '../../store/reducers/cardSlice';
+// import { addQuiz } from '../../store/reducers/cardSlice';
+import { Link as RouterLink } from 'react-router-dom';
 import { BtnAddBlock } from '../BtnAddBlock/BtnAddBlock';
 import { Question } from '../FormQuestion/Question';
 import { ParseJwt } from '../utils/helpers';
+import { dataUser } from './data';
 import {
   CreateQuizBox,
   CreateQuizBox2,
@@ -29,6 +32,8 @@ export const CreateQuiz = () => {
     useCreateQuestionMutation();
 
   const { data: getQuestionsServer = [], isSuccess: isGetQuestions } = useGetQuestionsQuery();
+  const { data: getAnswersServer = [], isSuccess } = useGetAnswersQuery();
+
   const arrayForSort = [...getQuestionsServer];
   const questionsInOrder = arrayForSort?.sort((a, b) => a.id - b.id);
   const userId = ParseJwt();
@@ -36,17 +41,19 @@ export const CreateQuiz = () => {
   const darkMode = useAppSelector((state) => state.darkMode.darkMode);
 
   const saveQuiz = async () => {
-    dispatch(
-      addQuiz({
-        title,
-        img,
-        date: new Date().toISOString(),
-        description,
-        questionsArr: [],
-        passed: false,
-        passedOn: 0,
-      })
-    );
+    const id = Number(new Date());
+    const theme = { title: title, img: img, description: description, userId: userId, id: id };
+    localStorage.setItem('theme', JSON.stringify(theme));
+    dataUser(getQuestionsServer, isGetQuestions, getAnswersServer, dispatch);
+    // dispatch(
+    //   addQuiz({
+    //     title,
+    //     img,
+    //     description,
+    //     questionsArr: [],
+    //     id: id,
+    //   })
+    // );
     //await createQuestion(questions);
     //await createAnswer(answers);
   };
@@ -76,13 +83,11 @@ export const CreateQuiz = () => {
             {t('createNew')}
           </Typography>
         </Box>
-        <Button
-          variant="contained"
-          sx={{ color: '#ffffff', position: 'fixed', top: '11rem', right: '3rem' }}
-          onClick={saveQuiz}
-        >
-          {t('saveQuestions')}
-        </Button>
+        <Link component={RouterLink} to="/" underline="none">
+          <Button variant="contained" sx={{ color: '#ffffff' }} onClick={saveQuiz}>
+            {t('saveQuestions')}
+          </Button>
+        </Link>
       </Box>
 
       <Box sx={CreateQuizBox}>
@@ -142,6 +147,18 @@ export const CreateQuiz = () => {
           <BtnAddBlock handleClick={addNewQuestion} />
         </Container>
       </Box>
+      <Link component={RouterLink} to="/" underline="none">
+        <Button
+          variant="contained"
+          sx={{ color: '#ffffff', display: 'block', margin: '0 auto', mt: '50px' }}
+          onClick={saveQuiz}
+        >
+          {t('saveQuestions')}
+        </Button>
+      </Link>
     </Box>
   );
 };
+function customAlphabet(arg0: string, arg1: number) {
+  throw new Error('Function not implemented.');
+}
