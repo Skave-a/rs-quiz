@@ -1,0 +1,52 @@
+.header {
+    z-index: 0;
+}
+.headerDark::after{
+    height: 3.5rem;
+    content: "";
+    box-shadow: inset 0rem -4rem 1rem -0.5rem #1e222b;
+}
+.header:after {
+    background: linear-gradient(90deg, #ffe9d9 10%, #dabdfe 45%, #bdf4fe 90%);
+    box-shadow: inset 0rem -4rem 1rem -0.5rem #eff4fc;
+    content: "";
+    display: block;
+    height: 3.5rem;
+    left: 0;
+    opacity: 1;
+    pointer-events: none;
+    position: relative;
+    right: 0;
+    z-index: -1;
+    top: 0px;
+}
+
+.logo {
+    max-width: 85px;
+    width: 100%;
+}
+
+.logo__sm {
+    max-width: 65px;
+    width: 100%;
+}
+
+.logo__sm_box {
+    margin: 0 auto;
+}
+
+@media screen and (max-width: 899px) {
+    .logo {
+        display: none;
+    }
+}
+
+.settings {
+    display: flex;
+    gap: 5px;
+}
+@media (max-width: 350px) {
+    .settings {
+        display: none;
+    }
+}
