@@ -6,7 +6,6 @@ import { useTranslation } from 'react-i18next';
 import { useGetAnswersQuery } from '../../store/api/AnswerApi';
 import { useCreateQuestionMutation, useGetQuestionsQuery } from '../../store/api/QuestionApi';
 import { useAppDispatch, useAppSelector } from '../../store/hooks';
-// import { addQuiz } from '../../store/reducers/cardSlice';
 import { Link as RouterLink } from 'react-router-dom';
 import { BtnAddBlock } from '../BtnAddBlock/BtnAddBlock';
 import { Question } from '../FormQuestion/Question';
@@ -160,6 +159,3 @@ export const CreateQuiz = () => {
     </Box>
   );
 };
-function customAlphabet(arg0: string, arg1: number) {
-  throw new Error('Function not implemented.');
-}
