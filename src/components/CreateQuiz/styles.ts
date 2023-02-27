@@ -61,6 +61,7 @@ export const CreateQuizBox2 = {
   position: 'relative',
   flexWrap: 'wrap',
   justifyContent: 'center',
+  flexDirection: 'column',
 };
 
 export const ItemBlockQuizBox = {
