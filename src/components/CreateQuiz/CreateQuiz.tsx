@@ -60,7 +60,7 @@ export const CreateQuiz = () => {
   };
 
   return (
-    <Box sx={{ pb: '150px' }}>
+    <Box sx={{ pb: '150px', position: 'relative' }}>
       <Box
         sx={{
           display: 'flex',
@@ -76,7 +76,11 @@ export const CreateQuiz = () => {
             {t('createNew')}
           </Typography>
         </Box>
-        <Button variant="contained" sx={{ color: '#ffffff' }} onClick={saveQuiz}>
+        <Button
+          variant="contained"
+          sx={{ color: '#ffffff', position: 'fixed', top: '11rem', right: '3rem' }}
+          onClick={saveQuiz}
+        >
           {t('saveQuestions')}
         </Button>
       </Box>
@@ -86,7 +90,7 @@ export const CreateQuiz = () => {
           sx={{
             margin: '0 auto',
             display: 'flex',
-            justifyContent: 'space-between',
+            justifyContent: 'center',
             alignItems: 'start',
             flexWrap: 'wrap',
             gap: '20px',
@@ -131,7 +135,6 @@ export const CreateQuiz = () => {
               </Typography>
             </Button>
           </Paper>
-          {/* <Box sx={CreateQuizBox2}></Box> */}
           {questionsInOrder.map((item, i) => {
             return <Question key={item.id} questionItem={item} index={i + 1} />;
           })}

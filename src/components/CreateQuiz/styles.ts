@@ -72,7 +72,8 @@ export const ItemBlockQuizBox = {
 
 export const TitleQuizPaper = {
   padding: '1.2rem 2.4rem',
-  maxWidth: '300px',
+  maxWidth: '400px',
+  width: '100%',
   margin: '0 auto',
   display: 'flex',
   flexDirection: 'column',
@@ -81,7 +82,8 @@ export const TitleQuizPaper = {
 
 export const TitleQuizPaperDark = {
   padding: '1.2rem 2.4rem',
-  maxWidth: '300px',
+  maxWidth: '400px',
+  width: '100%',
   margin: '0 auto',
   display: 'flex',
   flexDirection: 'column',

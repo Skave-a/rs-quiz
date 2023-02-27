@@ -40,3 +40,25 @@
 .swiper {
         padding: 0 45px 45px!important;
     }
+.input__load {
+    opacity: 0;
+    width: 0;
+    height: 0;
+    padding: 0;
+    margin: 0;
+    overflow: hidden;
+    line-height: 0;
+}
+.file_uploader {
+    max-width: 400px;
+    width: 100%;
+}
+.labelUp {
+    text-transform: capitalize;
+    padding: 5px 8px;
+    display: flex;
+    cursor: pointer;
+}
+.labelUp:hover {
+    background-color: rgb(203, 205, 206);
+}
