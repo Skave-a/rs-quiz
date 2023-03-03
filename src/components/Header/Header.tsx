@@ -90,13 +90,13 @@ export const Header = () => {
               open={Boolean(anchorElNav)}
               onClose={handleCloseNavMenu}
               sx={{
-                display: { xs: 'block', md: 'none', color: 'black' },
+                display: { xs: 'block', md: 'none', color: darkMode ? 'white' : 'black' },
               }}
             >
               <MenuItem onClick={handleCloseNavMenu}>
                 <Typography
                   component={RouterLink}
-                  style={{ textDecoration: 'none', color: 'black' }}
+                  style={{ textDecoration: 'none', color: darkMode ? 'white' : 'black' }}
                   to="/"
                   textAlign="center"
                 >
@@ -105,7 +105,7 @@ export const Header = () => {
               </MenuItem>
               <MenuItem onClick={handleCloseNavMenu}>
                 <Typography
-                  style={{ textDecoration: 'none', color: 'black' }}
+                  style={{ textDecoration: 'none', color: darkMode ? 'white' : 'black' }}
                   component={RouterLink}
                   to="/create-quiz"
                   textAlign="center"
@@ -115,7 +115,7 @@ export const Header = () => {
               </MenuItem>
               <MenuItem onClick={handleCloseNavMenu}>
                 <Typography
-                  style={{ textDecoration: 'none', color: 'black' }}
+                  style={{ textDecoration: 'none', color: darkMode ? 'white' : 'black' }}
                   component={RouterLink}
                   to="/profile"
                   textAlign="center"
