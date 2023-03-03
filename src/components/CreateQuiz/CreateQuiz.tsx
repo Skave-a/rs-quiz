@@ -6,7 +6,6 @@ import { useTranslation } from 'react-i18next';
 import { useGetAnswersQuery } from '../../store/api/AnswerApi';
 import { useCreateQuestionMutation, useGetQuestionsQuery } from '../../store/api/QuestionApi';
 import { useAppDispatch, useAppSelector } from '../../store/hooks';
-// import { addQuiz } from '../../store/reducers/cardSlice';
 import { Link as RouterLink } from 'react-router-dom';
 import { BtnAddBlock } from '../BtnAddBlock/BtnAddBlock';
 import { Question } from '../FormQuestion/Question';
@@ -133,10 +132,14 @@ export const CreateQuiz = () => {
               </Typography>
             </Button>
           </Paper>
-          {questionsInOrder.map((item, i) => {
+          {/* {questionsInOrder.map((item, i) => {
             return <Question key={item.id} questionItem={item} index={i + 1} />;
-          })}
-
+          })} */}
+          <Box sx={CreateQuizBox2}>
+            {questionsInOrder.map((item, i) => {
+              return <Question key={item.id} questionItem={item} index={i + 1} />;
+            })}
+          </Box>
           <BtnAddBlock handleClick={addNewQuestion} />
         </Container>
       </Box>
@@ -152,6 +155,3 @@ export const CreateQuiz = () => {
     </Box>
   );
 };
-function customAlphabet(arg0: string, arg1: number) {
-  throw new Error('Function not implemented.');
-}
